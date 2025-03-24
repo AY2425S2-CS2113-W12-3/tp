@@ -26,6 +26,9 @@ public class FinTrack {
 
         Storage storage = new Storage();
         storage.loadExpensesFromFile(expenseList);
+        storage.loadCategoriesFromFile();
+
+
 
         boolean isRunning = true;
         //Main application loop starts, user input is read and processed

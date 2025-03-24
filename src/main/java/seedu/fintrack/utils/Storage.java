@@ -1,5 +1,6 @@
 package seedu.fintrack.utils;
 
+import seedu.fintrack.Categories;
 import seedu.fintrack.Expense;
 import seedu.fintrack.ExpenseList;
 import java.io.BufferedWriter;
@@ -13,12 +14,6 @@ import java.util.Scanner;
 
 public class Storage {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-    private final String filePath;
-
-
-    public Storage() {
-        this.filePath = "expenses.txt";
-    }
 
     public static void saveExpensesToFile(ExpenseList expenseList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("expenses.txt"))) {
@@ -32,7 +27,7 @@ public class Storage {
     }
 
     public void loadExpensesFromFile(ExpenseList expenseList) {
-        File file = new File(filePath);
+        File file = new File("expenses.txt");
         if (!file.exists()) {
             return;
         }
@@ -55,6 +50,33 @@ public class Storage {
             }
         } catch (IOException | ParseException e) {
             System.out.println("Error loading expenses from file.");
+        }
+    }
+
+    public void loadCategoriesFromFile() {
+        File file = new File("categories.txt");
+        if (!file.exists()) {
+            return;
+        }
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String[] categories = scanner.nextLine().split("\\|");
+                for(String category: categories) {
+                    Categories.addCategory(category);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading categories from file.");
+        }
+    }
+
+    public static void saveCategoriesToFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("categories.txt"))) {
+            for (String category : Categories.getCategories()) {
+                writer.write(category + "|");
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving categories to file.");
         }
     }
 }

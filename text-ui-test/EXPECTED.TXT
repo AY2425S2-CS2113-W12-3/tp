@@ -2,18 +2,18 @@ ________________________________________________________________________________
 Hello, I am Fin! Your go-to expense tracker
 How can I help you today?
 ________________________________________________________________________________
- Hey! Here's what I can help you with
-[36m1.Add a new expense
-[0m[32m2.Check out this month's spending
-[0m[33m3.View your spending history
-[0m[35m4.Update an expense entry
-[0m[31m5.Delete an expense
-[0m[34m6.Set your monthly budget
-[0m[36m7.Add a recurring expense
+Hey! Here's what I can help you with
+[36m1. Add a new expense
+[0m[32m2. Check out this month's spending
+[0m[33m3. View your spending history
+[0m[35m4. Update an expense entry
+[0m[31m5. Delete an expense
+[0m[34m6. Set your monthly budget
+[0m[36m7. Add a recurring expense
 [0m[32m8. Create a new category
-[0m[31m9. Exit the app
-[0m________________________________________________________________________________
-
-Enter command (e.g., 'add', 'viewmonth', 'history', 'update', 'delete', 'budget', 'recurring', 'category', 'exit')
-or type 'help' to see the options again :] Enter expense details in as follows:
-dollars, cents, category index, description, date (yyyy-MM-dd)
+[0m[33m9. Delete a category
+[0m[31m10. Exit the app
+[0mFor more info on how to use the commands, type [1m'help'[0m.
+________________________________________________________________________________
+________________________________________________________________________________
+Exiting program.

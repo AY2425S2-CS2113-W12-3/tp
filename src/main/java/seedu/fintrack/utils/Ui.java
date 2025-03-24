@@ -11,7 +11,9 @@ public class Ui {
     public static String red = "\u001B[31m";
     public static String blue = "\u001B[34m";
 
-    private static String border = "________________________________________________________________________________\n";
+    public static String bold = "\033[1m";
+
+    private static String border = "________________________________________________________________________________";
     private static String greeting = "Hello, I am Fin! Your go-to expense tracker\nHow can I help you today?";
     private static String logo =
             "   ▄████████  ▄█  ███▄▄▄▄\n" +
@@ -34,7 +36,9 @@ public class Ui {
                     "              ███    ███                           ▀\n";
 
     public static void printGreeting() {
-        System.out.println(border + greeting);
+        printBorder();
+        System.out.println(greeting);
+        printBorder();
     }
 
     public static void printLogo() {
@@ -42,17 +46,19 @@ public class Ui {
     }
 
     public static void printOptions() {
-        String options = " Hey! Here's what I can help you with\n" +
-                cyan + "1.Add a new expense\n" + reset +
-                green + "2.Check out this month's spending\n" + reset +
-                yellow + "3.View your spending history\n" + reset +
-                purple + "4.Update an expense entry\n" + reset +
-                red + "5.Delete an expense\n" + reset +
-                blue + "6.Set your monthly budget\n" + reset +
-                cyan + "7.Add a recurring expense\n" + reset +
+        String options = "Hey! Here's what I can help you with\n" +
+                cyan + "1. Add a new expense\n" + reset +
+                green + "2. Check out this month's spending\n" + reset +
+                yellow + "3. View your spending history\n" + reset +
+                purple + "4. Update an expense entry\n" + reset +
+                red + "5. Delete an expense\n" + reset +
+                blue + "6. Set your monthly budget\n" + reset +
+                cyan + "7. Add a recurring expense\n" + reset +
                 green + "8. Create a new category\n" + reset +
-                red + "9. Exit the app\n" + reset;
-        System.out.println(border + options + border);
+                yellow + "9. Delete a category\n" + reset +
+                red + "10. Exit the app\n" + reset +
+                "For more info on how to use the commands, type " + bold + "'help'" + reset + ".\n";
+        System.out.println(options + border);
     }
 
     public static void showMessage(String message) {
@@ -61,5 +67,9 @@ public class Ui {
 
     public static void showError(String errorMessage) {
         System.err.println(errorMessage);
+    }
+
+    public static void printBorder() {
+        System.out.println(border);
     }
 }

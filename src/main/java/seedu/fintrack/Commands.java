@@ -59,33 +59,28 @@ public class Commands {
                 Ui.showError(e.getMessage());
             }
         });
-        commands.put("category", this::editCategory);
+        commands.put("category add", this::addCategory);
+        commands.put("category del", this::deleteCategory);
         commands.put("exit", this::exit);
 
 
         commands.put("help", () -> {
-            Ui.printOptions();
             Ui.showMessage("\nDetailed Usage Instructions:");
-            Ui.showMessage(Ui.cyan + " - To add a new expense, type 'add' and then enter " +
-                    "the expense details in one shot, for example:\n" +
-                    " 10, 50, 1, Lunch, 2025-03-18" + Ui.reset);
-            Ui.showMessage(Ui.green + " - To view this month's expenses, type 'viewmonth'." + Ui.reset);
-            Ui.showMessage(Ui.yellow + " - To view your spending history, type 'history'." + Ui.reset);
-            Ui.showMessage(Ui.purple + " - To update an expense, type 'update' and " +
-                    "follow the prompts to enter the expense index and new details." + Ui.reset);
-            Ui.showMessage(Ui.red + " - To delete an expense, type 'delete' and " +
-                    "follow the prompt to enter the expense index." + Ui.reset);
-            Ui.showMessage(Ui.blue + " - To set your monthly budget, type 'budget' and " +
-                    "enter the budget amount." + Ui.reset);
-            Ui.showMessage(Ui.cyan + " - To add a recurring expense, type 'recurring' and " +
-                    "follow the prompts." + Ui.reset);
-            Ui.showMessage(Ui.green + " - To create a new category, type 'category' and " +
-                    "then enter the category name." + Ui.reset);
-            Ui.showMessage(Ui.red + " - To exit the application, type 'exit'." + Ui.reset);
+            Ui.showMessage(Ui.cyan + " - 'add': Adds a new expense into the expense list" + Ui.reset);
+            Ui.showMessage(Ui.green + " - 'viewmonth': Shows this month's expenses" + Ui.reset);
+            Ui.showMessage(Ui.yellow + " - 'history': Shows your spending history" + Ui.reset);
+            Ui.showMessage(Ui.purple + " - 'update': Modifies the details of a chosen expense entry" + Ui.reset);
+            Ui.showMessage(Ui.red + " - 'delete': Deletes a chosen expense entry" + Ui.reset);
+            Ui.showMessage(Ui.blue + " - 'budget': Sets a monthly budget" + Ui.reset);
+            Ui.showMessage(Ui.cyan + " - 'recurring': Adds a recurring expense into the expense list" + Ui.reset);
+            Ui.showMessage(Ui.green + " - 'category add': Adds a new category into the category list" + Ui.reset);
+            Ui.showMessage(Ui.yellow + " - 'category del': Deletes a chosen category from category list" + Ui.reset);
+            Ui.showMessage(Ui.red + " - 'exit': Exits the program" + Ui.reset);
+            Ui.printBorder();
         });
 
 
-        assert commands.size() == 10 : "Commands map should contain 10 commands (including help)";
+        assert commands.size() == 11 : "Commands map should contain 11 commands (including help)";
     }
 
     /**
@@ -114,6 +109,7 @@ public class Commands {
         assert expenseList.size() == sizeBefore + 1 : "Expense list did not increment as expected";
         Ui.showMessage("Expense added.");
         Storage.saveExpensesToFile(expenseList);
+        Ui.printBorder();
     }
 
     private void viewMonth() {
@@ -124,54 +120,55 @@ public class Commands {
         for (int i = 0; i < expenseList.size(); i++) {
             Expense expense = expenseList.getExpense(i);
             if (monthFormat.format(expense.getDate()).equals(currentMonth)) {
-                Ui.showMessage(i + ": " + expense.getDescription() +
+                Ui.showMessage(i+1 + ": " + expense.getDescription() +
                         " - " + expense.getAmount() + " cents");
             }
         }
+        Ui.printBorder();
     }
 
     private void viewHistory() {
         Ui.showMessage("Spending history:");
         for (int i = 0; i < expenseList.size(); i++) {
             Expense expense = expenseList.getExpense(i);
-            Ui.showMessage(i + ": " + expense.getDescription() +
-                    " - " + expense.getAmount() + " cents on " + expense.getDate());
+            Ui.showMessage(i+1 + ": " + expense.getDescription() +
+                    " - " + expense.getAmount() + " cents on " + expense.getDate() + " (" +
+                    expense.getCategory() + ")");
         }
+        Ui.printBorder();
     }
 
     private void updateExpense() throws FinTrackException {
+        viewHistory();
         int index = parser.readInt("Enter the index of the expense to update:");
-        if (index < 0 || index >= expenseList.size()) {
+        if (index <= 0 || index > expenseList.size()) {
             Ui.showError("Invalid index.");
             return;
         }
-        int amount = parser.readInt("Enter new expense amount (in cents):");
-        if (amount < 0) {
-            Ui.showError("Expense amount must be non-negative.");
-            return;
+        Expense updatedExpense = parser.readExpenseDetails();
+        if (expenseList.getMonthlyBudget() > 0) {
+            Ui.showMessage("Your remaining budget for the month is: " + expenseList.getRemainingBudget());
         }
-        String category = parser.promptInput("Enter new expense category:");
-        String description = parser.promptInput("Enter new expense description:");
-        Date date = parser.readDate("Enter new expense date (format yyyy-MM-dd):");
-
-        Expense newExpense = new Expense(amount, category, description, date);
-        expenseList.updateExpense(index, newExpense);
+        expenseList.updateExpense(index, updatedExpense);
         Ui.showMessage("Expense updated.");
         Storage.saveExpensesToFile(expenseList);
+        Ui.printBorder();
     }
 
     private void deleteExpense() throws FinTrackException {
+        viewHistory();
         int index = parser.readInt("Enter the index of the expense to delete:");
-        if (index < 0 || index >= expenseList.size()) {
+        if (index <= 0 || index > expenseList.size()) {
             Ui.showError("Invalid index.");
             return;
         }
-        Expense expense = expenseList.getExpense(index);
+        Expense expense = expenseList.getExpense(index-1);
         int sizeBefore = expenseList.size();
         expenseList.deleteExpense(expense);
         assert expenseList.size() == sizeBefore - 1 : "Expense list did not decrement as expected";
         Ui.showMessage("Expense deleted.");
         Storage.saveExpensesToFile(expenseList);
+        Ui.printBorder();
     }
 
     private void exit() {
@@ -187,6 +184,7 @@ public class Commands {
         }
         expenseList.setMonthlyBudget(budget);
         Ui.showMessage("Monthly budget set to: " + budget);
+        Ui.printBorder();
     }
 
     private void addRecurringExpense() throws FinTrackException {
@@ -209,11 +207,28 @@ public class Commands {
                 frequency, description, startDate, startDate);
         expenseList.addRecurringExpense(recurringExpense);
         Ui.showMessage("Recurring expense added.");
+        Ui.printBorder();
     }
 
-    private void editCategory() {
+    private void addCategory() {
         String newCategory = parser.promptInput("Please enter the name of the new category:");
         Categories.addCategory(newCategory);
         Ui.showMessage(newCategory + " has been added to the list of categories.");
+        Storage.saveCategoriesToFile();
+        Ui.printBorder();
+    }
+
+    private void deleteCategory() {
+        Categories.printCategories();
+        int index = parser.readInt("Enter the index of the category to delete:");
+        if (index <= 0 || index > Categories.size()) {
+            Ui.showError("Invalid index.");
+            return;
+        }
+        String deletedCategory = Categories.getCategory(index);
+        Categories.removeCategory(index);
+        Ui.showMessage(deletedCategory + " has been deleted.");
+        Storage.saveCategoriesToFile();
+        Ui.printBorder();
     }
 }

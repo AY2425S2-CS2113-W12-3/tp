@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+
 public class Parser {
     private Scanner scanner;
 
@@ -17,8 +18,9 @@ public class Parser {
 
 
     public String getCommandInput() {
-        System.out.print("Enter command (e.g., 'add', 'viewmonth', 'history', 'update', 'delete', 'budget'" +
-                ", 'recurring', 'category', 'exit')\nor type 'help' to see the options again :] ");
+        //System.out.println("Enter command (e.g., 'add', 'viewmonth', 'history', 'update', 'delete', 'budget'" +
+        //        ", 'recurring', 'category', 'exit')\nor type 'help' to see the options again :] ");
+        Ui.printBorder();
         return scanner.nextLine().trim().toLowerCase();
     }
 
@@ -74,8 +76,9 @@ public class Parser {
      * dollars, cents, category index, description, date(yyyy-MM-dd)
      */
     public Expense readExpenseDetails() throws FinTrackException {
-        System.out.println("Enter expense details in as follows:");
-        System.out.println("dollars, cents, category index, description, date (yyyy-MM-dd)");
+        System.out.println(Ui.bold + "Enter expense details in as follows:" + Ui.reset);
+        System.out.println("<dollars>, <cents>, <category index>, <description>, <date (yyyy-MM-dd)>\n");
+        Categories.printCategories();
         String input = scanner.nextLine();
         String[] parts = input.split(",");
         if (parts.length < 5) {
@@ -95,3 +98,5 @@ public class Parser {
         }
     }
 }
+
+
