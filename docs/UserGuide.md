@@ -1,42 +1,80 @@
-# User Guide
+# FinTrack User Guide 
 
 ## Introduction
 
-{Give a product intro}
+FinTrack is a personal finance tracking application targeted at young adults 
+that helps you manage your daily expenses through
+a command-line interface. It allows you to add, view, update, and delete expenses easily.
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 17 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest version of `Fintrack` from [here](https://github.com/AY2425S2-CS2113-W12-3/tp/releases/download/A-Jar/tp.jar).
+3. Copy the downloaded file to a folder you want to use as the home folder for FinTrack.
+4. Open a command prompt and navigate to the folder.
+5. Run the command: `java -jar fintrack.jar`
 
-## Features 
+## Features
 
-{Give detailed description of each feature}
+### Adding an expense: `add`
+Adds a new expense to the tracking list.
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+Format: `add`, press enter and 
+enter expense details in the format: `DOLLAR, CENTS, CATEGORY_INDEX, DESCRIPTION, DATE`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+* The `DOLLAR` and `CENTS` should be non-negative integers
+* The `CATEGORY` must be one of: Food, Transport, Entertainment, Utilities, Household, Others.
+* The `CATEGORY_INDEX` is a number from 1 to 6 corresponding to the category,
+ which includes: 
+ 
+ | Index | Category      |
+ |-------|--------------|
+ | 1     | Food         |
+ | 2     | Transport    |
+ | 3     | Entertainment|
+ | 4     | Utilities    |
+ | 5     | Household    |
+ | 6     | Others       | 
+Optionally, you can add categories using the command `category add <category_name>` and delete categories `category del
+ <category_name>` to customize the categories to your preference and the commands will be explained later on.
+* The `DESCRIPTION` is an optional text describing the expense
+* The `DATE` should be in YYYY-MM-DD format
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+Example:
+* `add 12, 50, 1, Lunch 2025-03-28`
 
-Example of usage: 
+### Viewing expense history: `history`
+Shows a list of all recorded expenses.
 
-`todo n/Write the rest of the User Guide d/next week`
+Format: `history`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+### Updating an expense: `update`
+Updates an existing expense in the list.
 
-## FAQ
+Format: `update`, 
+press enter 
+expense details in the format: `INDEX, AMOUNT, CATEGORY_INDEX, DESCRIPTION, DATE`
 
-**Q**: How do I transfer my data to another computer? 
+* The `INDEX` refers to the expense's position in the list (visible when using `history`)
+* The `AMOUNT` should be a non-negative number
+* The `CATEGORY_INDEX` is a number from 1 to 6 corresponding to the category,
+ which includes: 1 - Food, 2 - Transport, 3 - Entertainment, 4 - Utilities, 5 - Household, 6 - Others. 
+* The `DESCRIPTION` is an optional text describing the expense
+* The `DATE` should be in YYYY-MM-DD format
+* Example: `update` `10, 00 , 2, Grab taxi 2025-03-28` 
 
-**A**: {your answer here}
+
+### Deleting an expense: `delete`
+Removes an expense from the list.
+
+Format: `delete INDEX`
+
+Example:
+* `delete 1`
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+* Add expense: `add`
+* View history: `history`
+* Update expense: `update`
+* Delete expense: `delete`

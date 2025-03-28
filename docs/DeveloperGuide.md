@@ -21,6 +21,25 @@ The application follows a modular design:
 * **Expense & ExpenseList**: Data models representing expenses and collections of expenses.
 * **Ui**: Provides a consistent user interface through console outputs.
 
+### CRUD Operations Implementation
+
+#### Overview
+
+The CRUD (Create, Read, Update, Delete) operations
+are central to FinTrack's expense management functionality.
+They are implemented through the `Commands` class which acts as
+a controller, coordinating between the user interface,
+data parsing, and data storage components.
+
+The CRUD operations follow a layered architecture:
+
+1. User Interface Layer (`Ui` class)
+2. Control Layer (`Commands` class)
+3. Logic Layer (`Parser` and `Categories` classes)
+4. Data Layer (`ExpenseList` and `Storage` classes
+
+[//]: # (![CRUD_UML.png]&#40;CRUD_UML.png&#41;)
+
 ## Classes and Their Responsibilities
 
 * **Commands**:
