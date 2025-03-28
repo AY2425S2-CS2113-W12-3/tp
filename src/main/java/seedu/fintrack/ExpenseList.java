@@ -27,7 +27,7 @@ public class ExpenseList {
         expenseList.remove(expense);
     }
 
-    Expense getExpense(int index) {
+    public Expense getExpense(int index) { // Changed visibility to public
         return expenseList.get(index);
     }
 

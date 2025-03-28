@@ -3,17 +3,17 @@ Hello, I am Fin! Your go-to expense tracker
 How can I help you today?
 ________________________________________________________________________________
 Hey! Here's what I can help you with
-[36m1. Add a new expense
-[0m[32m2. Check out this month's spending
-[0m[33m3. View your spending history
-[0m[35m4. Update an expense entry
-[0m[31m5. Delete an expense
-[0m[34m6. Set your monthly budget
-[0m[36m7. Add a recurring expense
-[0m[32m8. Create a new category
-[0m[33m9. Delete a category
-[0m[31m10. Exit the app
+[36mAdd a new expense
+[0m[33mCheck out this month's spending
+[0m[33mView your spending history
+[0m[35mUpdate an expense entry
+[0m[31mDelete an expense
+[0m[34mSet your monthly budget
+[0m[34mAdd a recurring expense
+[0m[32mCreate a new category
+[0m[31mDelete a category
+[0m[31mExit the app
 [0mFor more info on how to use the commands, type [1m'help'[0m.
 ________________________________________________________________________________
 ________________________________________________________________________________
-Exiting program.
+Make sure to have good saving habits yeah, cyaaaa.

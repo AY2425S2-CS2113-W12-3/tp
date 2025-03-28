@@ -22,29 +22,11 @@ public class Commands {
         this.expenseList = expenseList;
         this.parser = parser;
 
-        commands.put("add", () -> {
-            try {
-                addExpense();
-            } catch (FinTrackException e) {
-                Ui.showError(e.getMessage());
-            }
-        });
+        commands.put("add", this::addExpense);
         commands.put("viewmonth", this::viewMonth);
         commands.put("history", this::viewHistory);
-        commands.put("update", () -> {
-            try {
-                updateExpense();
-            } catch (FinTrackException e) {
-                Ui.showError(e.getMessage());
-            }
-        });
-        commands.put("delete", () -> {
-            try {
-                deleteExpense();
-            } catch (FinTrackException e) {
-                Ui.showError(e.getMessage());
-            }
-        });
+        commands.put("update", this::updateExpense);
+        commands.put("delete", this::deleteExpense);
         commands.put("budget", () -> {
             try {
                 setMonthlyBudget();
@@ -66,15 +48,17 @@ public class Commands {
 
         commands.put("help", () -> {
             Ui.showMessage("\nDetailed Usage Instructions:");
-            Ui.showMessage(Ui.cyan + " - 'add': Adds a new expense into the expense list" + Ui.reset);
-            Ui.showMessage(Ui.green + " - 'viewmonth': Shows this month's expenses" + Ui.reset);
+            Ui.showMessage(Ui.cyan + " - 'add': Add expenses. For example:" +
+                    "\"4,50,1, Chicken Rice, 2025-03-28\"" + Ui.reset);
+
+            Ui.showMessage(Ui.yellow + " - 'viewmonth': Shows this month's expenses" + Ui.reset);
             Ui.showMessage(Ui.yellow + " - 'history': Shows your spending history" + Ui.reset);
             Ui.showMessage(Ui.purple + " - 'update': Modifies the details of a chosen expense entry" + Ui.reset);
             Ui.showMessage(Ui.red + " - 'delete': Deletes a chosen expense entry" + Ui.reset);
             Ui.showMessage(Ui.blue + " - 'budget': Sets a monthly budget" + Ui.reset);
-            Ui.showMessage(Ui.cyan + " - 'recurring': Adds a recurring expense into the expense list" + Ui.reset);
+            Ui.showMessage(Ui.blue + " - 'recurring': Adds a recurring expense into the expense list" + Ui.reset);
             Ui.showMessage(Ui.green + " - 'category add': Adds a new category into the category list" + Ui.reset);
-            Ui.showMessage(Ui.yellow + " - 'category del': Deletes a chosen category from category list" + Ui.reset);
+            Ui.showMessage(Ui.red + " - 'category del': Deletes a chosen category from category list" + Ui.reset);
             Ui.showMessage(Ui.red + " - 'exit': Exits the program" + Ui.reset);
             Ui.printBorder();
         });
@@ -98,21 +82,30 @@ public class Commands {
         }
     }
 
-    public void addExpense() throws FinTrackException {
-        // Use parser to read all expense details in one go.
-        Expense expense = parser.readExpenseDetails();
-        int sizeBefore = expenseList.size();
-        expenseList.addExpense(expense);
-        if (expenseList.getMonthlyBudget() > 0) {
-            Ui.showMessage("Your remaining budget for the month is: " + expenseList.getRemainingBudget());
+
+    public void addExpense() {
+        try {
+            // Use parser to read all expense details in one go.
+            Expense expense = parser.readExpenseDetails();
+            int sizeBefore = expenseList.size();
+            expenseList.addExpense(expense);
+            if (expenseList.getMonthlyBudget() > 0) {
+                Ui.showMessage("Your remaining budget for the month is: " + expenseList.getRemainingBudget());
+            }
+            if (expenseList.size() != sizeBefore + 1) {
+                throw new FinTrackException("Expense list did not increment as expected");
+            }
+            Ui.showMessage("Expense added.");
+            Storage.saveExpensesToFile(expenseList);
+            Ui.printBorder();
+        } catch (FinTrackException e) {
+            Ui.showError("C'mon Imma need more info that that!\n" + "type 'add' and enter " +
+                    "then follow this format: " + " \"4,50,1, Chicken Rice, 2025-03-28\" ");
+            Ui.printBorder();
         }
-        assert expenseList.size() == sizeBefore + 1 : "Expense list did not increment as expected";
-        Ui.showMessage("Expense added.");
-        Storage.saveExpensesToFile(expenseList);
-        Ui.printBorder();
     }
 
-    private void viewMonth() {
+    public void viewMonth() {
         Date now = new Date();
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM-yyyy");
         String currentMonth = monthFormat.format(now);
@@ -127,57 +120,86 @@ public class Commands {
         Ui.printBorder();
     }
 
-    private void viewHistory() {
-        Ui.showMessage("Spending history:");
-        for (int i = 0; i < expenseList.size(); i++) {
-            Expense expense = expenseList.getExpense(i);
-            Ui.showMessage(i+1 + ": " + expense.getDescription() +
-                    " - " + expense.getAmount() + " cents on " + expense.getDate() + " (" +
-                    expense.getCategory() + ")");
+
+    public void viewHistory() {
+        try {
+            Ui.showMessage("Spending history:");
+            for (int i = 0; i < expenseList.size(); i++) {
+                Expense expense = expenseList.getExpense(i);
+                Ui.showMessage((i + 1) + ": " + expense.getDescription() +
+                        " - " + expense.getAmount() + " cents on " + expense.getDate() + " (" +
+                        expense.getCategory() + ")");
+            }
+            Ui.printBorder();
+        } catch (Exception e) {
+            Ui.showError("An error occurred while displaying history: " + e.getMessage());
+            Ui.printBorder();
         }
-        Ui.printBorder();
     }
 
-    private void updateExpense() throws FinTrackException {
-        viewHistory();
-        int index = parser.readInt("Enter the index of the expense to update:");
-        if (index <= 0 || index > expenseList.size()) {
-            Ui.showError("Invalid index.");
-            return;
+
+    public void updateExpense() {
+        try {
+            viewHistory();
+            int index = parser.readInt("Enter the index of the expense to update:");
+            if (index <= 0 || index > expenseList.size()) {
+                Ui.showError("Invalid index. Please type 'update' and then follow the instructions: " +
+                        "enter a valid index from your spending history.");
+                Ui.printBorder();
+                return;
+            }
+            Expense updatedExpense = parser.readExpenseDetails();
+            if (expenseList.getMonthlyBudget() > 0) {
+                Ui.showMessage("Your remaining budget for the month is: " + expenseList.getRemainingBudget());
+            }
+            expenseList.updateExpense(index, updatedExpense);
+            Ui.showMessage("Expense updated.");
+            Storage.saveExpensesToFile(expenseList);
+            Ui.printBorder();
+        } catch (FinTrackException e) {
+            Ui.showError("Error updating expense: " + e.getMessage() +
+                    "\nPlease type 'update' and follow this format: \"<dollars>, <cents>, <category index>, " +
+                    "<description>, <date (yyyy-MM-dd)>\".");
+            Ui.printBorder();
         }
-        Expense updatedExpense = parser.readExpenseDetails();
-        if (expenseList.getMonthlyBudget() > 0) {
-            Ui.showMessage("Your remaining budget for the month is: " + expenseList.getRemainingBudget());
-        }
-        expenseList.updateExpense(index, updatedExpense);
-        Ui.showMessage("Expense updated.");
-        Storage.saveExpensesToFile(expenseList);
-        Ui.printBorder();
     }
 
-    private void deleteExpense() throws FinTrackException {
-        viewHistory();
-        int index = parser.readInt("Enter the index of the expense to delete:");
-        if (index <= 0 || index > expenseList.size()) {
-            Ui.showError("Invalid index.");
-            return;
+
+
+    public void deleteExpense() {
+        try {
+            viewHistory();
+            int index = parser.readInt("Enter the index of the expense to delete:");
+            if (index <= 0 || index > expenseList.size()) {
+                Ui.showError("Invalid index. Please type 'delete' and then choose a valid index " +
+                        "from your spending history.");
+                Ui.printBorder();
+                return;
+            }
+            Expense expense = expenseList.getExpense(index - 1);
+            int sizeBefore = expenseList.size();
+            expenseList.deleteExpense(expense);
+            if (expenseList.size() != sizeBefore - 1) {
+                throw new FinTrackException("Expense list did not decrement as expected");
+            }
+            Ui.showMessage("Expense deleted.");
+            Storage.saveExpensesToFile(expenseList);
+            Ui.printBorder();
+        } catch (FinTrackException e) {
+            Ui.showError("Error deleting expense: " + e.getMessage() + "\nPlease type 'delete'" +
+                    "and choose a valid index from your spending history.");
+            Ui.printBorder();
         }
-        Expense expense = expenseList.getExpense(index-1);
-        int sizeBefore = expenseList.size();
-        expenseList.deleteExpense(expense);
-        assert expenseList.size() == sizeBefore - 1 : "Expense list did not decrement as expected";
-        Ui.showMessage("Expense deleted.");
-        Storage.saveExpensesToFile(expenseList);
-        Ui.printBorder();
     }
 
-    private void exit() {
+
+    public void exit() {
         Storage.saveExpensesToFile(expenseList);
-        Ui.showMessage("Exiting program.");
+        Ui.showMessage("Make sure to have good saving habits yeah, cyaaaa.");
         System.exit(0);
     }
 
-    private void setMonthlyBudget() throws FinTrackException {
+    public void setMonthlyBudget() throws FinTrackException {
         int budget = parser.readInt("Enter monthly budget:");
         if (budget < 0) {
             throw new FinTrackException("Budget must be non-negative");
@@ -187,7 +209,7 @@ public class Commands {
         Ui.printBorder();
     }
 
-    private void addRecurringExpense() throws FinTrackException {
+    public void addRecurringExpense() throws FinTrackException {
         int amount = parser.readInt("Enter expense amount (in cents):");
         if (amount < 0) {
             throw new FinTrackException("Expense amount must be non-negative.");
