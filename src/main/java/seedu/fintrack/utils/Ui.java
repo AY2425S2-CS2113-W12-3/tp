@@ -47,16 +47,16 @@ public class Ui {
 
     public static void printOptions() {
         String options = "Hey! Here's what I can help you with\n" +
-                cyan + "1. Add a new expense\n" + reset +
-                green + "2. Check out this month's spending\n" + reset +
-                yellow + "3. View your spending history\n" + reset +
-                purple + "4. Update an expense entry\n" + reset +
-                red + "5. Delete an expense\n" + reset +
-                blue + "6. Set your monthly budget\n" + reset +
-                cyan + "7. Add a recurring expense\n" + reset +
-                green + "8. Create a new category\n" + reset +
-                yellow + "9. Delete a category\n" + reset +
-                red + "10. Exit the app\n" + reset +
+                cyan + "Add a new expense\n" + reset +
+                yellow + "Check out this month's spending\n" + reset +
+                yellow + "View your spending history\n" + reset +
+                purple + "Update an expense entry\n" + reset +
+                red + "Delete an expense\n" + reset +
+                blue + "Set your monthly budget\n" + reset +
+                blue + "Add a recurring expense\n" + reset +
+                green + "Create a new category\n" + reset +
+                red + "Delete a category\n" + reset +
+                red + "Exit the app\n" + reset +
                 "For more info on how to use the commands, type " + bold + "'help'" + reset + ".\n";
         System.out.println(options + border);
     }
@@ -66,7 +66,7 @@ public class Ui {
     }
 
     public static void showError(String errorMessage) {
-        System.err.println(errorMessage);
+        System.out.println(errorMessage);
     }
 
     public static void printBorder() {
