@@ -19,8 +19,7 @@ public class Categories {
         System.out.println(Ui.bold + "Categories:" + Ui.reset);
         if(categories.isEmpty()) {
             System.out.println("There are currently no categories! Use the 'category add' command to add a category.");
-        }
-        else {
+        } else {
             int index = 1;
             for (String category : categories) {
                 System.out.println(index + ". " + category);

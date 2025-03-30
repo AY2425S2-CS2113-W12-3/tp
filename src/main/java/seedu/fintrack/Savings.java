@@ -1,13 +1,8 @@
 package seedu.fintrack;
 
-import seedu.fintrack.utils.Ui;
-import seedu.fintrack.utils.Storage;
-import seedu.fintrack.utils.Ui;
-import seedu.fintrack.utils.Parser;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
+
 
 public class Savings {
     private int income; // presumed to be on a monthly basis
