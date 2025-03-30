@@ -17,10 +17,15 @@ public class Categories {
 
     public static void printCategories() {
         System.out.println(Ui.bold + "Categories:" + Ui.reset);
-        int index = 1;
-        for (String category : categories) {
-            System.out.println(index + ". " + category);
-            index++;
+        if(categories.isEmpty()) {
+            System.out.println("There are currently no categories! Use the 'category add' command to add a category.");
+        }
+        else {
+            int index = 1;
+            for (String category : categories) {
+                System.out.println(index + ". " + category);
+                index++;
+            }
         }
     }
 
@@ -30,10 +35,6 @@ public class Categories {
 
     public static void removeCategory(int index) {
         categories.remove(index-1);
-    }
-
-    public static Boolean checkCategory(String category) {
-        return categories.contains(category);
     }
 
     public static ArrayList<String> getCategories() {

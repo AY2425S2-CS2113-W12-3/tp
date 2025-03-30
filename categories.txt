@@ -1,1 +1,1 @@
-Food|Transport|Entertainment|Utilities|Household|Others|
+Food|

@@ -43,8 +43,8 @@ The CRUD operations follow a layered architecture:
 ## Classes and Their Responsibilities
 
 * **Commands**:
-    * Maps user commands (`add`, `viewmonth`, `history`, `update`, `delete`, `budget`, `recurring`, `category`, `exit`,
-      `help`) to their functionalities.
+    * Maps user commands (`add`, `viewmonth`, `history`, `update`, `delete`, `budget`, `recurring`, `category add`,
+      `category del`, `exit`, `help`) to their functionalities.
     * Contains methods to handle each user command.
 * **Expense**:
     * Represents an expense with `amount` (in cents), `category`, `description`, and `date`.
@@ -56,6 +56,8 @@ The CRUD operations follow a layered architecture:
     * Parses user-provided details into structured data types.
 * **Ui**:
     * Facilitates user interaction by displaying prompts, messages, and errors in color-coded formats.
+* **Categories**:
+    * Manages the user's list of available categories to choose from when adding expenses.
 
 ## Product scope
 

@@ -29,6 +29,7 @@ public class CommandsTest {
     private PrintStream originalOut;
     private PrintStream originalErr;
 
+
     @BeforeEach
     public void setUp() {
         expenseList = new DummyExpenseList();
@@ -164,6 +165,66 @@ public class CommandsTest {
                 "should be printed.");
     }
 
+    // ===== addCategory Tests =====
+
+    @Test
+    public void addCategory_categoriesContainOneCategory_showsSuccessMessage() {
+        int sizeBefore = Categories.size();
+        parser.isValidCategory = true;
+        commands.addCategory();
+
+        assertEquals(sizeBefore + 1, Categories.size(), "Category list size should increment by 1.");
+        String output = outputStream.toString();
+        assertTrue(output.contains("Food has been added to the list of categories."),
+                "The success message should be printed.");
+    }
+
+    @Test
+    public void addCategory_categoriesContainOneCategory_showsErrorMessage() {
+        parser.isValidCategory = false;
+        commands.addCategory();
+
+        String output = outputStream.toString();
+        assertTrue(output.contains("Empty input. Please enter a category."),
+                "The error message should be printed.");
+    }
+
+    @Test
+    public void addCategory_categoriesAlreadyContainCategory_showsErrorMessage() {
+        parser.isValidCategory = true;
+        commands.addCategory();
+        commands.addCategory();
+
+        String output = outputStream.toString();
+        assertTrue(output.contains("Category already exists."),
+                "The success message should be printed.");
+    }
+
+    // ===== deleteCategory Tests =====
+
+    @Test
+    public void deleteCategory_categoriesContainOneCategory_showsSuccessMessage() {
+        parser.isValidCategory = true;
+        commands.addCategory();
+        int sizeBefore = Categories.size();
+        parser.setIntInputs(new int[]{1});
+        commands.deleteCategory();
+
+        assertEquals(sizeBefore - 1, Categories.size(), "Category list size should decrement by 1.");
+        String output = outputStream.toString();
+        assertTrue(output.contains("Food has been deleted."), "The success message should be printed.");
+    }
+
+    @Test
+    public void deleteCategory_categoriesContainOneCategory_showsErrorMessage() {
+        parser.isValidCategory = true;
+        commands.addCategory();
+        parser.setIntInputs(new int[]{-1});
+        commands.deleteCategory();
+
+        String output = outputStream.toString();
+        assertTrue(output.contains("Invalid index."), "This error message should be printed.");
+    }
 
     // ===== Dummy Implementations for Testing =====
 
@@ -275,6 +336,7 @@ public class CommandsTest {
     private static class DummyParser extends Parser {
         private DummyExpense dummyExpense;
         private boolean throwExceptionOnReadExpense = false;
+        private boolean isValidCategory;
         private java.util.Queue<Integer> intInputs = new java.util.LinkedList<>();
 
         public DummyParser() {
@@ -316,7 +378,10 @@ public class CommandsTest {
 
         @Override
         public String promptInput(String prompt) {
-            return "";
+            return isValidCategory ? "Food" : "" ;
         }
+
     }
+
+
 }

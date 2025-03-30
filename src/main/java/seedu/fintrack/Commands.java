@@ -232,19 +232,34 @@ public class Commands {
         Ui.printBorder();
     }
 
-    private void addCategory() {
+    public void addCategory() {
         String newCategory = parser.promptInput("Please enter the name of the new category:");
+        if(newCategory.isEmpty()) {
+            Ui.showError("Empty input. Please enter a category.");
+            Ui.printBorder();
+            return;
+        }
+        if(Categories.getCategories().contains(newCategory)) {
+            Ui.showError("Category already exists.");
+            Ui.printBorder();
+            return;
+        }
         Categories.addCategory(newCategory);
         Ui.showMessage(newCategory + " has been added to the list of categories.");
         Storage.saveCategoriesToFile();
         Ui.printBorder();
     }
 
-    private void deleteCategory() {
+    public void deleteCategory() {
         Categories.printCategories();
+        if(Categories.getCategories().isEmpty()) {
+            Ui.printBorder();
+            return;
+        }
         int index = parser.readInt("Enter the index of the category to delete:");
         if (index <= 0 || index > Categories.size()) {
             Ui.showError("Invalid index.");
+            Ui.printBorder();
             return;
         }
         String deletedCategory = Categories.getCategory(index);
