@@ -78,7 +78,8 @@ public class Commands {
         if (command != null) {
             command.run();
         } else {
-            Ui.showError("Invalid command. Please type 'help' to see the available commands and their proper formats.");
+            Ui.showError("Invalid command. Please type 'help' to see the available commands and their" +
+                    " proper formats.");
         }
     }
 

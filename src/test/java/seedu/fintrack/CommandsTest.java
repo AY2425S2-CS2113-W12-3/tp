@@ -104,13 +104,14 @@ public class CommandsTest {
         expenseList.addExpense(original);
 
         parser.setIntInputs(new int[]{1});
-        DummyExpense updatedExpense = new DummyExpense(250, "Food", "Snack Updated", new Date());
+        DummyExpense updatedExpense = new DummyExpense(250,"Food","Snack Updated",new Date());
         parser.setDummyExpense(updatedExpense);
 
         commands.updateExpense();
 
         DummyExpense result = (DummyExpense) expenseList.getExpense(0);
-        assertEquals("Snack Updated", result.getDescription(), "Expense description should be updated.");
+        assertEquals("Snack Updated", result.getDescription(),
+                "Expense description should be updated.");
         String output = outputStream.toString();
         assertTrue(output.contains("Expense updated."), "Success message should be printed after update.");
     }
@@ -125,7 +126,8 @@ public class CommandsTest {
         commands.updateExpense();
 
         DummyExpense result = (DummyExpense) expenseList.getExpense(0);
-        assertEquals("Snack", result.getDescription(), "Expense should remain unchanged on invalid index.");
+        assertEquals("Snack", result.getDescription(),
+                "Expense should remain unchanged on invalid index.");
         String output = outputStream.toString().toLowerCase();
         assertTrue(output.contains("invalid index"), "Error message for invalid index should be printed.");
     }
