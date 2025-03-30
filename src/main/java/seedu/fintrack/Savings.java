@@ -10,13 +10,24 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Savings {
-    int income; // presumed to be on a monthly basis
-    int savingsGoal;
-    String currentMonth;
+    private int income; // presumed to be on a monthly basis
+    private int savingsGoal;
+    private int totalSavings;
+    private String currentMonth;
 
-    Savings(){
-        income = 0;
-        savingsGoal = 0;
+    public Savings(){
+        this.income = 0;
+        this.savingsGoal = 0;
+        this.totalSavings = 0;
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MM"); // Format for month (e.g., 01, 02, ...)
+        Date now = new Date(); // Get the current date and time
+        this.currentMonth = monthFormat.format(now);
+    }
+
+    public Savings(int income, int savingsGoal, int totalSavings){
+        this.income = income;
+        this.savingsGoal = savingsGoal;
+        this.totalSavings = totalSavings;
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM"); // Format for month (e.g., 01, 02, ...)
         Date now = new Date(); // Get the current date and time
         this.currentMonth = monthFormat.format(now);
@@ -32,16 +43,20 @@ public class Savings {
         return savingsGoal;
     }
 
+    public int getCurrentSavings() {
+        return totalSavings;
+    }
+
     //setters
     public void updateIncome(int monthlyIncome) {
         this.income = monthlyIncome;
     }
-s
+
     public void updateSavingsGoal(int monthlySavingsGoal) {
         this.savingsGoal = monthlySavingsGoal;
     }
 
-    int calculateMonthlyExpesnes(ExpenseList expenseList) {
+    public int calculateMonthlyExpesnes(ExpenseList expenseList) {
         int monthlyExpenses = 0;
 
 
@@ -53,5 +68,19 @@ s
         }
 
         return monthlyExpenses;
+    }
+
+    public void addToSavings(int newSavings ) {
+        totalSavings += newSavings;
+    }
+
+    public void addIncome() {
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
+        String currentMonthCheck = monthFormat.format(new Date());
+
+        if (!currentMonthCheck.equals(currentMonth)) {
+            this.currentMonth = currentMonthCheck;
+            totalSavings += income;
+        }
     }
 }

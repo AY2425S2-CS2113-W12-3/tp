@@ -3,6 +3,8 @@ package seedu.fintrack.utils;
 import seedu.fintrack.Categories;
 import seedu.fintrack.Expense;
 import seedu.fintrack.ExpenseList;
+import seedu.fintrack.Savings;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -79,4 +81,52 @@ public class Storage {
             System.out.println("Error saving categories to file.");
         }
     }
+
+    public static void saveSavingsToFile(int income, int savingsGoal, int totalSavings) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("savings.txt"))) {
+            writer.write(income + "\n");
+            writer.write(savingsGoal + "\n");
+            writer.write(totalSavings + "\n");
+        } catch (IOException e) {
+            System.out.println("Error saving expenses to file.");
+        }
+    }
+
+    public static Savings loadSavingsFromFile() {
+        File file = new File("savings.txt");
+
+        // If file doesn't exist, return a default Savings object
+        if (!file.exists()) {
+            return new Savings();  // Return a new default object
+        }
+
+        try (Scanner scanner = new Scanner(file)) {
+            String[] data = new String[3];
+            int count = 0;
+
+            // Read all lines (assuming the file is properly formatted)
+            while (scanner.hasNextLine() && count < 3) {
+                data[count] = scanner.nextLine();
+                count++;
+            }
+
+            if (count < 3) {
+                System.out.println("Error: File format is incorrect.");
+                return new Savings();  // Return a default object if the file format is invalid
+            }
+
+            // Parse the data
+            int income = Integer.parseInt(data[0]);
+            int savingsGoal = Integer.parseInt(data[1]);
+            int totalSavings = Integer.parseInt(data[2]);
+
+            // Return a new Savings object with the loaded data
+            return new Savings(income, savingsGoal, totalSavings);
+
+        } catch (IOException e) {
+            System.out.println("Error loading savings from file.");
+            return new Savings();  // Return a default object in case of error
+        }
+    }
+
 }

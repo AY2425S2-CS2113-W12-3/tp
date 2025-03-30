@@ -28,7 +28,9 @@ public class FinTrack {
         storage.loadExpensesFromFile(expenseList);
         storage.loadCategoriesFromFile();
 
-
+        //Loading the savings.txt file will also call the constructor for a new Savings object
+        Savings savings = storage.loadSavingsFromFile();
+        savings.addIncome();
 
         boolean isRunning = true;
         //Main application loop starts, user input is read and processed
