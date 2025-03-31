@@ -110,7 +110,19 @@ public class Commands {
         Date now = new Date();
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM-yyyy");
         String currentMonth = monthFormat.format(now);
-        Ui.showMessage("Expenses for " + currentMonth + ":");
+        Ui.showMessage("Month: " + currentMonth);
+        Ui.showMessage("Your current income: " + Savings.getIncome());
+        int monthlyExpenses = Savings.calculateMonthlyExpenses(expenseList);
+
+        if(monthlyExpenses < Savings.getSavingsGoal()) {
+            Ui.showMessage("You have yet to hit your savings goal You can still spend "
+                    + (Savings.getSavingsGoal() - monthlyExpenses));
+        } else {
+            Ui.showMessage("You have exceeded your monthly savings goal by "
+                    + (monthlyExpenses - Savings.getSavingsGoal()));
+        }
+
+        Ui.showMessage("Here is your expenses for this month: ");
         for (int i = 0; i < expenseList.size(); i++) {
             Expense expense = expenseList.getExpense(i);
             if (monthFormat.format(expense.getDate()).equals(currentMonth)) {
