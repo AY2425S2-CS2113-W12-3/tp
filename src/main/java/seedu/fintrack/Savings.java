@@ -5,10 +5,10 @@ import java.util.Date;
 
 
 public class Savings {
-    private int income; // presumed to be on a monthly basis
-    private int savingsGoal;
+    private static int income; // presumed to be on a monthly basis
+    private static int savingsGoal;
     private int totalSavings;
-    private String currentMonth;
+    private static String currentMonth;
 
     public Savings(){
         this.income = 0;
@@ -30,11 +30,11 @@ public class Savings {
 
 
     //getters
-    public int getIncome() {
+    public static int getIncome() {
         return income;
     }
 
-    public int getSavingsGoal() {
+    public static int getSavingsGoal() {
         return savingsGoal;
     }
 
@@ -51,7 +51,7 @@ public class Savings {
         this.savingsGoal = monthlySavingsGoal;
     }
 
-    public int calculateMonthlyExpesnes(ExpenseList expenseList) {
+    public static int calculateMonthlyExpenses(ExpenseList expenseList) {
         int monthlyExpenses = 0;
 
 
