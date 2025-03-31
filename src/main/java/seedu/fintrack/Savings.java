@@ -7,7 +7,7 @@ import java.util.Date;
 public class Savings {
     private static int income; // presumed to be on a monthly basis
     private static int savingsGoal;
-    private int totalSavings;
+    private static int totalSavings;
     private static String currentMonth;
 
     public Savings(){

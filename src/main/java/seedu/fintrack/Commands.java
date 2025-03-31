@@ -115,9 +115,11 @@ public class Commands {
         int monthlyExpenses = Savings.calculateMonthlyExpenses(expenseList);
 
         if(monthlyExpenses < Savings.getSavingsGoal()) {
-            Ui.showMessage("You have yet to hit your savings goal You can still spend " + (Savings.getSavingsGoal() - monthlyExpenses));
+            Ui.showMessage("You have yet to hit your savings goal You can still spend "
+                    + (Savings.getSavingsGoal() - monthlyExpenses));
         } else {
-            Ui.showMessage("You have exceeded your monthly savings goal by " + (monthlyExpenses - Savings.getSavingsGoal()));
+            Ui.showMessage("You have exceeded your monthly savings goal by "
+                    + (monthlyExpenses - Savings.getSavingsGoal()));
         }
 
         Ui.showMessage("Here is your expenses for this month: ");
