@@ -1,6 +1,8 @@
 package seedu.fintrack.utils;
 
 
+import seedu.fintrack.Savings;
+
 public class Ui {
     //Color codes for the text
     public static String reset = "\u001B[0m";
@@ -56,9 +58,21 @@ public class Ui {
                 blue + "Add a recurring expense\n" + reset +
                 green + "Create a new category\n" + reset +
                 red + "Delete a category\n" + reset +
+                cyan + "Update your Income\n" + reset +
+                cyan + "Update your monthly savings goal\n" + reset +
                 red + "Exit the app\n" + reset +
                 "For more info on how to use the commands, type " + bold + "'help'" + reset + ".\n";
         System.out.println(options + border);
+    }
+
+    public static void printSavings() {
+        float income =   ((float)Savings.getIncome()) / 100;
+        float savings = ((float)Savings.getCurrentSavings()) / 100;
+        float savingsGoal = ((float)Savings.getSavingsGoal()) / 100;
+
+        System.out.println("Your current income: $" + income);
+        System.out.println("Your current savings: $" + savings);
+        System.out.println("Your current monthly saving goal: $" + savingsGoal);
     }
 
     public static void showMessage(String message) {

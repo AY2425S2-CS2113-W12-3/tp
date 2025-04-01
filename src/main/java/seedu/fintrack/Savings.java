@@ -38,17 +38,17 @@ public class Savings {
         return savingsGoal;
     }
 
-    public int getCurrentSavings() {
+    public static int getCurrentSavings() {
         return totalSavings;
     }
 
     //setters
-    public void updateIncome(int monthlyIncome) {
-        this.income = monthlyIncome;
+    public static void updateIncome(int monthlyIncome) {
+        income = monthlyIncome;
     }
 
-    public void updateSavingsGoal(int monthlySavingsGoal) {
-        this.savingsGoal = monthlySavingsGoal;
+    public static void updateSavingsGoal(int monthlySavingsGoal) {
+        savingsGoal = monthlySavingsGoal;
     }
 
     public static int calculateMonthlyExpenses(ExpenseList expenseList) {
