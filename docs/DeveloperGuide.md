@@ -1,14 +1,15 @@
+
 # Developer Guide
 
 ## Acknowledgements
-
+<!-- @@author kaxiangg -->
 [Java Standard Library](https://docs.oracle.com/javase/8/docs/api/): Utilized extensively for collections, date
 handling, and file operations.
 
 [ANSI Escape Codes](https://en.wikipedia.org/wiki/ANSI_escape_code): Adapted for colored console outputs in Ui.java.
 
 [JUnit 5](https://junit.org/junit5/docs/current/user-guide/): Used for unit testing.
-
+<!-- @@author  -->
 # Design & Implementation
 
 ## Architecture
@@ -21,6 +22,9 @@ The application follows a modular design:
 * **Expense & ExpenseList**: Data models representing expenses and collections of expenses.
 * **Ui**: Provides a consistent user interface through console outputs.
 
+
+
+<!-- @@author kaxiangg -->
 ### CRUD Operations Implementation
 
 #### Overview
@@ -38,7 +42,7 @@ The CRUD operations follow a layered architecture:
 3. Logic Layer (`Parser` and `Categories` classes)
 4. Data Layer (`ExpenseList` and `Storage` classes
 
-[//]: # (![CRUD_UML.png]&#40;CRUD_UML.png&#41;)
+![CRUD_UML.png](CRUD_UML.png)
 
 ## Classes and Their Responsibilities
 
@@ -58,6 +62,7 @@ The CRUD operations follow a layered architecture:
     * Facilitates user interaction by displaying prompts, messages, and errors in color-coded formats.
 * **Categories**:
     * Manages the user's list of available categories to choose from when adding expenses.
+<!-- @@author -->
 
 ## Product scope
 
@@ -85,7 +90,7 @@ Manage finances better by tracking expenses and income faster than a GUI driven 
 * *glossary item* - Definition
 
 ## Instructions for manual testing
-
+<!-- @@author kaxiangg -->
 1. **Launching the Application:**
     * Run `FinTrack.main()`.
 
@@ -101,4 +106,4 @@ Manage finances better by tracking expenses and income faster than a GUI driven 
 5. **Deleting an Expense:**
     * Type `delete`, follow prompt to specify the expense index.
 
-
+<!-- @@author -->
