@@ -2,7 +2,7 @@
 # Developer Guide
 
 ## Acknowledgements
-<!-- @@author kaxiangg -->
+<!-- @@author kaixiangg -->
 [Java Standard Library](https://docs.oracle.com/javase/8/docs/api/): Utilized extensively for collections, date
 handling, and file operations.
 
@@ -24,7 +24,7 @@ The application follows a modular design:
 
 
 
-<!-- @@author kaxiangg -->
+<!-- @@author kaixiangg -->
 ### CRUD Operations Implementation
 
 #### Overview
@@ -90,7 +90,7 @@ Manage finances better by tracking expenses and income faster than a GUI driven 
 * *glossary item* - Definition
 
 ## Instructions for manual testing
-<!-- @@author kaxiangg -->
+<!-- @@author kaixiangg -->
 1. **Launching the Application:**
     * Run `FinTrack.main()`.
 

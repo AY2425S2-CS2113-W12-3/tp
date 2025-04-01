@@ -1,6 +1,6 @@
 # FinTrack User Guide
 
-<!-- @@author kaxiangg -->
+<!-- @@author kaixiangg -->
 
 ## Introduction
 
