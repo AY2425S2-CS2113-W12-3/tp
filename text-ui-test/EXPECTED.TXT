@@ -2,6 +2,9 @@ ________________________________________________________________________________
 Hello, I am Fin! Your go-to expense tracker
 How can I help you today?
 ________________________________________________________________________________
+Your current income: $0.0
+Your current savings: $0.0
+Your current monthly saving goal: $0.0
 Hey! Here's what I can help you with
 [36mAdd a new expense
 [0m[33mCheck out this month's spending
@@ -12,6 +15,8 @@ Hey! Here's what I can help you with
 [0m[34mAdd a recurring expense
 [0m[32mCreate a new category
 [0m[31mDelete a category
+[0m[36mUpdate your Income
+[0m[36mUpdate your monthly savings goal
 [0m[31mExit the app
 [0mFor more info on how to use the commands, type [1m'help'[0m.
 ________________________________________________________________________________

@@ -43,6 +43,8 @@ public class Commands {
         });
         commands.put("category add", this::addCategory);
         commands.put("category del", this::deleteCategory);
+        commands.put("update income", this::updateIncome);
+        commands.put("update savings goal", this::updateSavingsGoal);
         commands.put("exit", this::exit);
 
 
@@ -59,12 +61,14 @@ public class Commands {
             Ui.showMessage(Ui.blue + " - 'recurring': Adds a recurring expense into the expense list" + Ui.reset);
             Ui.showMessage(Ui.green + " - 'category add': Adds a new category into the category list" + Ui.reset);
             Ui.showMessage(Ui.red + " - 'category del': Deletes a chosen category from category list" + Ui.reset);
+            Ui.showMessage(Ui.cyan + " - 'update income': Updates the income of the expense entry" + Ui.reset);
+            Ui.showMessage(Ui.cyan + " - 'update savings goal': Updates the monthly savings goal" + Ui.reset);
             Ui.showMessage(Ui.red + " - 'exit': Exits the program" + Ui.reset);
             Ui.printBorder();
         });
 
 
-        assert commands.size() == 11 : "Commands map should contain 11 commands (including help)";
+        assert commands.size() == 13 : "Commands map should contain 11 commands (including help)";
     }
 
     /**
@@ -133,7 +137,6 @@ public class Commands {
         Ui.printBorder();
     }
 
-
     public void viewHistory() {
         try {
             Ui.showMessage("Spending history:");
@@ -176,8 +179,6 @@ public class Commands {
             Ui.printBorder();
         }
     }
-
-
 
     public void deleteExpense() {
         try {
@@ -280,5 +281,29 @@ public class Commands {
         Ui.showMessage(deletedCategory + " has been deleted.");
         Storage.saveCategoriesToFile();
         Ui.printBorder();
+    }
+
+    public void updateIncome() {
+        Ui.printBorder();
+        Ui.showMessage("Your current income: ");
+        Ui.showMessage(Integer.toString(Savings.getIncome()));
+        int newIncome = parser.readInt("Enter your new income:");
+        if (newIncome < 0) {
+            Savings.updateIncome(newIncome);
+        } else {
+            Ui.showMessage("Income not updated as the number you entered is invalid.");
+        }
+    }
+
+    public void updateSavingsGoal() {
+        Ui.printBorder();
+        Ui.showMessage("Your current savings goal: ");
+        Ui.showMessage(Integer.toString(Savings.getSavingsGoal()));
+        int newSavingsGoal = parser.readInt("Enter your new savings goal:");
+        if (newSavingsGoal < 0) {
+            Savings.updateSavingsGoal(newSavingsGoal);
+        } else {
+            Ui.showMessage("Savings goal not updated as the number you entered is invalid.");
+        }
     }
 }

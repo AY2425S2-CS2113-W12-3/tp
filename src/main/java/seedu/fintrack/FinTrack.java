@@ -17,6 +17,7 @@ public class FinTrack {
         //Do the initial setup for the application, which will happen once at the start.
         Ui.printGreeting();
         //Ui.printLogo();
+        Ui.printSavings();
         Ui.printOptions();
 
         //String input = sc.nextLine();
