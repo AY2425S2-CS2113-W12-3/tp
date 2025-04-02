@@ -288,8 +288,9 @@ public class Commands {
         Ui.showMessage("Your current income: ");
         Ui.showMessage(Integer.toString(Savings.getIncome()));
         int newIncome = parser.readInt("Enter your new income:");
-        if (newIncome < 0) {
+        if (newIncome > 0) {
             Savings.updateIncome(newIncome);
+            Storage.saveSavingsToFile(newIncome, Savings.getSavingsGoal(), Savings.getCurrentSavings());
         } else {
             Ui.showMessage("Income not updated as the number you entered is invalid.");
         }
@@ -300,8 +301,9 @@ public class Commands {
         Ui.showMessage("Your current savings goal: ");
         Ui.showMessage(Integer.toString(Savings.getSavingsGoal()));
         int newSavingsGoal = parser.readInt("Enter your new savings goal:");
-        if (newSavingsGoal < 0) {
+        if (newSavingsGoal > 0) {
             Savings.updateSavingsGoal(newSavingsGoal);
+            Storage.saveSavingsToFile(Savings.getIncome(), newSavingsGoal, Savings.getCurrentSavings());
         } else {
             Ui.showMessage("Savings goal not updated as the number you entered is invalid.");
         }
