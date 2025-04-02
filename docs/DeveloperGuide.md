@@ -58,12 +58,14 @@ The CRUD operations follow a layered architecture:
     * Facilitates user interaction by displaying prompts, messages, and errors in color-coded formats.
 * **Categories**:
     * Manages the user's list of available categories to choose from when adding expenses.
+* **Savings**:
+    * Tracks the user's income, savings and if they meet their monthly savings goals.
 
 ## Product scope
 
 ### Target user profile
 
-Young adults who are looking to manage their finances better.
+Young adults who are looking to manage their finances better and improve their discipline to continuously save their income over time. 
 
 ### Value proposition
 
@@ -100,5 +102,6 @@ Manage finances better by tracking expenses and income faster than a GUI driven 
 
 5. **Deleting an Expense:**
     * Type `delete`, follow prompt to specify the expense index.
+
 
 
