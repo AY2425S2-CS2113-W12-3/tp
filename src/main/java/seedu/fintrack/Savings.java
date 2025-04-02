@@ -45,6 +45,9 @@ public class Savings {
     //setters
     public static void updateIncome(int monthlyIncome) {
         income = monthlyIncome;
+        if(totalSavings == 0){
+            totalSavings = monthlyIncome;
+        }
     }
 
     public static void updateSavingsGoal(int monthlySavingsGoal) {
@@ -77,5 +80,9 @@ public class Savings {
             this.currentMonth = currentMonthCheck;
             totalSavings += income;
         }
+    }
+
+    public static void updateTotalSavings(int expenseAmount) {
+        totalSavings -= expenseAmount;
     }
 }

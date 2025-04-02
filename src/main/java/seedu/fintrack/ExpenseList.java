@@ -21,6 +21,7 @@ public class ExpenseList {
     public void addExpense(Expense expense) {
         expenseList.add(expense);
         remainingBudget = remainingBudget - expense.getAmount();
+        Savings.updateTotalSavings(expense.getAmount());
     }
 
     void deleteExpense(Expense expense) {
@@ -46,6 +47,7 @@ public class ExpenseList {
     public void addRecurringExpense(RecurringExpense recurringExpense) {
         recurringExpenses.add(recurringExpense);
         addRecurringExpenses(recurringExpense);
+        Savings.updateTotalSavings(recurringExpense.getAmount());
     }
 
 

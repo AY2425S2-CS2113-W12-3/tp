@@ -291,9 +291,11 @@ public class Commands {
         if (newIncome > 0) {
             Savings.updateIncome(newIncome);
             Storage.saveSavingsToFile(newIncome, Savings.getSavingsGoal(), Savings.getCurrentSavings());
+            Ui.showMessage("Income updated to " + newIncome + ".");
         } else {
             Ui.showMessage("Income not updated as the number you entered is invalid.");
         }
+        Ui.printBorder();
     }
 
     public void updateSavingsGoal() {
@@ -304,8 +306,10 @@ public class Commands {
         if (newSavingsGoal > 0) {
             Savings.updateSavingsGoal(newSavingsGoal);
             Storage.saveSavingsToFile(Savings.getIncome(), newSavingsGoal, Savings.getCurrentSavings());
+            Ui.showMessage("Savings goal updated to " + newSavingsGoal + ".");
         } else {
             Ui.showMessage("Savings goal not updated as the number you entered is invalid.");
         }
+        Ui.printBorder();
     }
 }
