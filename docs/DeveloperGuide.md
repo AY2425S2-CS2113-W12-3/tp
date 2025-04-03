@@ -78,18 +78,41 @@ Manage finances better by tracking expenses and income faster than a GUI driven 
 
 ## User Stories
 
-| Version | As a ... | I want to ...             | So that I can ...                                           |
-|---------|----------|---------------------------|-------------------------------------------------------------|
-| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
+| Version | As a/an ...       | I can ...                                              | So that ...                                              | Priority     |
+|---------|-------------------|--------------------------------------------------------|----------------------------------------------------------|--------------|
+| v1.0    | new user         | create custom categories                               | I can track expenses according to my lifestyle          | Must-Have    |
+| v1.0    | regular user     | manually log/add an expense                           | I can track my spending                                 | Must-Have    |
+| v1.0    | regular user     | set a monthly budget                                 | I can track if I am overspending                        | Must-Have    |
+| v1.0    | regular user     | view a spending summary                              | I can understand my financial habits                    | Must-Have    |
+| v1.0    | expert user      | search for past transactions                         | I can quickly find specific entries                     | Must-Have    |
+| v1.0    | expert user      | set different budget limits for each category        | I can control my expenses more effectively              | Must-Have    |
+| v1.0    | new user         | access sample data in the app                        | I can explore how the app works before inputting real data | Nice-to-Have |
+| v1.0    | regular user     | track subscriptions and recurring payments           | I can avoid unwanted charges                            | Should-Have  |
+| v2.0    | regular user     | use currency conversion                               | I can track spending in different currencies            | Nice-to-Have |
+| v2.0    | regular user     | receive insights and tips on reducing expenses       | I can optimize my spending                              | Nice-to-Have |
+| v2.0    | regular user     | auto-categorize expenses based on past entries       | I save time when logging transactions                   | Nice-to-Have |
+| v2.0    | expert user      | track net worth over time                            | I can monitor my financial progress                     | Nice-to-Have |
+| v2.0    | regular user     | receive a monthly financial health report            | I can get insights into my financial behavior           | Nice-to-Have |
+| v2.0    | regular user     | set savings goals                                    | I can track my progress toward financial targets        | Should-Have  |
+
+ 
+
+
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+This program should be able to work smoothly, with minimal lag in Windows 11, Ubuntu and MacOS.
 
 ## Glossary
 
-* *glossary item* - Definition
+* Expense – A financial transaction where money is spent.
+* Recurring Expense – An expense that occurs automatically on a set schedule (e.g., monthly subscriptions).
+* Budget – A financial limit set for expenses over a given period.
+* Category – A label for grouping expenses (e.g., Food, Entertainment, Rent).
+* Dashboard – The home screen of the application displaying an overview of financial data.
+* User Role – Defines whether a user is a new user, regular user, or expert user, determining available features.
+
+
 
 ## Instructions for manual testing
 <!-- @@author kaixiangg -->

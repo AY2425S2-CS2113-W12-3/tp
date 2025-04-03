@@ -15,6 +15,7 @@ public class FinTrack {
         Scanner sc = new Scanner(System.in);
 
         //Do the initial setup for the application, which will happen once at the start.
+        //Ui.printRandomTip();
         Ui.printGreeting();
         //Ui.printLogo();
         Ui.printSavings();
