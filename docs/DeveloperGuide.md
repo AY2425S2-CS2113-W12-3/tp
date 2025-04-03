@@ -62,6 +62,18 @@ The add command execution follows these steps:
 5. A success message is shown through the `Ui` component
 6. Confirmation is returned to the user
 
+The category add command follows similar steps:
+
+1. User enters the "category add" command
+2. `FinTrack` forwards the request to `Commands`
+3. `Commands` uses `Parser` to:
+    - Read user's input (category name)
+    - Validate the input data
+    - Returns the input as a string
+4. The new category is added to `Categories`
+5. A success message is shown through the `Ui` component
+6. Confirmation is returned to the user
+
 #### <u> View History Implementation </u>
 
 ![View History Command Sequence Diagram](diagrams/ViewHistoryCommand.png)
@@ -97,6 +109,18 @@ The delete command execution involves the following steps:
 4. The validated index is used to delete the expense from `ExpenseList`
 5. A success message is displayed through the `Ui` component
 6. The confirmation message is propagated back to the user
+
+The category del command follows similar steps:
+
+1. User enters the "category del" command
+2. `FinTrack` forwards the request to `Commands`
+3. `Commands` uses `Parser` to:
+    - Read user's input (category index)
+    - Validate the input data
+    - Returns the input as an int
+4. The category is removed from the list of categories
+5. A success message is shown through the `Ui` component
+6. Confirmation is returned to the user
 
 ## Classes and Their Responsibilities
 
@@ -181,5 +205,11 @@ This program should be able to work smoothly, with minimal lag in Windows 11, Ub
 
 5. **Deleting an Expense:**
     * Type `delete`, follow prompt to specify the expense index.
+
+6. **Adding a Category**
+    * Type `category add`, then input name of category.
+
+7. **Deleting a Category**
+    * Type `category del`, then input index of category.
 
 

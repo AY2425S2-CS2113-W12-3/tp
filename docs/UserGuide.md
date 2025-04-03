@@ -168,16 +168,13 @@ budget
 
 **Description:** Adds a new category to the list.
 
-**Format:**
-
-```
-category add CATEGORY_NAME
-```
-
 **Example:**
 
 ```
-category add Healthcare
+category add
+```
+```
+Please enter the name of the new category: Health
 ```
 
 #### Delete a Category
@@ -186,16 +183,13 @@ category add Healthcare
 
 **Description:** Removes a category from the list.
 
-**Format:**
-
-```
-category del CATEGORY_NAME
-```
-
 **Example:**
 
 ```
-category del Healthcare
+category del
+```
+```
+Enter the index of the category to delete: 1
 ```
 
 ---
