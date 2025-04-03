@@ -130,11 +130,12 @@ delete 1
 ---
 <!-- @@author -->
 
-### 6. Setting a Monthly Budget
+### 6. Setting and updating Monthly Budget
 
 **Command:** `budget`
 
-**Description:** Sets a spending limit for the month.
+**Description:** Sets a spending limit for the month. 
+The format to update the budget is the same.
 
 **Format:**
 
