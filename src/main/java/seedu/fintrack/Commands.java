@@ -84,6 +84,7 @@ public class Commands {
         } else {
             Ui.showError("Invalid command. Please type 'help' to see the available commands and their" +
                     " proper formats.");
+            Ui.printBorder();
         }
     }
 
