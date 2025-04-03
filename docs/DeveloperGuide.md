@@ -145,6 +145,10 @@ The category del command follows similar steps:
 
 <!-- @@author -->
 
+### Class diagrams of key classes
+
+![ExpenseList Class Diagram](diagrams/ExpenseList_Class_diagram.png)
+
 ## Product scope
 
 ### Target user profile
