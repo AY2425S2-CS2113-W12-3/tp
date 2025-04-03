@@ -7,7 +7,7 @@ import java.util.Date;
 public class ExpenseList {
     private ArrayList<Expense> expenseList;
     private ArrayList<RecurringExpense> recurringExpenses;
-    private int monthlyBudget;
+    private int monthlyBudget = 0;
     private int remainingBudget;
 
 
@@ -60,6 +60,11 @@ public class ExpenseList {
         this.remainingBudget = budget;
     }
 
+    public void updateMonthlyBudget(int budget) {
+        int amountSpent = this.monthlyBudget - this.remainingBudget;
+        this.monthlyBudget = budget;
+        this.remainingBudget = budget - amountSpent;
+    }
 
     public int getMonthlyBudget() {
         return monthlyBudget;

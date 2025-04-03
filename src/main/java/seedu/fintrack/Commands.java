@@ -218,7 +218,11 @@ public class Commands {
         if (budget < 0) {
             throw new FinTrackException("Budget must be non-negative");
         }
-        expenseList.setMonthlyBudget(budget);
+        if (expenseList.getMonthlyBudget() != 0) {
+            expenseList.updateMonthlyBudget(budget);
+        } else {
+            expenseList.setMonthlyBudget(budget);
+        }
         Ui.showMessage("Monthly budget set to: " + budget);
         Ui.printBorder();
     }
