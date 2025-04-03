@@ -49,7 +49,8 @@ DOLLARS, CENTS, CATEGORY_INDEX, DESCRIPTION, DATE (YYYY-MM-DD)
 **Example:**
 
 ```
-add 12, 50, 1, Lunch, 2025-03-28
+add //press Enter
+12, 50, 1, Lunch, 2025-03-28
 ```
 
 ---
@@ -100,7 +101,8 @@ INDEX, DOLLARS, CENTS, CATEGORY_INDEX, DESCRIPTION, DATE (YYYY-MM-DD)
 **Example:**
 
 ```
-update 3, 15, 00, 2, Grab Taxi, 2025-03-28
+update //press Enter
+3, 15, 00, 2, Grab Taxi, 2025-03-28
 ```
 
 ---
@@ -144,13 +146,16 @@ budget
 
 ---
 
-### 7. Adding a Recurring Expense
+### 7. Adding a Recurring Expense (*Coming soon*)
 
 **Command:** `recurring`
 
 **Description:** Adds an expense that repeats on a regular basis.
 
 **Format:** Follow the prompt to enter:
+```
+//coming soon
+```
 
 - Amount
 - Category
@@ -158,6 +163,10 @@ budget
 - Description
 - Start date (`YYYY-MM-DD` format)
 
+**Example:**
+```
+//coming soon
+```
 ---
 
 ### 8. Managing Expense Categories
