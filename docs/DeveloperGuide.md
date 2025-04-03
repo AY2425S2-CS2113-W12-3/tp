@@ -101,11 +101,18 @@ Manage finances better by tracking expenses and income faster than a GUI driven 
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+This program should be able to work smoothly, with minimal lag in Windows 11, Ubuntu and MacOS.
 
 ## Glossary
 
-* *glossary item* - Definition
+* Expense – A financial transaction where money is spent.
+* Recurring Expense – An expense that occurs automatically on a set schedule (e.g., monthly subscriptions).
+* Budget – A financial limit set for expenses over a given period.
+* Category – A label for grouping expenses (e.g., Food, Entertainment, Rent).
+* Dashboard – The home screen of the application displaying an overview of financial data.
+* User Role – Defines whether a user is a new user, regular user, or expert user, determining available features.
+
+
 
 ## Instructions for manual testing
 <!-- @@author kaixiangg -->
