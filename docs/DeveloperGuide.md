@@ -46,6 +46,7 @@ The CRUD operations follow a layered architecture and can be seen from the seqeu
 3. Logic Layer (`Parser` and `Categories` classes)
 4. Data Layer (`ExpenseList` and `Storage` classes)
 
+
 #### <u> Add Command Implementation </u>
 
 ![Add Command Sequence Diagram](diagrams/AddCommand.png)
@@ -122,6 +123,7 @@ The category del command follows similar steps:
 5. A success message is shown through the `Ui` component
 6. Confirmation is returned to the user
 
+
 ## Classes and Their Responsibilities
 
 * **Commands**:
@@ -130,6 +132,10 @@ The category del command follows similar steps:
     * Contains methods to handle each user command.
 * **Expense**:
     * Represents an expense with `amount` (in cents), `category`, `description`, and `date`.
+* **Recurring Expense**:
+    * A subclass of Expense class, extends the base Expense class to model expenses that repeat at regular intervals (weekly, monthly, yearly).
+    * Has additional parameters `frequency` (Weekly, Monthly, Yearly) to set the frequency of the recurring expense
+    and `startDate` representing the date of the first recurring expense
 * **ExpenseList**:
     * Manages lists of regular and recurring expenses.
     * Handles operations such as adding, deleting, updating expenses, and managing budgets.
@@ -143,7 +149,14 @@ The category del command follows similar steps:
 * **Savings**:
     * Tracks the user's income, savings and if they meet their monthly savings goals.
 
+* **Storage**:
+    * Manages saving and loading of information in the application. Reads and writes data to and from a text file
+  
+
 <!-- @@author -->
+Below is the class diagram showing the basic class interactions in Fintrack
+![Overall_class_diagram.png](Overall_class_diagram.png)
+
 
 ### Class diagrams of key classes
 
