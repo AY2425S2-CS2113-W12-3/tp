@@ -5,10 +5,11 @@ import java.util.Date;
 
 
 public class Savings {
+    static String currentMonth;
     private static int income; // presumed to be on a monthly basis
     private static int savingsGoal;
     private static int totalSavings;
-    private static String currentMonth;
+
 
     public Savings(){
         this.income = 0;
@@ -56,10 +57,12 @@ public class Savings {
 
     public static int calculateMonthlyExpenses(ExpenseList expenseList) {
         int monthlyExpenses = 0;
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
 
+        Date now = new Date();
+        currentMonth = monthFormat.format(now);
 
-        for(Expense expense : expenseList.getExpenseList()) {
-            SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
+        for (Expense expense : expenseList.getExpenseList()) {
             if (monthFormat.format(expense.getDate()).equals(currentMonth)) {
                 monthlyExpenses += expense.getAmount();
             }
@@ -67,6 +70,7 @@ public class Savings {
 
         return monthlyExpenses;
     }
+
 
     public void addToSavings(int newSavings ) {
         totalSavings += newSavings;
