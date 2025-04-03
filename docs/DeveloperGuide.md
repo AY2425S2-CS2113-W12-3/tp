@@ -1,6 +1,27 @@
-# Developer Guide
+# Developer Guide for FinTrack
 
-## Acknowledgements
+## Table of Contents
+
+1. [Acknowledgements](#acknowledgements)
+2. [Design & Implementation](#design--implementation)
+    1. [Architecture](#architecture)
+    2. [CRUD Operations Implementation](#crud-operations-implementation)
+        1. [Overview](#overview)
+        2. [Add Command Implementation](#add-command-implementation)
+        3. [View History Implementation](#view-history-implementation)
+        4. [Update Command Implementation](#update-command-implementation)
+        5. [Delete Command Implementation](#delete-command-implementation)
+    3. [Classes and Their Responsibilities](#classes-and-their-responsibilities)
+3. [Product Scope](#product-scope)
+    1. [Target User Profile](#target-user-profile)
+    2. [Value Proposition](#value-proposition)
+4. [User Stories](#user-stories)
+5. [Non-Functional Requirements](#non-functional-requirements)
+6. [Glossary](#glossary)
+7. [Instructions for Manual Testing](#instructions-for-manual-testing)
+
+
+# Acknowledgements
 
 [Java Standard Library](https://docs.oracle.com/javase/8/docs/api/): Utilized extensively for collections, date
 handling, and file operations.
@@ -98,6 +119,7 @@ The delete command execution involves the following steps:
 5. A success message is displayed through the `Ui` component
 6. The confirmation message is propagated back to the user
 
+<br><br>
 ## Classes and Their Responsibilities
 
 * **Commands**:
@@ -163,7 +185,8 @@ This program should be able to work smoothly, with minimal lag in Windows 11, Ub
 * Category – A label for grouping expenses (e.g., Food, Entertainment, Rent).
 * Dashboard – The home screen of the application displaying an overview of financial data.
 * User Role – Defines whether a user is a new user, regular user, or expert user, determining available features.
-
+  
+* <br><br>
 ## Instructions for manual testing
 
 
