@@ -105,6 +105,7 @@ viewmonth
 **Format:**
 
 ```
+
 history
 ```
 
@@ -164,6 +165,7 @@ or, input parameters in separate lines:
 ```
 update
 3, 15, 00, 2, Grab Taxi, 2025-03-28
+
 ```
 
 ---
@@ -234,6 +236,7 @@ viewmonth
 
 **Format:**
 ```
+
 history
 ```
 
@@ -248,6 +251,7 @@ history
 **Example:**
 ```
 history
+
 ```
 
 ---
@@ -278,11 +282,14 @@ delete 1
 ---
 <!-- @@author -->
 
-### 6. Setting a Monthly Budget
+### 6. Setting and updating Monthly Budget
 
 **Command:** `budget`
 
+
 **Description:** Allows users to set a monthly spending budget to manage their expenses against a predefined limit.
+The format to update the budget is the same.
+
 
 **Format:**
 ```
@@ -306,7 +313,7 @@ budget
 
 ---
 
-### 7. Adding a Recurring Expense
+### 7. Adding a Recurring Expense (*Coming soon*)
 
 **Command:** `recurring`
 
@@ -317,8 +324,10 @@ budget
 recurring
 ```
 
+
 **Interaction:**
 When you use the `recurring` command, FinTrack will guide you through a series of prompts to define your recurring expense:
+
 
 1.  **Amount:** You will be asked to enter the expense amount in cents. Please enter a non-negative integer.
 2.  **Category:** You will be prompted to specify the category for the recurring expense. Choose from the predefined categories (viewable using `help`).
@@ -341,6 +350,10 @@ recurring
 ```
 *Follow the prompts to enter amount, category, frequency (Monthly), description (Netflix), and start date (2025-04-05).*
 
+**Example:**
+```
+//coming soon
+```
 ---
 
 ### 8. Managing Expense Categories
