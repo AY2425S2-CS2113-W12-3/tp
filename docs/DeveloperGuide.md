@@ -40,7 +40,7 @@ The CRUD operations follow a layered architecture:
 1. User Interface Layer (`Ui` class)
 2. Control Layer (`Commands` class)
 3. Logic Layer (`Parser` and `Categories` classes)
-4. Data Layer (`ExpenseList` and `Storage` classes
+4. Data Layer (`ExpenseList` and `Storage` classes)
 
 ![CRUD_UML.png](CRUD_UML.png)
 
@@ -52,6 +52,10 @@ The CRUD operations follow a layered architecture:
     * Contains methods to handle each user command.
 * **Expense**:
     * Represents an expense with `amount` (in cents), `category`, `description`, and `date`.
+* **Recurring Expense**:
+    * A subclass of Expense class, extends the base Expense class to model expenses that repeat at regular intervals (weekly, monthly, yearly).
+    * Has additional parameters `frequency` (Weekly, Monthly, Yearly) to set the frequency of the recurring expense
+    and `startDate` representing the date of the first recurring expense
 * **ExpenseList**:
     * Manages lists of regular and recurring expenses.
     * Handles operations such as adding, deleting, updating expenses, and managing budgets.
@@ -64,7 +68,13 @@ The CRUD operations follow a layered architecture:
     * Manages the user's list of available categories to choose from when adding expenses.
 * **Savings**:
     * Tracks the user's income, savings and if they meet their monthly savings goals.
+* **Storage**:
+    * Manages saving and loading of information in the application. Reads and writes data to and from a text file
+  
 <!-- @@author -->
+Below is the class diagram showing the basic class interactions in Fintrack
+![Overall_class_diagram.png](Overall_class_diagram.png)
+
 
 ## Product scope
 
