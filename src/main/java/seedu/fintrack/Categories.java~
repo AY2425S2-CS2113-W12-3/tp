@@ -1,0 +1,53 @@
+package seedu.fintrack;
+
+import java.util.ArrayList;
+import seedu.fintrack.utils.Ui;
+
+public class Categories {
+    private ArrayList<String> categories;
+
+    public Categories() {
+        this.categories = new ArrayList<>();
+        // Initialize with default categories
+        categories.add("Food");
+        categories.add("Transport");
+        categories.add("Others");
+    }
+
+    public String getCategory(int index) {
+        return categories.get(index - 1);
+    }
+
+    public int size() {
+        return categories.size();
+    }
+
+    public void printCategories() {
+        System.out.println(Ui.bold + "Categories:" + Ui.reset);
+        if(categories.isEmpty()) {
+            System.out.println("There are currently no categories! Use the 'category add' command to add a category.");
+        } else {
+            int index = 1;
+            for (String category : categories) {
+                System.out.println(index + ". " + category);
+                index++;
+            }
+        }
+    }
+
+    public void addCategory(String category) {
+        categories.add(category);
+    }
+
+    public void removeCategory(int index) {
+        categories.remove(index-1);
+    }
+
+    public ArrayList<String> getCategories() {
+        return categories;
+    }
+
+    public boolean contains(String category) {
+        return categories.contains(category);
+    }
+}

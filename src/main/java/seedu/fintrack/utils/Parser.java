@@ -72,31 +72,50 @@ public class Parser {
 
 
     /**
-     * The user is expected to enter details separated by commas:
-     * dollars, cents, category index, description, date(yyyy-MM-dd)
+     * Reads expense details by prompting user for each detail separately.
+     * @return Expense object containing the details.
+     * @throws FinTrackException if input is invalid or missing.
      */
     public Expense readExpenseDetails() throws FinTrackException {
         System.out.println(Ui.bold + "Enter expense details in as follows:" + Ui.reset);
         System.out.println("<dollars>, <cents>, <category index>, <description>, <date (yyyy-MM-dd)>\n");
         Categories.printCategories();
         String input = scanner.nextLine();
-        String[] parts = input.split(",");
+        return parseExpenseDetails(input);
+    }
+
+    /**
+     * Parses expense details from a single input line.
+     * @param inputLine Line containing expense details separated by commas.
+     * @return Expense object containing the details.
+     * @throws FinTrackException if input is invalid or missing.
+     */
+    public Expense parseExpenseDetails(String inputLine) throws FinTrackException {
+        String[] parts = inputLine.split(",");
         if (parts.length < 5) {
             throw new FinTrackException("Insufficient details provided.");
         }
         try {
             int dollars = Integer.parseInt(parts[0].trim());
             int cents = Integer.parseInt(parts[1].trim());
-            int amount = dollars * 100 + cents;
+            if (dollars < 0 || cents < 0) {
+                throw new FinTrackException("Expense amount cannot be negative.");
+            }
+            if (cents > 99) {
+                throw new FinTrackException("Cents value cannot exceed 99.");
+            }
+            double amountDouble = dollars + (double) cents / 100.0;
+            amountDouble = Math.round(amountDouble * 100.0) / 100.0; // Round to 2 dp
+            int amount = (int) (amountDouble * 100); // Store as cents to avoid floating point issues
             int categoryIndex = Integer.parseInt(parts[2].trim());
             String category = Categories.getCategory(categoryIndex);
             String description = parts[3].trim();
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(parts[4].trim());
             return new Expense(amount, category, description, date);
+        } catch (NumberFormatException e) {
+            throw new FinTrackException("Invalid number format for dollars or cents.");
         } catch (Exception e) {
             throw new FinTrackException("Error parsing expense details: " + e.getMessage());
         }
     }
 }
-
-

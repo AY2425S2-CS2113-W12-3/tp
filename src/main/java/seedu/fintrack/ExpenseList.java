@@ -24,7 +24,7 @@ public class ExpenseList {
         Savings.updateTotalSavings(expense.getAmount());
     }
 
-    void deleteExpense(Expense expense) {
+    public void deleteExpense(Expense expense) {
         expenseList.remove(expense);
     }
 
