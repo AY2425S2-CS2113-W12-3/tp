@@ -17,6 +17,8 @@ Hey! Here's what I can help you with
 [0m[31mDelete a category
 [0m[36mUpdate your Income
 [0m[36mUpdate your monthly savings goal
+[0m[31mClear all expense history
+[0m[36mExport expenses to CSV
 [0m[31mExit the app
 [0mFor more info on how to use the commands, type [1m'help'[0m.
 ________________________________________________________________________________
