@@ -143,7 +143,7 @@ public class Parser {
     public Expense readExpenseDetails() throws FinTrackException {
         System.out.println(Ui.bold + "Enter expense details in as follows:" + Ui.reset);
         System.out.println("<dollars>,<cents>,<category index>,<description>" +
-                "[,<date (yyyy-MM-dd)>[,<time (HH:mm:ss)>]]");
+                ",<date (yyyy-MM-dd)>,<time (HH:mm:ss)>");
         System.out.println("Note: Date and time are optional. Current date/time will be used if not provided.\n");
         Categories.printCategories();
         String input = scanner.nextLine();

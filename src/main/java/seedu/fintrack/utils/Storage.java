@@ -88,8 +88,9 @@ public class Storage {
 
     public static void saveCategoriesToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("categories.txt"))) {
-            for (String category : Categories.getCategories()) {
-                writer.write(category + "|");
+            int firstCustomCategoryIndex = 6;
+            for (int i = firstCustomCategoryIndex; i < Categories.size(); i++) {
+                writer.write(Categories.getCategory(i+1) + "|");
             }
         } catch (IOException e) {
             System.out.println("Error saving categories to file.");

@@ -43,7 +43,7 @@ You can input all parameters in one line or in separate lines after typing `add`
     -   `CENTS`: A non-negative integer less than 100, representing the cent amount.
     -   Use a comma to separate dollars and cents (e.g., `12,50` for $12.50).
 -   **Category Index**:
-    -   `CATEGORY_INDEX`: An integer from 1 to 6 that corresponds to a predefined expense category.
+    -   `CATEGORY_INDEX`: An integer corresponding to the index of the category in the list of categories.
     -   Use the `help` command to view the category index. The categories are:
 
         | Index | Category      |
@@ -64,7 +64,7 @@ You can input all parameters in one line or in separate lines after typing `add`
 -   **Input Parsing**: Parses the input string to extract the amount, category index, description, and date.
 -   **Validation**:
     -   **Amount**: Checks if dollars and cents are non-negative integers.
-    -   **Category Index**: Validates if the category index is within the range of defined categories (1-6).
+    -   **Category Index**: Validates if the category index is within the range of defined categories.
     -   **Date**: Verifies if the date is in the `YYYY-MM-DD` format and is a valid date.
 -   **Error Handling**: If any validation fails, an error message is displayed, and the expense is not added.
 -   **Expense Creation**: If all inputs are valid, an `Expense` object is created with the provided details and added to the expense list.
