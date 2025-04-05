@@ -1,0 +1,66 @@
+package seedu.fintrack.commandtest;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import seedu.fintrack.Expense;
+import seedu.fintrack.ExpenseList;
+import seedu.fintrack.command.ClearHistoryCommand;
+import seedu.fintrack.utils.FinTrackException;
+import seedu.fintrack.utils.Storage;
+import seedu.fintrack.utils.Ui;
+import seedu.fintrack.utils.Parser;
+import seedu.fintrack.Categories;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.ByteArrayInputStream;
+import java.util.Date;
+import java.util.Scanner;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class ClearHistoryCommandTest {
+    private ExpenseList expenseList;
+    private Ui ui;
+    private Storage storage;
+    private Categories categories;
+    private Parser parser;
+    private ClearHistoryCommand clearCommand;
+    private ByteArrayOutputStream outputStream;
+    private ByteArrayInputStream inputStream;
+
+    @BeforeEach
+    public void setUp() {
+        expenseList = new ExpenseList();
+        ui = new Ui();
+        storage = new Storage();
+        categories = new Categories();
+        outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        
+        // Add test expenses to the list
+        expenseList.addExpense(new Expense(1000, "Food", "Lunch", new Date()));
+        expenseList.addExpense(new Expense(2000, "Transport", "Taxi", new Date()));
+    }
+
+    @Test
+    public void execute_clearsExpenseList() throws FinTrackException {
+        // Set up input for the parser
+        String input = "yes\n";
+        inputStream = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inputStream);
+        parser = new Parser(new Scanner(System.in));
+        clearCommand = new ClearHistoryCommand(parser);
+        
+        // Execute the command
+        clearCommand.execute(expenseList, ui, storage, categories);
+        
+        // Verify the list is empty
+        assertEquals(0, expenseList.size());
+        
+        // Verify the output contains the clear message
+        String output = outputStream.toString();
+        assertTrue(output.contains("All expense history has been cleared"));
+    }
+} 
