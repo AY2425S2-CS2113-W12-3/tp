@@ -22,7 +22,7 @@ public class CommandsTest {
     // Dummy dependencies
     private DummyExpenseList expenseList;
     private DummyParser parser;
-    private Commands commands;
+    private AllCommands commands;
 
     // Used to capture console output (e.g., messages printed by Ui)
     private ByteArrayOutputStream outputStream;
@@ -34,7 +34,7 @@ public class CommandsTest {
     public void setUp() {
         expenseList = new DummyExpenseList();
         parser = new DummyParser();
-        commands = new Commands(expenseList, parser);
+        commands = new AllCommands(expenseList, parser);
 
         originalOut = System.out;
         outputStream = new ByteArrayOutputStream();

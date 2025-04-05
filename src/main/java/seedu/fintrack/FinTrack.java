@@ -24,7 +24,7 @@ public class FinTrack {
         //String input = sc.nextLine();
         ExpenseList expenseList = new ExpenseList();
         Parser parser = new Parser(sc);
-        Commands commands = new Commands(expenseList, parser);
+        AllCommands commands = new AllCommands(expenseList, parser);
 
         Storage storage = new Storage();
         storage.loadExpensesFromFile(expenseList);

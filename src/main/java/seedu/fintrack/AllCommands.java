@@ -9,13 +9,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Commands {
+public class AllCommands {
     private final ExpenseList expenseList;
     private final Parser parser;
     // Map of descriptive command keywords to their actions.
     private final HashMap<String, Runnable> commands = new HashMap<>();
 
-    public Commands(ExpenseList expenseList, Parser parser) {
+    public AllCommands(ExpenseList expenseList, Parser parser) {
         assert expenseList != null : "Expense list should not be null";
         assert parser != null : "Parser should not be null";
 
