@@ -15,13 +15,14 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Storage {
+    private static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void saveExpensesToFile(ExpenseList expenseList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("expenses.txt"))) {
             for (Expense expense : expenseList.getExpenseList()) {
                 writer.write(expense.getAmount() + "|" + expense.getCategory() + "|"
-                        + expense.getDescription() + "|" + DATE_FORMAT.format(expense.getDate()) + "\n");
+                        + expense.getDescription() + "|" + DATE_TIME_FORMAT.format(expense.getDate()) + "\n");
             }
         } catch (IOException e) {
             System.out.println("Error saving expenses to file.");
@@ -45,12 +46,25 @@ public class Storage {
                 int amount = Integer.parseInt(data[0]);
                 String category = data[1];
                 String description = data[2];
-                Date date = DATE_FORMAT.parse(data[3]);
+                Date date;
+                
+                try {
+                    // Try parsing with the new format first
+                    date = DATE_TIME_FORMAT.parse(data[3]);
+                } catch (ParseException e) {
+                    try {
+                        // If that fails, try the old format
+                        date = DATE_FORMAT.parse(data[3]);
+                    } catch (ParseException e2) {
+                        System.out.println("Error parsing date: " + data[3]);
+                        continue;
+                    }
+                }
 
                 Expense expense = new Expense(amount, category, description, date);
                 expenseList.addExpense(expense);
             }
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             System.out.println("Error loading expenses from file.");
         }
     }
