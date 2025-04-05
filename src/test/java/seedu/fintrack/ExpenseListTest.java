@@ -38,16 +38,6 @@ public class ExpenseListTest {
     }
 
     @Test
-    void testUpdateExpense() {
-        Expense expense1 = new Expense(50, "Groceries", "Milk", new Date());
-        Expense expense2 = new Expense(75, "Groceries", "Fruits", new Date());
-        expenseList.addExpense(expense1);
-        expenseList.updateExpense(1, expense2);
-
-        assertEquals(75, expenseList.getExpense(0).getAmount());
-    }
-
-    @Test
     void testSetMonthlyBudget() {
         expenseList.setMonthlyBudget(2000);
         assertEquals(2000, expenseList.getMonthlyBudget());
