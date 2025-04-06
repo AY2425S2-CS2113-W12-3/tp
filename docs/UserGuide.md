@@ -121,7 +121,7 @@ Then follow the prompts:
 - Enter cents: `00`
 - Enter category index: `2` (Transport)
 - Enter description: `Grab Taxi`
-- Enter date: `2025-03-28`
+- Enter date: (optional) `2025-03-28`
 - Enter time (optional): `15:30:00`
 
 ---
