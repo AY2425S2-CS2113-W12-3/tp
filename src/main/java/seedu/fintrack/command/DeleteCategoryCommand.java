@@ -55,5 +55,6 @@ public class DeleteCategoryCommand implements Command {
         ui.showMessage(deletedCategory + " has been deleted.");
         storage.saveCategoriesToFile();
         ui.printBorder();
+
     }
 }
