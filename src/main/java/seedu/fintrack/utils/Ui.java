@@ -189,6 +189,9 @@ public class Ui {
                 red + "Delete an expense\n" + reset +
                 blue + "Set your monthly budget\n" + reset +
                 blue + "Add a recurring expense\n" + reset +
+                cyan + "Update a recurring expense\n" + reset +
+                yellow + "View all your recurring expenses\n" + reset +
+                red + "Delete a recurring expense\n" + reset +
                 green + "Create a new category\n" + reset +
                 red + "Delete a category\n" + reset +
                 cyan + "Update your Income\n" + reset +

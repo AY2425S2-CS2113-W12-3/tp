@@ -3,6 +3,7 @@ package seedu.fintrack;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class ExpenseList {
     private ArrayList<Expense> expenseList;
@@ -47,9 +48,11 @@ public class ExpenseList {
     public void addRecurringExpense(RecurringExpense recurringExpense) {
         recurringExpenses.add(recurringExpense);
         addRecurringExpenses(recurringExpense);
-        Savings.updateTotalSavings(recurringExpense.getAmount());
     }
 
+    public void deleteRecurringExpense(int index) {
+        recurringExpenses.remove(index);
+    }
 
     public ArrayList<RecurringExpense> getRecurringExpenses() {
         return recurringExpenses;
@@ -75,18 +78,30 @@ public class ExpenseList {
         return remainingBudget;
     }
 
-    private void addRecurringExpenses(RecurringExpense recurringExpense) {
+    public void updateRecurringExpense(int index, RecurringExpense expense) {
+        expenseList.set(index-1, expense);
+    }
+
+    public void addAllRecurringExpenses() {
+        for (RecurringExpense r: recurringExpenses) {
+            addRecurringExpenses(r);
+        }
+    }
+
+    public void addRecurringExpenses(RecurringExpense recurringExpense) {
         Date startDate = recurringExpense.getStartDate();
-        Date currentDate = new Date(); // Get the current date
+        Date currentDate = new Date();
+
+        Date nextDate = recurringExpense.getLastProcessedDate() != null?
+                recurringExpense.getLastProcessedDate() : startDate;
 
         Calendar startCalendar = Calendar.getInstance();
-        startCalendar.setTime(startDate);
+        startCalendar.setTime(nextDate);
 
         Calendar currentCalendar = Calendar.getInstance();
         currentCalendar.setTime(currentDate);
 
-        int numberOfOccurrences = 0;
-
+        List<Expense> newExpenses = new ArrayList<>();
         while (startCalendar.getTime().before(currentDate) || startCalendar.getTime().equals(currentDate)) {
             Expense expense = new Expense(
                     recurringExpense.getAmount(),
@@ -94,10 +109,13 @@ public class ExpenseList {
                     recurringExpense.getDescription(),
                     startCalendar.getTime()
             );
-            expenseList.add(expense);
-
+            newExpenses.add(expense);
+            Savings.updateTotalSavings(recurringExpense.getAmount());
 
             switch (recurringExpense.getFrequency().toLowerCase()) {
+            case "daily":
+                startCalendar.add(Calendar.DAY_OF_MONTH,1);
+                break;
             case "weekly":
                 startCalendar.add(Calendar.WEEK_OF_YEAR, 1);
                 break;
@@ -110,7 +128,12 @@ public class ExpenseList {
             default:
                 throw new IllegalArgumentException("Invalid frequency: " + recurringExpense.getFrequency());
             }
-            numberOfOccurrences++;
+        }
+        if (!newExpenses.isEmpty()) {
+            recurringExpense.setLastProcessedDate(newExpenses.get(newExpenses.size() - 1).getDate());
+            expenseList.addAll(newExpenses);
+        } else {
+            recurringExpense.setLastProcessedDate(currentCalendar.getTime());
         }
     }
 }

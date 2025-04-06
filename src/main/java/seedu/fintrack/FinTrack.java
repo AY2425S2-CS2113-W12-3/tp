@@ -29,11 +29,16 @@ public class FinTrack {
         Storage storage = new Storage();
         storage.loadExpensesFromFile(expenseList);
         storage.loadCategoriesFromFile();
+        storage.loadRecurringExpensesFromFile(expenseList);
 
         //Loading the savings.txt file will also call the constructor for a new Savings object
         Savings savings = storage.loadSavingsFromFile();
         savings.addIncome();
 
+        if (!expenseList.getRecurringExpenses().isEmpty()) {
+            expenseList.addAllRecurringExpenses();
+            storage.saveExpensesToFile(expenseList);
+        }
         boolean isRunning = true;
         //Main application loop starts, user input is read and processed
         //until the user enters the "exit" command.

@@ -2,6 +2,7 @@ package seedu.fintrack.utils;
 
 import seedu.fintrack.Expense;
 import seedu.fintrack.Categories;
+import seedu.fintrack.RecurringExpense;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -209,6 +210,46 @@ public class Parser {
         } catch (Exception e) {
             throw new FinTrackException("Error parsing expense details: " + e.getMessage());
         }
+    }
+
+    public RecurringExpense readRecurringExpenseDetails() throws FinTrackException {
+        System.out.println(Ui.bold + "Enter Recurring expense details in as follows:" + Ui.reset);
+        System.out.println("<dollars>,<cents>,<category index>,<description>" +
+                ",<frequency>");
+        System.out.println("Frequency has to be either daily, weekly, monthly, or yearly");
+        Categories.printCategories();
+        String input = scanner.nextLine();
+
+        // Split by commas and handle multiple spaces
+        String[] parts = input.split("\\s*,\\s*");
+        if (parts.length < 5) {
+            throw new FinTrackException("Insufficient details provided. Dollars, cents, category index, "
+                    + ",description and frequency are required.");
+        }
+        try {
+            // Trim each part to handle any remaining spaces
+            int dollars = Integer.parseInt(parts[0].trim());
+            int cents = Integer.parseInt(parts[1].trim());
+
+            // Validate that neither dollars nor cents are negative
+            if (dollars < 0 || cents < 0) {
+                throw new FinTrackException("Dollars and cents cannot be negative.");
+            }
+
+            int amount = dollars * 100 + cents;
+            int categoryIndex = Integer.parseInt(parts[2].trim());
+            String category = Categories.getCategory(categoryIndex);
+            String description = parts[3].trim();
+            String frequency = parts[4].trim();
+            Date date = new Date();
+            return new RecurringExpense(amount, category, frequency, description, date, date);
+
+        } catch (NumberFormatException e) {
+            throw new FinTrackException("Invalid number format in dollars, cents, or category index.");
+        } catch (Exception e) {
+            throw new FinTrackException("Error parsing recurring expense details: " + e.getMessage());
+        }
+
     }
 }
 
