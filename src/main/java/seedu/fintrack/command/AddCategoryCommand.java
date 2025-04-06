@@ -38,14 +38,14 @@ public class AddCategoryCommand implements Command {
             throw new FinTrackException("Categories is null");
         }
 
-        String newCategory = parser.promptInput("Please enter the name of the new category:");
+        String newCategory = parser.promptInput("Please enter the name of the new category: ");
         if (newCategory.isEmpty()) {
-            ui.showError("Empty input. Please enter a category.");
+            ui.showError("Empty Input. Please enter a category.");
             ui.printBorder();
             return;
         }
-        if (categories.getCategories().contains(newCategory)) {
-            ui.showError("Category already exists.");
+        if(categories.getCategories().contains(newCategory)) {
+            ui.showError("Category already exists. Please choose a different category.");
             ui.printBorder();
             return;
         }
@@ -53,5 +53,6 @@ public class AddCategoryCommand implements Command {
         ui.showMessage(newCategory + " has been added to the list of categories.");
         storage.saveCategoriesToFile();
         ui.printBorder();
+
     }
 }
