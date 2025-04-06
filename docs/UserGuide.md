@@ -10,7 +10,7 @@ categorize expenses.
 
 ## Quick Start
 
-1. Ensure that you have Java 17 or above installed.
+1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Fintrack`
    from [here](https://github.com/AY2425S2-CS2113-W12-3/tp/releases).
 3. Copy the downloaded file to a folder you want to use as the home folder for FinTrack.
@@ -27,58 +27,27 @@ categorize expenses.
 
 **Format:**
 ```
-add DOLLARS, CENTS, CATEGORY_INDEX, DESCRIPTION, DATE
-```
-or
-```
 add
-DOLLARS, CENTS, CATEGORY_INDEX, DESCRIPTION, DATE
 ```
-You can input all parameters in one line or in separate lines after typing `add` and pressing Enter.
-
-**Parameters:**
-
--   **Amount**:
-    -   `DOLLARS`: A non-negative integer representing the dollar amount.
-    -   `CENTS`: A non-negative integer less than 100, representing the cent amount.
-    -   Use a comma to separate dollars and cents (e.g., `12,50` for $12.50).
--   **Category Index**:
-    -   `CATEGORY_INDEX`: An integer corresponding to the index of the category in the list of categories.
-    -   Use the `help` command to view the category index. The categories are:
-
-        | Index | Category      |
-        |-------|---------------|
-        | 1     | Food          |
-        | 2     | Transport     |
-        | 3     | Entertainment |
-        | 4     | Utilities     |
-        | 5     | Household     |
-        | 6     | Others        |
--   **Description**:
-    -   `DESCRIPTION`: An optional text field to describe the expense.
-    -   If the description contains spaces, enclose it in double quotes (e.g., `"Dinner with friends"`).
--   **Date**:
-    -   `DATE`: The date the expense was incurred, in `YYYY-MM-DD` format.
-
-**Functionality:**
--   **Input Parsing**: Parses the input string to extract the amount, category index, description, and date.
--   **Validation**:
-    -   **Amount**: Checks if dollars and cents are non-negative integers.
-    -   **Category Index**: Validates if the category index is within the range of defined categories.
-    -   **Date**: Verifies if the date is in the `YYYY-MM-DD` format and is a valid date.
--   **Error Handling**: If any validation fails, an error message is displayed, and the expense is not added.
--   **Expense Creation**: If all inputs are valid, an `Expense` object is created with the provided details and added to the expense list.
+Follow the prompts to enter:
+- Amount (in dollars and cents)
+- Category (select from available categories)
+- Description
+- Date (optional, in yyyy-MM-dd format)
+- Time (optional, in HH:mm:ss format)
 
 **Example:**
 To add an expense of $12.50 for lunch in the 'Food' category on March 28, 2025:
 ```
-add 12,50, 1, Lunch, 2025-03-28
-```
-or, input parameters in separate lines:
-```
 add
-12,50, 1, Lunch, 2025-03-28
 ```
+Then follow the prompts:
+- Enter dollars: `12`
+- Enter cents: `50`
+- Enter category index: `1` (Food)
+- Enter description: `Lunch`
+- Enter date: `2025-03-28`
+- Enter time (optional): `15:30:00`
 
 ---
 
@@ -87,123 +56,6 @@ add
 **Command:** `viewmonth`
 
 **Description:** Displays all expenses for the current month, the user's income, and budget status.
-
-**Format:**
-
-```
-viewmonth
-```
-
----
-
-### 3. Viewing Spending History
-
-**Command:** `history`
-
-**Description:** Displays all past expenses with categories and dates.
-
-**Format:**
-
-```
-
-history
-```
-
----
-
-### 4. Updating an Expense
-
-**Command:** `update`
-
-**Description:**  Allows users to modify the details of an already recorded expense in the FinTrack system.
-
-**Format:**
-```
-update INDEX, DOLLARS, CENTS, CATEGORY_INDEX, DESCRIPTION, DATE
-```
-or
-```
-update
-INDEX, DOLLARS, CENTS, CATEGORY_INDEX, DESCRIPTION, DATE
-```
-You can input all parameters in one line or in separate lines after typing `update` and pressing Enter.
-
-**Parameters:**
-
--   **Index**:
-    -   `INDEX`: The position number of the expense you wish to update.
-    -   To find the index, use the `history` command to view all recorded expenses and their corresponding index numbers.
--   **Amount**:
-    -   `DOLLARS`: A non-negative integer for the dollar amount.
-    -   `CENTS`: A non-negative integer less than 100 for the cent amount.
-    -   Separate dollars and cents with a comma (e.g., `15,00` for $15.00).
--   **Category Index**:
-    -   `CATEGORY_INDEX`: An integer from 1 to 6 representing the expense category.
-    -   Refer to the `help` command output for the list of categories and their indices.
--   **Description**:
-    -   `DESCRIPTION`:  The new description for the expense (optional).
-    -   Enclose descriptions with spaces in double quotes (e.g., `"Grab ride"`).
--   **Date**:
-    -   `DATE`: The updated date of the expense in `YYYY-MM-DD` format.
-
-**Functionality:**
--   **Expense Identification**: Uses the provided `INDEX` to locate the expense to be updated in the expense list.
--   **Input Parsing and Validation**:
-    -   Parses the input for amount, category index, description, and date, similar to the `add` command.
-    -   Validates all input parameters to ensure they meet the required format and criteria.
--   **Error Handling**:
-    -   If the provided `INDEX` is invalid (e.g., out of range), an error message is displayed.
-    -   If any of the updated parameters are invalid, an error message is shown, and the expense is not updated.
--   **Expense Update**: If all inputs are valid and the expense index exists, the details of the expense at the specified index are updated with the new information.
-
-**Example:**
-To update the 3rd expense in the list to $15.00 for 'Grab Taxi' under the 'Transport' category on March 28, 2025:
-```
-update 3, 15, 00, 2, Grab Taxi, 2025-03-28
-```
-or, input parameters in separate lines:
-```
-update
-3, 15, 00, 2, Grab Taxi, 2025-03-28
-
-```
-
----
-
-### 2. Viewing Monthly Expenses
-
-**Command:** `viewmonth`
-
-**Description:** Displays all expenses for the current month, the user's income, and budget status.
-
-**Format:**
-
-```
-viewmonth
-```
-
----
-
-### 3. Viewing Spending History
-
-**Command:** `history`
-
-**Description:** Displays all past expenses with categories and dates.
-
-**Format:**
-
-```
-history
-```
-
----
-
-
-### 2. Viewing Monthly Expenses
-
-**Command:** `viewmonth`
-
-**Description:** Displays a summary of expenses for the current month.
 
 **Format:**
 ```
@@ -219,12 +71,7 @@ viewmonth
 - **Monthly Expenses List:** A list of expenses for the current month, including:
   - Index number for each expense.
   - Description of the expense.
-  - Amount spent in cents.
-
-**Example:**
-```
-viewmonth
-```
+  - Amount spent in dollars and cents.
 
 ---
 
@@ -236,7 +83,6 @@ viewmonth
 
 **Format:**
 ```
-
 history
 ```
 
@@ -244,15 +90,39 @@ history
 - **Spending history:** A numbered list of all expenses, including:
   - Index number.
   - Description of the expense.
-  - Amount spent in cents.
+  - Amount spent in dollars and cents.
   - Date of the expense.
   - Category of the expense.
 
-**Example:**
-```
-history
+---
 
+### 4. Updating an Expense
+
+**Command:** `update`
+
+**Description:**  Allows users to modify the details of an already recorded expense in the FinTrack system.
+
+**Format:**
 ```
+update
+```
+Follow the prompts to:
+1. Select the expense to update (by index)
+2. Enter new amount, category, description, and date
+
+**Example:**
+To update the 3rd expense in the list to $15.00 for 'Grab Taxi' under the 'Transport' category on March 28, 2025:
+```
+update
+```
+Then follow the prompts:
+- Enter expense number to update: `3`
+- Enter dollars: `15`
+- Enter cents: `00`
+- Enter category index: `2` (Transport)
+- Enter description: `Grab Taxi`
+- Enter date: `2025-03-28`
+- Enter time (optional): `15:30:00`
 
 ---
 
@@ -264,11 +134,9 @@ history
 
 **Format:**
 ```
-delete INDEX
+delete
 ```
-
-**Parameter:**
-- `INDEX`: The number of the expense to delete, as listed in the spending history (viewable with the `history` command).
+Enter the index of the expense you want to delete when prompted.
 
 **Important:**
 - Ensure you have viewed the history to identify the correct index of the expense you wish to delete.
@@ -276,20 +144,18 @@ delete INDEX
 **Example:**
 To delete the first expense listed in the history:
 ```
-delete 1
+delete
 ```
+Then enter: `1`
 
 ---
-<!-- @@author -->
 
 ### 6. Setting and updating Monthly Budget
 
 **Command:** `budget`
 
-
 **Description:** Allows users to set a monthly spending budget to manage their expenses against a predefined limit.
 The format to update the budget is the same.
-
 
 **Format:**
 ```
@@ -298,22 +164,18 @@ budget
 
 **Interaction:**
 - Upon entering the `budget` command, FinTrack will prompt you to input your desired monthly budget.
-- Enter the budget amount as a positive integer. This budget is used to track your spending and will be displayed in the `viewmonth` command.
-
-**Functionality:**
-- **Budget Setting**: Sets the monthly budget limit.
-- **Budget Tracking**: Calculates and displays the remaining budget based on expenses added. The remaining budget is updated each time an expense is added using the `add` command.
-- **Integration with `viewmonth`**: The set budget and remaining budget are displayed when using the `viewmonth` command, providing a clear view of your budget status for the month.
+- Enter the budget amount in cents. This budget is used to track your spending and will be displayed in the `viewmonth` command.
 
 **Example:**
 ```
 budget
 ```
 *Followed by user input of the budget amount when prompted.*
+- Enter budget amount in cents: `100000` (for a $1000 monthly budget)
 
 ---
 
-### 7. Adding a Recurring Expense (*Coming soon*)
+### 7. Adding a Recurring Expense
 
 **Command:** `recurring`
 
@@ -324,24 +186,14 @@ budget
 recurring
 ```
 
-
 **Interaction:**
 When you use the `recurring` command, FinTrack will guide you through a series of prompts to define your recurring expense:
 
-
-1.  **Amount:** You will be asked to enter the expense amount in cents. Please enter a non-negative integer.
-2.  **Category:** You will be prompted to specify the category for the recurring expense. Choose from the predefined categories (viewable using `help`).
-3.  **Frequency:** Specify how often the expense recurs. You can choose between `Weekly`, `Monthly`, or `Yearly`. Type in the frequency and press Enter.
+1.  **Amount:** You will be asked to enter the expense amount in dollars and cents.
+2.  **Category:** You will be prompted to specify the category for the recurring expense. Choose from the predefined categories.
+3.  **Frequency:** Specify how often the expense recurs. You can choose between `Weekly`, `Monthly`, or `Yearly`.
 4.  **Description:** Provide a brief description for the recurring expense (e.g., "Netflix subscription", "Weekly allowance").
 5.  **Start date:** Enter the date when the recurring expense begins in `YYYY-MM-DD` format.
-
-After you provide all the details, FinTrack automatically calculates and adds all past occurrences of the recurring expense up to the current date into your expense list. This ensures that your expense history is complete from the start date of the recurring expense.
-
-**Functionality:**
-- **Recurring Expense Setup**: Defines a recurring expense with amount, category, frequency, description, and start date.
-- **Frequency Options**: Supports `Weekly`, `Monthly`, and `Yearly` frequencies.
-- **Automatic Expense Generation**: Automatically generates and adds past expenses to the expense list from the start date to the current date, based on the specified frequency.
-- **Savings Update**: Updates the total savings by considering the amount of the recurring expense.
 
 **Example:**
 To add a monthly Netflix subscription of $15.99 starting from April 5, 2025:
@@ -350,10 +202,6 @@ recurring
 ```
 *Follow the prompts to enter amount, category, frequency (Monthly), description (Netflix), and start date (2025-04-05).*
 
-**Example:**
-```
-//coming soon
-```
 ---
 
 ### 8. Managing Expense Categories
@@ -366,23 +214,16 @@ recurring
 
 **Format:**
 ```
-category add CATEGORY_NAME
+category add
 ```
-
-**Parameter:**
-- `CATEGORY_NAME`: The name of the new category you wish to add. Category names should be single words.
-
-**Functionality:**
-- Checks if the category name is empty. If it is, an error message is displayed.
-- Checks if the category already exists. If it does, an error message is shown.
-- If the category name is valid and does not already exist, it is added to the list of categories.
-- The updated category list is saved.
+Enter the name of the new category when prompted.
 
 **Example:**
 To add a new category named 'Healthcare':
 ```
-category add Healthcare
+category add
 ```
+Then enter: `Healthcare`
 
 #### Delete a Category
 
@@ -398,11 +239,6 @@ category del
 **Interaction:**
 - When you enter the `category del` command, FinTrack will first display the current list of categories with their corresponding index numbers.
 - You will then be prompted to enter the index of the category you wish to delete.
-- After entering the index, the category at that index will be removed.
-- The updated category list is saved.
-
-**Important:**
-- Ensure you view the category list to choose the correct index for deletion.
 
 **Example:**
 ```
@@ -426,13 +262,14 @@ update income
 **Interaction:**
 - Upon entering `update income`, the application will first display your current recorded income.
 - You will then be prompted to enter your new monthly income.
-- Enter the new income value as a positive integer. If the input is invalid, the income will not be updated.
+- Enter the new income value in cents. If the input is invalid, the income will not be updated.
 
 **Example:**
 ```
 update income
 ```
 *Followed by user input of the new income amount when prompted.*
+- Enter new income amount in cents: `300000` (for a $3000 monthly income)
 
 ---
 
@@ -450,41 +287,95 @@ update savings goal
 **Interaction:**
 - When you use the `update savings goal` command, FinTrack will display your current savings goal.
 - You will be prompted to input your new desired savings goal for the month.
-- Enter the new savings goal as a positive integer. If the input is invalid, the savings goal will not be updated.
+- Enter the new savings goal in cents. If the input is invalid, the savings goal will not be updated.
 
 **Example:**
 ```
 update savings goal
 ```
 *Followed by user input of the new savings goal when prompted.*
+- Enter new savings goal in cents: `50000` (for a $500 savings goal)
 
 ---
 
-### 11. Exiting the Program
+### 11. Clearing History
 
-**Command:** `exit`
+**Command:** `clear`
 
-**Description:** Saves all data and exits the application.
+**Description:** Removes all expenses from your history.
 
 **Format:**
+```
+clear
+```
 
+**Interaction:**
+- When you enter the `clear` command, FinTrack will display a warning message.
+- You will be prompted to confirm the deletion by typing 'yes'.
+- If you confirm, all expenses will be deleted from your history.
+
+**Example:**
 ```
-exit
+clear
 ```
+*Followed by typing 'yes' to confirm the deletion.*
 
 ---
 
-### 12. Getting Help
+### 12. Exporting Expenses
+
+**Command:** `export`
+
+**Description:** Exports your expenses to a CSV file.
+
+**Format:**
+```
+export
+```
+
+**Interaction:**
+- When you enter the `export` command, FinTrack will create a CSV file with all your expenses.
+- The file will be saved in the 'exports' folder with a timestamp in the filename.
+
+**Example:**
+```
+export
+```
+*The expenses will be exported to a CSV file in the 'exports' folder.*
+
+---
+
+### 13. Getting Help
 
 **Command:** `help`
 
 **Description:** Displays a list of all available commands and their usage.
 
 **Format:**
-
 ```
 help
 ```
+
+**Output:**
+- Detailed instructions for all commands, including:
+  - Step-by-step guidance
+  - Examples
+  - Format requirements
+
+---
+
+### 14. Exiting the Program
+
+**Command:** `exit`
+
+**Description:** Saves all data and exits the application.
+
+**Format:**
+```
+exit
+```
+
+---
 
 ## Command Summary
 
@@ -501,5 +392,45 @@ help
 | `category del`        | Deletes a category                   |
 | `update income`       | Updates the user's income            |
 | `update savings goal` | Updates the savings goal             |
-| `exit`                | Exits the application                |
+| `clear`               | Clears all expenses                  |
+| `export`              | Exports expenses to CSV              |
 | `help`                | Displays help information            |
+| `exit`                | Exits the application                |
+
+## Tips for Using FinTrack
+
+1. Use the `help` command whenever you're unsure about how to use a feature
+2. Keep your categories organized to better track your spending patterns
+3. Export your data regularly to maintain a backup of your expense history
+4. Use descriptive names when adding expenses to make them easier to find later
+5. Review your expense history regularly to stay on top of your spending
+
+## Troubleshooting
+
+If you encounter any issues:
+
+1. Make sure you're using Java 11 or above
+2. Check that your input follows the correct format
+3. Use the `help` command to verify the correct usage
+4. If the application becomes unresponsive, use `exit` to close it properly
+
+## Saving Data
+
+FinTrack data are saved in the hard disk automatically after any command that changes the data. You can find the data file in the same folder as the application.
+
+## FAQ
+
+**Q: How do I transfer my data to another Computer?**  
+A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the copy of your data from your previous FinTrack home folder.
+
+**Q: What happens if I enter an invalid command?**  
+A: The application will show an error message explaining what went wrong. Use the `help` command to see the list of valid commands.
+
+**Q: Can I edit an expense after adding it?**  
+A: Yes, use the `update` command to modify any existing expense.
+
+**Q: How do I delete all my expenses?**  
+A: Use the `clear` command and confirm with 'yes' when prompted.
+
+**Q: Where are my exported files saved?**  
+A: Exported files are saved in an 'exports' folder in the same directory as the application.
