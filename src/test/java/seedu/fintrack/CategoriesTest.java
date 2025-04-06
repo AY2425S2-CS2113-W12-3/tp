@@ -2,6 +2,9 @@ package seedu.fintrack;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,20 +62,91 @@ class CategoriesTest {
         assertEquals(expected, Categories.getCategories());
     }
 
+
     @Test
-    void testPrintCategoriesOutput() {
+    void testPrintCategoriesOutputs() {
+
         Categories.addCategory("Food");
         Categories.addCategory("Health");
 
-        // This is a visual check; alternatively, you can capture System.out
-        System.out.println("Expected output:");
-        System.out.println("\u001B[1mCategories:\u001B[0m");
-        System.out.println("1. Food");
-        System.out.println("2. Health");
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
 
-        System.out.println("Actual output:");
-        Categories.printCategories();
+        try {
+            Categories.printCategories();
+        } finally {
+            System.setOut(originalOut);
+        }
+
+        // Build expected output
+        String expectedOutput = "\u001B[1mCategories:\u001B[0m" + System.lineSeparator() +
+                "1. Food" + System.lineSeparator() +
+                "2. Health" + System.lineSeparator();
+
+        assertEquals(expectedOutput, outputStream.toString());
     }
+
+
+    @Test
+    void testPrintCustomCategoriesOutput() {
+        //Default categories
+        Categories.addCategory("Food");
+        Categories.addCategory("Transport");
+        Categories.addCategory("Entertainment");
+        Categories.addCategory("Household");
+        Categories.addCategory("Utilities");
+
+        //Custom categories
+        Categories.addCategory("Subscriptions");
+        Categories.addCategory("Health");
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+
+        try {
+            Categories.printCustomCategories();
+        } finally {
+            // Reset System.out
+            System.setOut(originalOut);
+        }
+
+        String expectedOutput = "\u001B[1mCustom Categories:\u001B[0m" + System.lineSeparator() +
+                "1. Subscriptions" + System.lineSeparator() +
+                "2. Health" + System.lineSeparator();
+
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
+    void testPrintCustomCategoriesIfNoCustomCategoriesFound() {
+        //Default categories
+        Categories.addCategory("Food");
+        Categories.addCategory("Transport");
+        Categories.addCategory("Entertainment");
+        Categories.addCategory("Household");
+        Categories.addCategory("Utilities");
+
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+
+        try {
+            Categories.printCustomCategories();
+        } finally {
+            // Reset System.out
+            System.setOut(originalOut);
+        }
+
+        String expectedOutput = "\u001B[1mCustom Categories:\u001B[0m" + System.lineSeparator() +
+                "There are currently no custom categories! Use the 'category add' command to add a" +
+                " category." + System.lineSeparator();
+
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
 
     @Test
     void testGetCategoryThrowsExceptionWhenOutOfBounds() {
