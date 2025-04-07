@@ -46,11 +46,16 @@ public class ExpenseList {
 
     public void addRecurringExpense(RecurringExpense recurringExpense) {
         recurringExpenses.add(recurringExpense);
-
+        int previousMonthlyBudget = Savings.getMonthlyBudget();
+        Savings.updateMonthlyBudget(recurringExpenses);
+        Savings.updateCurrentMonthlyBudget(previousMonthlyBudget);
     }
 
     public void deleteRecurringExpense(int index) {
         recurringExpenses.remove(index);
+        int previousMonthlyBudget = Savings.getMonthlyBudget();
+        Savings.updateMonthlyBudget(recurringExpenses);
+        Savings.updateCurrentMonthlyBudget(previousMonthlyBudget);
     }
 
     public ArrayList<RecurringExpense> getRecurringExpenses() {
@@ -63,6 +68,9 @@ public class ExpenseList {
 
     public void updateRecurringExpense(int index, RecurringExpense expense) {
         recurringExpenses.set(index - 1, expense);
+        int previousMonthlyBudget = Savings.getMonthlyBudget();
+        Savings.updateMonthlyBudget(recurringExpenses);
+        Savings.updateCurrentMonthlyBudget(previousMonthlyBudget);
     }
 
     public void addAllRecurringExpenses() {
