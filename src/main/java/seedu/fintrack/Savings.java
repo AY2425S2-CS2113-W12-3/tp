@@ -72,7 +72,7 @@ public class Savings {
     }
 
 
-    public void addToSavings(int newSavings ) {
+    public static void addToSavings(int newSavings) {
         totalSavings += newSavings;
     }
 

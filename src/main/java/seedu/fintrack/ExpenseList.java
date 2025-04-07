@@ -27,6 +27,7 @@ public class ExpenseList {
 
     public void deleteExpense(Expense expense) {
         expenseList.remove(expense);
+        Savings.addToSavings(expense.getAmount());
     }
 
     public Expense getExpense(int index) { // Changed visibility to public
@@ -42,7 +43,10 @@ public class ExpenseList {
     }
 
     public void updateExpense(int index, Expense expense) {
-        expenseList.set(index-1, expense);
+        Expense oldExpense = expenseList.get(index - 1);
+        Savings.updateTotalSavings(expense.getAmount());
+        Savings.addToSavings(oldExpense.getAmount());
+        expenseList.set(index - 1, expense);
     }
 
     public void addRecurringExpense(RecurringExpense recurringExpense) {
