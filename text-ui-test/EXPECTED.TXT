@@ -6,23 +6,23 @@ Your current income: $0.0
 Your current savings: $0.0
 Your current monthly saving goal: $0.0
 Hey! Here's what I can help you with
-[36mAdd a new expense
-[0m[33mCheck out this month's spending
-[0m[33mView your spending history
-[0m[35mUpdate an expense entry
-[0m[31mDelete an expense
-[0m[34mSet your monthly budget
-[0m[34mAdd a recurring expense
-[0m[36mUpdate a recurring expense
-[0m[33mView all your recurring expenses
-[0m[31mDelete a recurring expense
-[0m[32mCreate a new category
-[0m[31mDelete a category
-[0m[36mUpdate your Income
-[0m[36mUpdate your monthly savings goal
-[0m[31mClear all expense history
-[0m[36mExport expenses to CSV
-[0m[31mExit the app
+[36m1. Add a new expense
+[0m[33m2. Check out this month's spending
+[0m[33m3. View your spending history
+[0m[35m4. Update an expense entry
+[0m[31m5. Delete an expense
+[0m[34m6. Set your monthly budget
+[0m[34m7. Add a recurring expense
+[0m[36m8. Update a recurring expense
+[0m[33m9. View all your recurring expenses
+[0m[31m10. Delete a recurring expense
+[0m[32m11. Create a new category
+[0m[31m12. Delete a category
+[0m[36m13. Update your Income
+[0m[36m14. Update your monthly savings goal
+[0m[31m15. Clear all expense history
+[0m[36m16. Export expenses to CSV
+[0m[31m17. Exit the app
 [0mFor more info on how to use the commands, type [1m'help'[0m.
 ________________________________________________________________________________
 ________________________________________________________________________________

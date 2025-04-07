@@ -2,6 +2,7 @@ package seedu.fintrack.command;
 
 import seedu.fintrack.Expense;
 import seedu.fintrack.ExpenseList;
+import seedu.fintrack.Savings;
 import seedu.fintrack.utils.FinTrackException;
 import seedu.fintrack.utils.Parser;
 import seedu.fintrack.utils.Storage;
@@ -87,6 +88,8 @@ public class DeleteExpenseCommand implements Command {
             String description = expense.getDescription() != null ? expense.getDescription() : "No description";
             String category = expense.getCategory() != null ? expense.getCategory() : "Uncategorized";
             String dateStr = expense.getDate() != null ? DATE_TIME_FORMAT.format(expense.getDate()) : "No date";
+
+            Savings.addToCurrentMonthlyBudget(expense);
             
             ui.showMessage("Expense deleted: " + category + ": " + description + " on " + dateStr);
             
