@@ -1,6 +1,5 @@
 package seedu.fintrack.command;
 
-import seedu.fintrack.Expense;
 import seedu.fintrack.ExpenseList;
 import seedu.fintrack.RecurringExpense;
 import seedu.fintrack.utils.FinTrackException;

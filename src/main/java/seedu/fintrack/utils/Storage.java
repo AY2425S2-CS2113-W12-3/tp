@@ -1,6 +1,10 @@
 package seedu.fintrack.utils;
 
-import seedu.fintrack.*;
+import seedu.fintrack.Expense;
+import seedu.fintrack.ExpenseList;
+import seedu.fintrack.RecurringExpense;
+import seedu.fintrack.Savings;
+import seedu.fintrack.Categories;
 
 import java.io.BufferedWriter;
 import java.io.File;
