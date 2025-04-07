@@ -68,20 +68,33 @@ public class HelpCommand implements Command {
         ui.printBorder();
 
         // Add Recurring Expense
-        ui.showMessage(Ui.blue + "7. Add Recurring Expense" + Ui.reset);
+        ui.showMessage(Ui.cyan + "7. Add Recurring Expense" + Ui.reset);
         ui.showMessage("   Step 1: Type 'recurring'");
         ui.showMessage("   Step 2: Press Enter");
-        ui.showMessage("   Step 3: Follow the prompts to enter:");
-        ui.showMessage("          - Amount: 10,00");
-        ui.showMessage("          - Category: 1 (Food)");
-        ui.showMessage("          - Frequency: Monthly");
-        ui.showMessage("          - Description: Netflix Subscription");
-        ui.showMessage("          - Start Date: 2025-04-01");
-        ui.showMessage("          - End Date: 2025-12-31");
+        ui.showMessage("   Step 3: Type the recurring expense details:");
+        ui.showMessage("          <dollars>,<cents>,<category index>,<description>,<frequency>");
+        ui.showMessage("          Example: 10,00,3,Spotify,Monthly");
+        ui.printBorder();
+
+        // Delete Recurring Expense
+        ui.showMessage(Ui.red + "8. Delete a Recurring Expense" + Ui.reset);
+        ui.showMessage("   Step 1: Type 'delete recurring'");
+        ui.showMessage("   Step 2: Press Enter");
+        ui.showMessage("   Step 3: Type the expense number to delete");
+        ui.showMessage("   Example: Type '1' to delete the first recurring expense in the recurring expense list");
+        ui.printBorder();
+
+        // Update Recurring Expense
+
+        // View Recurring Expense
+        ui.showMessage(Ui.yellow + "9. View Spending History" + Ui.reset);
+        ui.showMessage("   Step 1: Type 'view recurring'");
+        ui.showMessage("   Step 2: Press Enter");
+        ui.showMessage("   Example: Shows the current list of recurring expenses and their frequencies");
         ui.printBorder();
 
         // Category Management
-        ui.showMessage(Ui.green + "8. Category Management" + Ui.reset);
+        ui.showMessage(Ui.green + "10. Category Management" + Ui.reset);
         ui.showMessage("   Add Category:");
         ui.showMessage("   Step 1: Type 'category add'");
         ui.showMessage("   Step 2: Press Enter");
@@ -95,7 +108,7 @@ public class HelpCommand implements Command {
         ui.printBorder();
 
         // Update Income and Savings Goal
-        ui.showMessage(Ui.cyan + "9. Update Financial Goals" + Ui.reset);
+        ui.showMessage(Ui.cyan + "11. Update Financial Goals" + Ui.reset);
         ui.showMessage("   Update Income:");
         ui.showMessage("   Step 1: Type 'update income'");
         ui.showMessage("   Step 2: Press Enter");
@@ -109,7 +122,7 @@ public class HelpCommand implements Command {
         ui.printBorder();
 
         // Clear History
-        ui.showMessage(Ui.red + "10. Clear History" + Ui.reset);
+        ui.showMessage(Ui.red + "12. Clear History" + Ui.reset);
         ui.showMessage("   Step 1: Type 'clear'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Step 3: Type 'yes' to confirm");
@@ -117,7 +130,7 @@ public class HelpCommand implements Command {
         ui.printBorder();
 
         // Export
-        ui.showMessage(Ui.cyan + "11. Export Expenses" + Ui.reset);
+        ui.showMessage(Ui.cyan + "13. Export Expenses" + Ui.reset);
         ui.showMessage("   Step 1: Type 'export'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Example: Type 'export' to save all expenses to a CSV file");
@@ -125,7 +138,7 @@ public class HelpCommand implements Command {
         ui.printBorder();
 
         // Exit
-        ui.showMessage(Ui.red + "12. Exit Program" + Ui.reset);
+        ui.showMessage(Ui.red + "14. Exit Program" + Ui.reset);
         ui.showMessage("   Step 1: Type 'exit'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Example: Type 'exit' to close the program");

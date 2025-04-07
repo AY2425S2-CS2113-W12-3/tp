@@ -15,8 +15,10 @@ import seedu.fintrack.command.UpdateSavingsGoalCommand;
 import seedu.fintrack.command.ClearHistoryCommand;
 import seedu.fintrack.command.ExitCommand;
 import seedu.fintrack.command.HelpCommand;
+import seedu.fintrack.command.ViewRecurringExpenses;
+import seedu.fintrack.command.DeleteRecurringExpenseCommand;
+import seedu.fintrack.command.UpdateRecurringExpenseCommand;
 import seedu.fintrack.command.ExportCommand;
-
 import seedu.fintrack.utils.FinTrackException;
 import seedu.fintrack.utils.Storage;
 import seedu.fintrack.utils.Ui;
@@ -60,10 +62,13 @@ public class AllCommands {
         commands.put("update savings goal", new UpdateSavingsGoalCommand(parser));
         commands.put("clear", new ClearHistoryCommand(parser));
         commands.put("exit", new ExitCommand());
+        commands.put("view recurring", new ViewRecurringExpenses());
+        commands.put("delete recurring", new DeleteRecurringExpenseCommand(parser));
+        commands.put("update recurring", new UpdateRecurringExpenseCommand(parser));
         commands.put("help", new HelpCommand());
         commands.put("export", new ExportCommand());
 
-        assert commands.size() == 15 : "Commands map should contain 15 commands (including help and export)";
+        assert commands.size() == 18 : "Commands map should contain 18 commands (including help and export)";
     }
 
     /**
