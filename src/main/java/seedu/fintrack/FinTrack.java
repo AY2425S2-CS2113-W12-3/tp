@@ -39,7 +39,12 @@ public class FinTrack {
             expenseList.addAllRecurringExpenses();
             storage.saveExpensesToFile(expenseList);
         }
+
         boolean isRunning = true;
+        if (args.length > 0 && args[0].equals("--apply-only")) {
+            isRunning = false;
+        }
+
         //Main application loop starts, user input is read and processed
         //until the user enters the "exit" command.
         while (sc.hasNextLine() && isRunning) {

@@ -8,7 +8,7 @@ import seedu.fintrack.utils.Storage;
 import seedu.fintrack.utils.Ui;
 import java.util.ArrayList;
 
-public class ViewRecurringExpenses implements Command {
+public class ViewRecurringExpensesCommand implements Command {
     @Override
     public void execute(ExpenseList expenseList, Ui ui, Storage storage, Categories categories)
             throws FinTrackException {
@@ -19,7 +19,9 @@ public class ViewRecurringExpenses implements Command {
         } else {
             ui.showMessage("These are your current recurring expenses:");
             for (RecurringExpense r : recurringExpenses) {
-                ui.showMessage(index + ". " + r.getDescription() + ": " + r.getAmount() + ", "
+                double amountInDollars = r.getAmount() / 100.0;
+                String formattedAmount = String.format("$%.2f", amountInDollars);
+                ui.showMessage(index + ". " + r.getDescription() + ": " + formattedAmount + ", "
                         + r.getFrequency());
                 index++;
             }

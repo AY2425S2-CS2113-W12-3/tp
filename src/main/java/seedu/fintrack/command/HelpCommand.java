@@ -87,7 +87,7 @@ public class HelpCommand implements Command {
         // Update Recurring Expense
 
         // View Recurring Expense
-        ui.showMessage(Ui.yellow + "9. View Spending History" + Ui.reset);
+        ui.showMessage(Ui.yellow + "9. View list of recurring expenses" + Ui.reset);
         ui.showMessage("   Step 1: Type 'view recurring'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Example: Shows the current list of recurring expenses and their frequencies");

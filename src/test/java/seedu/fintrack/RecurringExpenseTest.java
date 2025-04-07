@@ -3,6 +3,7 @@ package seedu.fintrack;
 import org.junit.jupiter.api.Test;
 import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class RecurringExpenseTest {
     @Test
@@ -53,5 +54,22 @@ public class RecurringExpenseTest {
         RecurringExpense expense = new RecurringExpense(1500, "Food",
                 "Monthly", "Dinner", new Date(1000L), new Date(1000L));
         assertEquals("Monthly", expense.getFrequency(), "Expected frequency to be 'Monthly'");
+    }
+
+    @Test
+    void getLastProcessedDate() {
+        RecurringExpense expense = new RecurringExpense(1500, "Food",
+                "Monthly", "Dinner", new Date(1000L), new Date(1000L));
+        assertNull(expense.getLastProcessedDate(), "Expected last processed date to be initially null");
+    }
+
+    @Test
+    void setLastProcessedDate() {
+        RecurringExpense expense = new RecurringExpense(1500, "Food",
+                "Monthly", "Dinner", new Date(1000L), new Date(1000L));
+        Date newDate = new Date(2000L);
+        expense.setLastProcessedDate(newDate);
+        assertEquals(newDate, expense.getLastProcessedDate(),
+                "Expected last processed date to be updated to the new date");
     }
 }
