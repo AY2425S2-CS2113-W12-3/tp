@@ -194,19 +194,53 @@ recurring
 When you use the `recurring` command, FinTrack will guide you through a series of prompts to define your recurring expense:
 
 1.  **Amount:** You will be asked to enter the expense amount in dollars and cents.
-2.  **Category:** You will be prompted to specify the category for the recurring expense. Choose from the defined categories.
-3.  **Frequency:** Specify how often the expense recurs. You can choose between `Weekly`, `Monthly`, or `Yearly`.
-4.  **Description:** Provide a brief description for the recurring expense (e.g., "Netflix subscription", "Weekly allowance").
-5.  **Start date:** Enter the date when the recurring expense begins in `YYYY-MM-DD` format.
+2.  **Category:** You will be prompted to specify the index of the particular category for the recurring expense. Choose from the listed defined categories.
+3.  **Description:** Provide a brief description for the recurring expense (e.g., "Netflix subscription", "Weekly allowance").
+4. **Frequency:** Specify how often the expense recurs. You can choose between `Weekly`, `Monthly`, or `Yearly`.
+
 
 **Example:**
-To add a monthly Netflix subscription of $15.99 starting from April 5, 2025:
+To add a monthly Netflix subscription of $15.99, enter:
 ```
 recurring
 ```
-*Follow the prompts to enter amount, category, frequency (Monthly), description (Netflix), and start date (2025-04-05).*
+Then follow the given prompts and type
+
+```
+15,99,3,Netflix,monthly
+```
+The output will be 
+```
+Recurring expense added for Entertainment: Netflix on 2025-04-08 00:14:27
+```
+---
+
+### 8. Deleting recurring expenses
+
+**Command:** `delete recurring`
+
+**Description:** Enables users to delete recurring expenses, thus the program will not automate the entry of the particular recurring expense anymore.
+
+*Note: The expenses of recurring expense that is added, before the recurring expense is removed, will not be removed, and can be viewed via the `history` command
+
+**Format:**
+```
+delete recurring
+```
+
 
 ---
+
+### 9. Updating recurring expenses
+
+
+---
+
+### 10. Viewing list of recurring expenses
+
+---
+
+
 
 ### 8. Managing Expense Categories
 

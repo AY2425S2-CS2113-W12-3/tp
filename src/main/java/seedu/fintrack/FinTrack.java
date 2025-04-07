@@ -37,6 +37,7 @@ public class FinTrack {
 
         if (!expenseList.getRecurringExpenses().isEmpty()) {
             expenseList.addAllRecurringExpenses();
+            storage.savRecurringExpensesToFile(expenseList);
             storage.saveExpensesToFile(expenseList);
         }
 

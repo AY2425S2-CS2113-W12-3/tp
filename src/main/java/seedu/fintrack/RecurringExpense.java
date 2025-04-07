@@ -1,6 +1,7 @@
 
 package seedu.fintrack;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class RecurringExpense extends Expense{
@@ -14,7 +15,7 @@ public class RecurringExpense extends Expense{
         super(amount, category, description, date);
         this.frequency = frequency;
         this.startDate = startDate;
-        this.lastProcessedDate = null;
+        this.lastProcessedDate = date;
     }
 
 
@@ -31,7 +32,14 @@ public class RecurringExpense extends Expense{
     }
 
     public void setLastProcessedDate(Date lastProcessedDate) {
-        this.lastProcessedDate = lastProcessedDate;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(lastProcessedDate);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        this.lastProcessedDate = calendar.getTime();
+        System.out.println(lastProcessedDate);
     }
 
 }
