@@ -20,7 +20,7 @@ The application follows a modular design with a command pattern implementation:
 * **AllCommands**: Maps user commands to their respective command objects.
 * **Command Interface**: Defines the contract for all command classes.
 * **Command Classes**: Each command is implemented as a separate class.
-* **Expense & ExpenseList**: Data models representing expenses and collections of expenses.
+* **Expense, RecurringExpense & ExpenseList**: Data models representing expenses and collections of expenses.
 * **Parser**: Handles user inputs and ensures validation.
 * **Ui**: Provides a consistent user interface through console outputs.
 * **Storage**: Manages saving and loading of data to and from files.
@@ -89,6 +89,23 @@ The category add command follows similar steps:
 6. A success message is shown through the `Ui` component
 7. Confirmation is returned to the user
 
+
+The add recurring expense command execution follows steps similar to add expense:
+
+1. User enters the "recurring" command
+2. `FinTrack` forwards the request to `AllCommands`
+3. `AllCommands` creates an `AddRecurringExpenseCommand` object
+4. `AddRecurringExpenseCommand` uses `Parser` to:
+    - Read recurring expense details (amount, category, description, frequency)
+    - Validate the input data
+    - Create a new `RecurringExpense` object
+5. The new `RecurringExpense` is added to `RecurringExpenses`
+6. A success message is shown through the `Ui` component
+7. Confirmation is returned to the user
+
+**Note:** Similar to add command, the system enforces a maximum expense amount of $1,000,000.00 (one million dollars). If a user attempts to enter an amount exceeding this limit, the system will throw a `FinTrackException` with an appropriate error message.
+
+
 #### <u> View History Implementation </u>
 
 The view history command works as follows:
@@ -101,6 +118,14 @@ The view history command works as follows:
 6. Display confirmation is returned through the chain
 
 ![ViewHistoryCommand Sequence Diagram](diagrams/ViewHistoryCommand.png)
+
+The view recurring command operates similarly to the view history command and is as follows:
+
+1. User enters the "view recurring" command
+2. `FinTrack` passes the request to `AllCommands`
+3. `AllCommands` creates a `ViewRecurringExpenseCommand` object
+4. `ViewRecurringExpenseCommand` gets the recurring expense list from `ExpenseList` by calling `getRecurringExpenses()`
+5. If the list is not empty, the recurring expense list is then shown to the user through `Ui`, else a message about the recurring expense list being empty is shown via `Ui`
 
 #### <u> Update Command Implementation </u>
 
@@ -119,6 +144,20 @@ The update command execution follows this sequence:
 
 ![UpdateCommand Sequence Diagram](diagrams/UpdateCommand.png)
 
+The update recurring command execution is similar to the update command and follows this sequence:
+1. User enters the "recurring" command
+2. `FinTrack` forwards the request to `AllCommands`
+3. `AllCommands` creates an `UpdateRecurringExpenseCommand` object
+4. `UpdateRecurringExpenseCommand` uses `Parser` to:
+    - Read recurring expense details (amount, category, description, frequency)
+    - Validate the input data
+    - Create a new `RecurringExpense` object with updated recurring expense details
+5. The new `RecurringExpense` replaces the old one in `RecurringExpenses` via `updateRecurringExpense(index,recurringExpense)`
+6. A success message is shown through the `Ui` component
+
+**Note:** Same as the update command and recurring command, there is a maximum expense amount of $1,000,000, and inputting a value larger thaan that will throw a `FinTrackException` with an appropriate error message.
+
+
 #### <u> Delete Command Implementation </u>
 
 The delete command execution involves the following steps:
@@ -130,20 +169,32 @@ The delete command execution involves the following steps:
 6. A success message is displayed through the `Ui` component
 7. The confirmation message is propagated back to the user
 
+
+
 ![DeleteCommand Sequence Diagram](diagrams/DeleteCommand.png)
 
 The category del command follows similar steps:
 
-1. User enters the "category del" command
+1. User enters the "delete recurring" command
 2. `FinTrack` forwards the request to `AllCommands`
-3. `AllCommands` creates a `DeleteCategoryCommand` object
-4. `DeleteCategoryCommand` uses `Parser` to:
-    - Read user's input (category index)
+3. `AllCommands` creates a `DeleteRecurringExpenseCommand` object
+4. `DeleteRecurringExpenseCommand` uses `Parser` to:
+    - Read user's input (recurring expense index)
     - Validate the input data
     - Returns the input as an Integer[ ]
 5. The category is removed from the list of categories
 6. A success message is shown through the `Ui` component
 7. Confirmation is returned to the user
+
+The delete recurring command follows a similar sequence to delete command
+and follows these steps:
+1. User enters the "delete" command
+2. `FinTrack` forwards the command to `AllCommands`
+3. `AllCommands` creates a `DeleteExpenseCommand` object
+4. `DeleteExpenseCommand` uses `Parser` to read and validate the recurring expense index
+5. `deleteRecurringExpense(index)` is called and a recurring expense is deleted from `recurringExpenses`
+6. A success message is displayed through the `Ui` component
+7. The confirmation message is displayed to the user
 
 ### Additional Command Implementations
 
@@ -209,11 +260,12 @@ The exit command works as follows:
 * **RecurringExpense**:
     * A subclass of Expense class, extends the base Expense class to model expenses that repeat at regular intervals (weekly, monthly, yearly).
     * Has additional parameters `frequency` (Weekly, Monthly, Yearly) to set the frequency of the recurring expense
-    and `startDate` representing the date of the first recurring expense.
+    , `startDate` representing the date of the first recurring expense, and `lastProcesseddate` which shows the latest date a recurring expense is added into the `expenseList`.
 * **ExpenseList**:
     * Manages lists of regular and recurring expenses.
     * Handles operations such as adding, deleting, updating expenses, and managing budgets.
     * The `updateExpense` method takes a 1-based index and converts it to a 0-based index for ArrayList operations.
+    * Operates `addAllRecurringExpenses`, which calls upon `addRecurringExpenses(recurringExpense)`, where `addRecurringExpenses(recurringExpense)` adds recurring expense (of expense type) into `expenseList` by comparing the `lastProcesseddate` and `currentDate` and seeing the number of occurences between that time period based on the given frequency, for all the recurring expenses
 * **Parser**:
     * Reads and validates user input from the command line.
     * Parses user-provided details into structured data types.
@@ -297,23 +349,29 @@ This program should be able to work smoothly, with minimal lag in Windows 11, Ub
 
 5. **Deleting an Expense:**
     * Type `delete`, follow prompt to specify the expense index.
-
-6. **Adding a Category**
+6. **Adding a recurring expense**
+    * Type `recurring`, then input details in the format:`dollars, cents, category index, description, frequency`
+7. **Updating a recurring expense**
+    * Type `update recurring`,  follow prompt to specify the recurring expense index, then update recurring expense using the same format when adding recurring expense
+8. **Viewing recurring expenses**
+    * Type `view recurring` to see all recurring expenses
+9. **Deleting a recurring expense**
+    * Type `delete recurring`, follow prompt to specifiy recurring expense index. 
+10. **Adding a Category**
     * Type `category add`, then input name of category/categories.
-
-7. **Deleting a Category**
+11. **Deleting a Category**
     * Type `category del`, then input index/indexes of category.
 
-8. **Clearing History**
+12. **Clearing History**
     * Type `clear`, then confirm with "yes" to clear all expenses.
 
-9. **Exporting Expenses**
+13. **Exporting Expenses**
     * Type `export` to create a CSV file of all expenses in the "exports" folder.
 
-10. **Getting Help**
+14. **Getting Help**
     * Type `help` to view detailed usage instructions.
 
-11. **Exiting the Application**
+15. **Exiting the Application**
     * Type `exit` to save data and close the application.
 
 
