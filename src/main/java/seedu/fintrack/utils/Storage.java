@@ -1,9 +1,10 @@
 package seedu.fintrack.utils;
 
-import seedu.fintrack.Categories;
 import seedu.fintrack.Expense;
 import seedu.fintrack.ExpenseList;
+import seedu.fintrack.RecurringExpense;
 import seedu.fintrack.Savings;
+import seedu.fintrack.Categories;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -63,6 +64,75 @@ public class Storage {
 
                 Expense expense = new Expense(amount, category, description, date);
                 expenseList.addExpense(expense);
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading expenses from file.");
+        }
+    }
+
+    public static void savRecurringExpensesToFile(ExpenseList expenseList) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("recurring_expenses.txt"))) {
+            for (RecurringExpense expense : expenseList.getRecurringExpenses()) {
+                writer.write(expense.getAmount() + "|" + expense.getCategory() + "|"
+                        + expense.getDescription() + "|" + expense.getFrequency() + "|"
+                        + DATE_TIME_FORMAT.format(expense.getStartDate()) + "|"
+                        +  DATE_TIME_FORMAT.format(expense.getLastProcessedDate()) + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving recurring expenses to file.");
+        }
+    }
+
+    public void loadRecurringExpensesFromFile(ExpenseList expenseList) {
+        File file = new File("recurring_expenses.txt");
+        if (!file.exists()) {
+            return;
+        }
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String[] data = scanner.nextLine().split("\\|");
+                // Skip malformed lines
+                if (data.length < 6) {
+                    continue;
+                }
+                assert data.length == 6: "Length of data is 6";
+
+                int amount = Integer.parseInt(data[0]);
+                String category = data[1];
+                String description = data[2];
+                String frequency = data[3];
+                Date startDate;
+                Date lastProcessedDate;
+
+                try {
+                    // Try parsing with the new format first
+                    startDate = DATE_TIME_FORMAT.parse(data[4]);
+
+                } catch (ParseException e) {
+                    try {
+                        startDate = DATE_FORMAT.parse(data[4]);
+                    } catch (ParseException e2) {
+                        System.out.println("Error parsing date: " + data[4]);
+                        continue;
+                    }
+                }
+
+                try {
+                    lastProcessedDate = DATE_TIME_FORMAT.parse(data[5]);
+                } catch (ParseException e) {
+                    try {
+                        lastProcessedDate = DATE_FORMAT.parse(data[5]);
+                    } catch (ParseException e2) {
+                        System.out.println("Error parsing date: " + data[5]);
+                        continue;
+                    }
+                }
+
+                RecurringExpense expense = new RecurringExpense(amount, category, frequency,
+                        description, startDate, startDate);
+                expense.setLastProcessedDate(lastProcessedDate);
+                expenseList.addRecurringExpense(expense);
             }
         } catch (IOException e) {
             System.out.println("Error loading expenses from file.");

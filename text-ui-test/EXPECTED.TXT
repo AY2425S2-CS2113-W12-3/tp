@@ -13,6 +13,9 @@ Hey! Here's what I can help you with
 [0m[31mDelete an expense
 [0m[34mSet your monthly budget
 [0m[34mAdd a recurring expense
+[0m[36mUpdate a recurring expense
+[0m[33mView all your recurring expenses
+[0m[31mDelete a recurring expense
 [0m[32mCreate a new category
 [0m[31mDelete a category
 [0m[36mUpdate your Income
