@@ -9,11 +9,22 @@ FinTrack is a CLI expense tracking application that helps users manage their dai
 [//]: # (**Enhancements to existing features**:)
 
 
+**Set up basic classes:**
+
+* Categories class
+* CategoriesTest class
+
+**Created storage functionality**
+
+* Storage functionality for custom categories
+
 **Added support for categories**
 
-* Allows users to add their own custom category for their expenses
-* Allows users to delete any category in the list
+* Added predefined default categories that can be used from the start
+* Allows users to add their own custom categories for their expenses
+* Allows users to delete custom categories in the list
 * Added JUnit tests for category methods
+
 
 **Design the UI of the program**
 

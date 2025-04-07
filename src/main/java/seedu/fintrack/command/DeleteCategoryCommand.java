@@ -23,26 +23,6 @@ public class DeleteCategoryCommand implements Command {
     public void execute(ExpenseList expenseList, Ui ui, Storage storage, Categories categories)
             throws FinTrackException {
 
-        // Check if expenseList is null
-        if (expenseList == null) {
-            throw new FinTrackException("Expense list is null");
-        }
-
-        // Check if parser is null
-        if (parser == null) {
-            throw new FinTrackException("Parser is null");
-        }
-
-        // Check if storage is null
-        if (storage == null) {
-            throw new FinTrackException("Storage is null");
-        }
-
-        // Check if categories is null
-        if (categories == null) {
-            throw new FinTrackException("Categories is null");
-        }
-
         categories.printCustomCategories();
         int numberOfDefaultCategories = 5;
         if (categories.size() == numberOfDefaultCategories) {

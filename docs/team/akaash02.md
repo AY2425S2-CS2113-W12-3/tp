@@ -1,4 +1,4 @@
-# kaixiangg - Project Portfolio Page
+# akaash02 - Project Portfolio Page
 
 ## Overview
 FinTrack is a CLI expense tracking application that helps users manage their daily expenses. The application allows users to track, categorize, and manage their spending while maintaining a simple and efficient interface.
