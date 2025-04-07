@@ -215,7 +215,37 @@ Recurring expense added for Entertainment: Netflix on 2025-04-08 00:14:27
 ```
 ---
 
-### 8. Deleting recurring expenses
+### 8. Updating recurring expenses
+
+---
+
+### 9. Viewing list of recurring expenses
+
+**Command:** `view recurring`
+
+**Description:** : shows the user the list of recurring expenses
+
+**Format:**
+```
+view recurring
+```
+
+**Interaction:**
+When you use the `view recurring` command, FinTrack will show you your list of recurring expenses.
+
+**Example:**
+```
+view recurring
+```
+
+The output will be
+```
+Recurring Expense deleted: Entertainment: Netflix, monthly
+```
+
+---
+
+### 10. Deleting recurring expenses
 
 **Command:** `delete recurring`
 
@@ -243,16 +273,14 @@ Then follow the displayed messages and type
 ```
 The output will be
 ```
-Recurring expense added for Entertainment: Netflix on 2025-04-08 00:14:27
+These are your current recurring expenses:
+1. Lunch: $10.00, monthly
 ```
----
+If there is no recurring expenses added, calling `view recurring ` will show
 
-### 9. Updating recurring expenses
+```
 
-
----
-
-### 10. Viewing list of recurring expenses
+```
 
 ---
 

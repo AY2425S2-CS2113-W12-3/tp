@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Calendar;
 import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class RecurringExpenseTest {
     @Test
@@ -62,7 +61,8 @@ public class RecurringExpenseTest {
     void getLastProcessedDate() {
         RecurringExpense expense = new RecurringExpense(1500, "Food",
                 "Monthly", "Dinner", new Date(1000L), new Date(1000L));
-        assertEquals(new Date(1000L), expense.getLastProcessedDate(), "Expected last processed date to be initially null");
+        assertEquals(new Date(1000L), expense.getLastProcessedDate(),
+                "Expected last processed date to be initially null");
     }
 
     @Test
