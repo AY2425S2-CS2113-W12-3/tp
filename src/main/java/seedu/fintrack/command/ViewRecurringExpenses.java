@@ -23,6 +23,8 @@ public class ViewRecurringExpenses implements Command {
                         + r.getFrequency());
                 index++;
             }
+            assert index == recurringExpenses.size() + 1: "There are " + recurringExpenses.size()
+                    + "recurring expenses in the list";
         }
         ui.printBorder();
     }

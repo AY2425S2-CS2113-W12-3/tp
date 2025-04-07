@@ -11,12 +11,17 @@ public class DeleteRecurringExpenseCommand implements Command {
     private final Parser parser;
 
     public DeleteRecurringExpenseCommand(Parser parser) {
+        assert parser != null : "Parser cannot be null";
         this.parser = parser;
     }
 
     @Override
     public void execute(ExpenseList expenseList, Ui ui, Storage storage, Categories categories)
             throws FinTrackException {
+        assert expenseList != null : "ExpenseList cannot be null";
+        assert ui != null : "Ui cannot be null";
+        assert storage != null : "Storage cannot be null";
+        assert categories != null : "Categories cannot be null";
         int index = parser.readInt("Enter the index of the recurring expense to delete: ");
 
         int sizeBefore = expenseList.getRecurringExpenses().size();
@@ -27,6 +32,8 @@ public class DeleteRecurringExpenseCommand implements Command {
         if (expenseList.getRecurringExpenses().size() != sizeBefore - 1) {
             throw new FinTrackException("Recurring expense is not removed as expected");
         }
+        assert expenseList.getRecurringExpenses().size() == sizeBefore - 1:
+                "1 recurring expense removed from recurring expense list";
         storage.savRecurringExpensesToFile(expenseList);
         ui.printBorder();
     }

@@ -2,6 +2,7 @@ package seedu.fintrack.command;
 
 import seedu.fintrack.Expense;
 import seedu.fintrack.ExpenseList;
+import seedu.fintrack.RecurringExpense;
 import seedu.fintrack.utils.FinTrackException;
 import seedu.fintrack.utils.Parser;
 import seedu.fintrack.utils.Storage;
@@ -18,6 +19,11 @@ public class UpdateRecurringExpenseCommand implements Command {
     @Override
     public void execute(ExpenseList expenseList, Ui ui, Storage storage, Categories categories)
             throws FinTrackException {
+        assert expenseList != null : "ExpenseList should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
+        assert categories != null : "Categories should not be null";
+
         try {
             int index = parser.readInt("Enter the index of the expense to update:");
             if (index <= 0 || index > expenseList.size()) {
@@ -26,11 +32,11 @@ public class UpdateRecurringExpenseCommand implements Command {
                 ui.printBorder();
                 return;
             }
-            Expense updatedExpense = parser.readRecurringExpenseDetails();
+            RecurringExpense updatedExpense = parser.readRecurringExpenseDetails();
             if (expenseList.getMonthlyBudget() > 0) {
                 ui.showMessage("Your remaining budget for the month is: " + expenseList.getRemainingBudget());
             }
-            expenseList.updateExpense(index, updatedExpense);
+            expenseList.updateRecurringExpense(index, updatedExpense);
             ui.showMessage("Recurring Expense updated.");
             storage.savRecurringExpensesToFile(expenseList);
             ui.printBorder();

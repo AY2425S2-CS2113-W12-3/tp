@@ -15,12 +15,17 @@ public class AddRecurringExpenseCommand implements Command {
     private final Parser parser;
 
     public AddRecurringExpenseCommand(Parser parser) {
+        assert parser != null : "Parser cannot be null";
         this.parser = parser;
     }
 
     @Override
     public void execute(ExpenseList expenseList, Ui ui, Storage storage, Categories categories)
             throws FinTrackException {
+        assert expenseList != null : "ExpenseList cannot be null";
+        assert ui != null : "Ui cannot be null";
+        assert storage != null : "Storage cannot be null";
+        assert categories != null : "Categories cannot be null";
 
         RecurringExpense expense = parser.readRecurringExpenseDetails();
         if (expense == null) {

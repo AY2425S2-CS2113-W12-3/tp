@@ -89,8 +89,11 @@ public class ExpenseList {
     }
 
     public void addRecurringExpenses(RecurringExpense recurringExpense) {
+        assert recurringExpense != null : "RecurringExpense cannot be null";
+
         Date startDate = recurringExpense.getStartDate();
         Date currentDate = new Date();
+        assert recurringExpense.getStartDate() != null : "Start date must be set";
 
         Date nextDate = recurringExpense.getLastProcessedDate() != null?
                 recurringExpense.getLastProcessedDate() : startDate;
@@ -103,6 +106,7 @@ public class ExpenseList {
 
         List<Expense> newExpenses = new ArrayList<>();
         while (startCalendar.getTime().before(currentDate) || startCalendar.getTime().equals(currentDate)) {
+            Date previousDate = startCalendar.getTime();
             Expense expense = new Expense(
                     recurringExpense.getAmount(),
                     recurringExpense.getCategory(),
@@ -112,6 +116,7 @@ public class ExpenseList {
             newExpenses.add(expense);
             Savings.updateTotalSavings(recurringExpense.getAmount());
 
+            assert recurringExpense.getFrequency() != null : "Frequency must be set";
             switch (recurringExpense.getFrequency().toLowerCase()) {
             case "daily":
                 startCalendar.add(Calendar.DAY_OF_MONTH,1);
@@ -128,9 +133,12 @@ public class ExpenseList {
             default:
                 throw new IllegalArgumentException("Invalid frequency: " + recurringExpense.getFrequency());
             }
+            assert startCalendar.getTime().after(previousDate)
+                    : "Date did not advance for frequency: " + recurringExpense.getFrequency();
         }
         if (!newExpenses.isEmpty()) {
             recurringExpense.setLastProcessedDate(newExpenses.get(newExpenses.size() - 1).getDate());
+            assert recurringExpense.getLastProcessedDate() != null : "Last processed date was not set";
             expenseList.addAll(newExpenses);
         } else {
             recurringExpense.setLastProcessedDate(currentCalendar.getTime());

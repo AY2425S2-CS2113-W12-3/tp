@@ -14,6 +14,7 @@ public class RecurringExpense extends Expense{
         super(amount, category, description, date);
         this.frequency = frequency;
         this.startDate = startDate;
+        this.lastProcessedDate = null;
     }
 
 
