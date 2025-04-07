@@ -8,7 +8,11 @@ import seedu.fintrack.utils.Storage;
 import seedu.fintrack.utils.Ui;
 import seedu.fintrack.Categories;
 
+import java.util.Date;
+
 public class UpdateRecurringExpenseCommand implements Command {
+    private static final int MAX_EXPENSE_AMOUNT = 100000000; // 1 million dollars in cents
+    private static final int MAX_CENTS = 99; // Maximum cents value (2 digits)
     private final Parser parser;
 
     public UpdateRecurringExpenseCommand(Parser parser) {
@@ -24,18 +28,52 @@ public class UpdateRecurringExpenseCommand implements Command {
         assert categories != null : "Categories should not be null";
 
         try {
-            int index = parser.readInt("Enter the index of the expense to update:");
-            if (index <= 0 || index > expenseList.size()) {
+            ViewRecurringExpensesCommand viewRecurringExpenses = new ViewRecurringExpensesCommand();
+            viewRecurringExpenses.execute(expenseList, ui, storage, categories);
+            ui.showMessage("Enter 0 to cancel the update operation.");
+
+            int index = parser.readIntWithCancel("Enter the index of the recurring expense to update:");
+
+            if (index == -1) {
+                ui.showMessage("Update operation cancelled.");
+                ui.printBorder();
+                return;
+            }
+            if (index <= 0 || index > expenseList.getRecurringExpenses().size()) {
                 ui.showError("Invalid index. Please type 'update recurring' and then follow the instructions: " +
                         "enter a valid index from the list of recurring expenses");
                 ui.printBorder();
                 return;
             }
+
             RecurringExpense updatedExpense = parser.readRecurringExpenseDetails();
+
+            if (updatedExpense.getAmount() > MAX_EXPENSE_AMOUNT) {
+                throw new FinTrackException("Expense amount cannot exceed $1,000,000.00 (one million dollars)");
+            }
+
+            // Validate that cents are limited to 2 digits
+            int cents = updatedExpense.getAmount() % 100;
+            if (cents > MAX_CENTS) {
+                throw new FinTrackException("Cents must be between 0 and 99 (2 digits only)");
+            }
+
+            if (updatedExpense.getAmount() > MAX_EXPENSE_AMOUNT) {
+                throw new FinTrackException("Expense amount cannot exceed $1,000,000.00 (one million dollars)");
+            }
+
+
+            if (updatedExpense.getCategory() == null || updatedExpense.getCategory().trim().isEmpty()) {
+                throw new FinTrackException("Expense category cannot be empty");
+            }
+            Date currentDate = new Date();
+            updatedExpense.setLastProcessedDate(currentDate);
+            expenseList.updateRecurringExpense(index, updatedExpense);
+
             if (expenseList.getMonthlyBudget() > 0) {
                 ui.showMessage("Your remaining budget for the month is: " + expenseList.getRemainingBudget());
             }
-            expenseList.updateRecurringExpense(index, updatedExpense);
+
             ui.showMessage("Recurring Expense updated.");
             storage.savRecurringExpensesToFile(expenseList);
             ui.printBorder();

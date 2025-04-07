@@ -18,7 +18,8 @@ import java.io.PrintStream;
 import java.util.Date;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class AddRecurringExpenseCommandTest {

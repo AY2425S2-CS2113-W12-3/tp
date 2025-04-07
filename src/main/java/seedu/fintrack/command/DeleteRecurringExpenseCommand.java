@@ -1,7 +1,9 @@
 package seedu.fintrack.command;
 
 import seedu.fintrack.Categories;
+import seedu.fintrack.Expense;
 import seedu.fintrack.ExpenseList;
+import seedu.fintrack.RecurringExpense;
 import seedu.fintrack.utils.FinTrackException;
 import seedu.fintrack.utils.Parser;
 import seedu.fintrack.utils.Storage;
@@ -28,7 +30,17 @@ public class DeleteRecurringExpenseCommand implements Command {
         if (index <= 0 || index > sizeBefore) {
             throw new FinTrackException("Invalid index. Please enter a number between 1 and " + sizeBefore);
         }
+
+        RecurringExpense expense = expenseList.getRecurringExpense(index - 1);
+        // Format and display success message
+        String description = expense.getDescription() != null ? expense.getDescription() : "No description";
+        String category = expense.getCategory() != null ? expense.getCategory() : "Uncategorized";
+        String frequency = expense.getDate() != null ? expense.getFrequency() : "No date";
+
+        ui.showMessage("Recurring Expense deleted: " + category + ": " + description + ", " + frequency);
+
         expenseList.deleteRecurringExpense(index-1);
+
         if (expenseList.getRecurringExpenses().size() != sizeBefore - 1) {
             throw new FinTrackException("Recurring expense is not removed as expected");
         }

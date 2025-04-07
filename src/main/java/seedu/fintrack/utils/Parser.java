@@ -261,6 +261,8 @@ public class Parser {
         System.out.println("<dollars>,<cents>,<category index>,<description>" +
                 ",<frequency>");
         System.out.println("Frequency has to be either daily, weekly, monthly, or yearly");
+        System.out.println("Note: The maximum amount that can be entered is $1,000,000.00 (one million dollars).");
+        System.out.println("Note: Cents must be between 0 and 99 (2 digits only).");
         Categories.printCategories();
         String input = scanner.nextLine();
 
@@ -268,16 +270,21 @@ public class Parser {
         String[] parts = input.split("\\s*,\\s*");
         if (parts.length < 5) {
             throw new FinTrackException("Insufficient details provided. Dollars, cents, category index, "
-                    + ",description and frequency are required.");
+                    + "description and frequency are required.");
+        }
+        if (parts.length > 5) {
+            throw new FinTrackException("More inputs than required, please follow the given syntax");
         }
         try {
-            // Trim each part to handle any remaining spaces
+
             int dollars = Integer.parseInt(parts[0].trim());
             int cents = Integer.parseInt(parts[1].trim());
 
-            // Validate that neither dollars nor cents are negative
             if (dollars < 0 || cents < 0) {
                 throw new FinTrackException("Dollars and cents cannot be negative.");
+            }
+            if (cents > 99) {
+                throw new FinTrackException("cents has to be between 0 and 99 inclusive.");
             }
 
             int amount = dollars * 100 + cents;

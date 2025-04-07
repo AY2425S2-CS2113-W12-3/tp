@@ -7,7 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExpenseListTest {
     private ExpenseList expenseList;
@@ -88,14 +89,16 @@ public class ExpenseListTest {
         RecurringExpense recurringExpense = new RecurringExpense(
                 100, "Food", "daily","Lunch", new Date(), new Date()
         );
-        expenseList.addExpense(recurringExpense);
+        expenseList.addRecurringExpense(recurringExpense);
 
         RecurringExpense updatedExpense = new RecurringExpense(
                 150, "Transport", "weekly","Bus", new Date(), new Date()
         );
+        Date currentDate = new Date();
+        updatedExpense.setLastProcessedDate(currentDate);
         expenseList.updateRecurringExpense(1, updatedExpense);
 
-        Expense result = expenseList.getExpense(0);
+        Expense result = expenseList.getRecurringExpenses().get(0);
         assertEquals(150, result.getAmount());
         assertEquals("Transport", result.getCategory());
         assertEquals("Bus", result.getDescription());

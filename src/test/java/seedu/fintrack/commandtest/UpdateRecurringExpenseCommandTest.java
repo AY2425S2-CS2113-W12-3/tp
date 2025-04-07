@@ -45,8 +45,10 @@ public class UpdateRecurringExpenseCommandTest {
         Categories.addCategory("Food");
         Categories.addCategory("Transport");
 
-        expenseList.addRecurringExpense(new RecurringExpense(1000, "Food",  "monthly", "Lunch", new Date(), new Date()));
-        expenseList.addRecurringExpense(new RecurringExpense(2000, "Transport", "monthly","Taxi", new Date(), new Date()));
+        expenseList.addRecurringExpense(new RecurringExpense(1000, "Food",  "monthly",
+                "Lunch", new Date(), new Date()));
+        expenseList.addRecurringExpense(new RecurringExpense(2000, "Transport",
+                "monthly","Taxi", new Date(), new Date()));
 
         // Print initial state
         System.out.println("Initial expense list size: " + expenseList.getRecurringExpenses().size());
@@ -68,7 +70,7 @@ public class UpdateRecurringExpenseCommandTest {
 
         updateRecurringExpenseCommand.execute(expenseList, ui, storage, categories);
 
-        RecurringExpense updatedExpense = (RecurringExpense) expenseList.getExpenseList().get(0);
+        RecurringExpense updatedExpense = expenseList.getRecurringExpenses().get(0);
         assertEquals(3000, updatedExpense.getAmount());
         assertEquals("Food", updatedExpense.getCategory());
         assertEquals("Movie", updatedExpense.getDescription());

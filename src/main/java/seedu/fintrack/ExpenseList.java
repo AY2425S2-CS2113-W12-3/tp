@@ -83,7 +83,7 @@ public class ExpenseList {
     }
 
     public void updateRecurringExpense(int index, RecurringExpense expense) {
-        expenseList.set(index-1, expense);
+        recurringExpenses.set(index-1, expense);
     }
 
     public void addAllRecurringExpenses() {
