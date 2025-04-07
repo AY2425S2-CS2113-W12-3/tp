@@ -96,11 +96,6 @@ public class AddExpenseCommand implements Command {
                 throw new FinTrackException("Expense list did not increment as expected");
             }
             
-            // Show budget information if applicable
-            if (expenseList.getMonthlyBudget() > 0) {
-                ui.showMessage("Your remaining budget for the month is: " + expenseList.getRemainingBudget());
-            }
-            
             // Format and display success message
             String description = expense.getDescription() != null ? expense.getDescription() : "No description";
             String category = expense.getCategory() != null ? expense.getCategory() : "Uncategorized";

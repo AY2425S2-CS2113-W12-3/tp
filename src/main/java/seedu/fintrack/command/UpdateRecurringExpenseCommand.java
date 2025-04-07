@@ -70,10 +70,6 @@ public class UpdateRecurringExpenseCommand implements Command {
             updatedExpense.setLastProcessedDate(currentDate);
             expenseList.updateRecurringExpense(index, updatedExpense);
 
-            if (expenseList.getMonthlyBudget() > 0) {
-                ui.showMessage("Your remaining budget for the month is: " + expenseList.getRemainingBudget());
-            }
-
             ui.showMessage("Recurring Expense updated.");
             storage.savRecurringExpensesToFile(expenseList);
             ui.printBorder();

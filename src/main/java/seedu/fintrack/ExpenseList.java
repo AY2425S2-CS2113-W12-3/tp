@@ -8,20 +8,14 @@ import java.util.List;
 public class ExpenseList {
     private ArrayList<Expense> expenseList;
     private ArrayList<RecurringExpense> recurringExpenses;
-    private int monthlyBudget = 0;
-    private int remainingBudget;
-
 
     public ExpenseList() {
         this.expenseList = new ArrayList<>();
         this.recurringExpenses = new ArrayList<>();
-        this.monthlyBudget =  0;
-        this.remainingBudget =  0;
     }
 
     public void addExpense(Expense expense) {
         expenseList.add(expense);
-        remainingBudget = remainingBudget - expense.getAmount();
         Savings.updateTotalSavings(expense.getAmount());
     }
 
@@ -64,26 +58,6 @@ public class ExpenseList {
 
     public RecurringExpense getRecurringExpense(int index) { // Changed visibility to public
         return recurringExpenses.get(index);
-    }
-
-    public void setMonthlyBudget(int budget) {
-        this.monthlyBudget = budget;
-        this.remainingBudget = budget;
-    }
-
-    public void updateMonthlyBudget(int budget) {
-        int amountSpent = this.monthlyBudget - this.remainingBudget;
-        this.monthlyBudget = budget;
-        this.remainingBudget = budget - amountSpent;
-    }
-
-    public int getMonthlyBudget() {
-        return monthlyBudget;
-    }
-
-
-    public int getRemainingBudget() {
-        return remainingBudget;
     }
 
     public void updateRecurringExpense(int index, RecurringExpense expense) {

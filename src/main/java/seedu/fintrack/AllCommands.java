@@ -6,7 +6,6 @@ import seedu.fintrack.command.ViewMonthCommand;
 import seedu.fintrack.command.ViewHistoryCommand;
 import seedu.fintrack.command.UpdateExpenseCommand;
 import seedu.fintrack.command.DeleteExpenseCommand;
-import seedu.fintrack.command.SetMonthlyBudgetCommand;
 import seedu.fintrack.command.AddRecurringExpenseCommand;
 import seedu.fintrack.command.AddCategoryCommand;
 import seedu.fintrack.command.DeleteCategoryCommand;
@@ -54,7 +53,6 @@ public class AllCommands {
         commands.put("history", new ViewHistoryCommand());
         commands.put("update", new UpdateExpenseCommand(parser));
         commands.put("delete", new DeleteExpenseCommand(parser));
-        commands.put("budget", new SetMonthlyBudgetCommand(parser));
         commands.put("recurring", new AddRecurringExpenseCommand(parser));
         commands.put("category add", new AddCategoryCommand(parser));
         commands.put("category del", new DeleteCategoryCommand(parser));
@@ -68,7 +66,7 @@ public class AllCommands {
         commands.put("help", new HelpCommand());
         commands.put("export", new ExportCommand());
 
-        assert commands.size() == 18 : "Commands map should contain 18 commands (including help and export)";
+        assert commands.size() == 17 : "Commands map should contain 18 commands (including help and export)";
     }
 
     /**

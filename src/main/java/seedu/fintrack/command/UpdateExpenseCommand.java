@@ -102,10 +102,6 @@ public class UpdateExpenseCommand implements Command {
             // Update expense in list
             expenseList.updateExpense(index, updatedExpense);
 
-            // Show budget information if applicable
-            if (expenseList.getMonthlyBudget() > 0) {
-                ui.showMessage("Your remaining budget for the month is: " + expenseList.getRemainingBudget());
-            }
 
             // Format and display success message
             String description = updatedExpense.getDescription() != null ? updatedExpense.getDescription() :
