@@ -46,8 +46,18 @@ public class DeleteExpenseCommand implements Command {
                 throw new FinTrackException("No expenses to delete");
             }
             
-            // Get index to delete
-            int index = parser.readInt("Enter the index of the expense to delete: ");
+            // Show current expenses and get index to delete
+            ViewHistoryCommand viewHistory = new ViewHistoryCommand();
+            viewHistory.execute(expenseList, ui, storage, categories);
+            ui.showMessage("Enter 0 to cancel the delete operation.");
+            int index = parser.readIntWithCancel("Enter the index of the expense to delete:");
+            
+            // Check for cancellation
+            if (index == -1) {
+                ui.showMessage("Delete operation cancelled.");
+                ui.printBorder();
+                return;
+            }
             
             // Validate index
             if (index <= 0 || index > expenseList.size()) {

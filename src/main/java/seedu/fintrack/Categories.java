@@ -36,8 +36,7 @@ public class Categories {
                     index++;
                 }
             }
-        }
-        catch (FinTrackException e) {
+        } catch (FinTrackException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -46,7 +45,7 @@ public class Categories {
         try {
             System.out.println(Ui.bold + "Custom Categories:" + Ui.reset);
             int numberOfDefaultCategories = 5;
-            if(categories.isEmpty()) {
+            if (categories.isEmpty()) {
                 throw new FinTrackException("Category list is empty.");
             }
             if (categories.size() == numberOfDefaultCategories) {
@@ -69,7 +68,7 @@ public class Categories {
     }
 
     public static void removeCategory(int index) {
-        categories.remove(index-1);
+        categories.remove(index - 1);
     }
 
     public static ArrayList<String> getCategories() {

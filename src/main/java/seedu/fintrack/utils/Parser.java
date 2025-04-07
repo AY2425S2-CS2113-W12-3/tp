@@ -13,6 +13,7 @@ import java.util.Calendar;
 public class Parser {
     private static final SimpleDateFormat DATE_ONLY_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final int MAX_EXPENSE_AMOUNT = 100000000; // 1 million dollars in cents
     private Scanner scanner;
 
     public Parser(Scanner scanner) {
@@ -55,6 +56,30 @@ public class Parser {
         }
     }
 
+    /**
+     * Reads an integer from user input with support for cancellation using '0'.
+     * @param prompt The prompt to display to the user
+     * @return The entered integer, or -1 if the user enters '0' to cancel
+     * @throws FinTrackException if the input is invalid
+     */
+    public int readIntWithCancel(String prompt) throws FinTrackException {
+        while (true) {
+            System.out.print(prompt + " (Enter 0 to cancel) ");
+            String input = scanner.nextLine().trim();
+            if (input.equalsIgnoreCase("exit") || input.equalsIgnoreCase("quit")) {
+                System.out.println("Exiting program...");
+                System.exit(0);
+            }
+            if (input.equals("0")) {
+                return -1; // Special value to indicate cancellation
+            }
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                throw new FinTrackException("Invalid number, please try again.");
+            }
+        }
+    }
 
     public Date readDate(String prompt) throws FinTrackException {
         while (true) {
@@ -144,9 +169,17 @@ public class Parser {
         System.out.println(Ui.bold + "Enter expense details in as follows:" + Ui.reset);
         System.out.println("<dollars>,<cents>,<category index>,<description>" +
                 ",<date (yyyy-MM-dd)>,<time (HH:mm:ss)>");
-        System.out.println("Note: Date and time are optional. Current date/time will be used if not provided.\n");
+        System.out.println("Note: Date and time are optional. Current date/time will be used if not provided.");
+        System.out.println("Note: The maximum amount that can be entered is $1,000,000.00 (one million dollars).");
+        System.out.println("Note: Cents must be between 0 and 99 (2 digits only).");
+        System.out.println("Note: Type 'NAH' to cancel the add operation.\n");
         Categories.printCategories();
-        String input = scanner.nextLine();
+        String input = scanner.nextLine().trim();
+        
+        // Check for cancellation
+        if (input.equalsIgnoreCase("NAH")) {
+            return null; // Special value to indicate cancellation
+        }
 
         // Split by commas and handle multiple spaces
         String[] parts = input.split("\\s*,\\s*");
@@ -164,7 +197,18 @@ public class Parser {
                 throw new FinTrackException("Dollars and cents cannot be negative.");
             }
             
+            // Validate that cents are limited to 2 digits (0-99)
+            if (cents > 99) {
+                throw new FinTrackException("Cents must be between 0 and 99 (2 digits only).");
+            }
+            
             int amount = dollars * 100 + cents;
+            
+            // Validate that the amount does not exceed 1 million dollars
+            if (amount > MAX_EXPENSE_AMOUNT) {
+                throw new FinTrackException("Expense amount cannot exceed $1,000,000.00 (one million dollars).");
+            }
+            
             int categoryIndex = Integer.parseInt(parts[2].trim());
             String category = Categories.getCategory(categoryIndex);
             String description = parts[3].trim();

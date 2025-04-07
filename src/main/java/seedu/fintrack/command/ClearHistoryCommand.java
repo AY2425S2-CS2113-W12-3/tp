@@ -22,7 +22,7 @@ public class ClearHistoryCommand implements Command {
             ui.showMessage(Ui.red + "WARNING: This will delete ALL your expense history!" + Ui.reset);
             ui.showMessage("This action cannot be undone.");
             String confirmation = parser.promptInput("Are you sure you want to proceed? (yes/no)");
-            
+
             if (confirmation.equalsIgnoreCase("yes")) {
                 // Clear the expense list
                 expenseList.getExpenseList().clear();

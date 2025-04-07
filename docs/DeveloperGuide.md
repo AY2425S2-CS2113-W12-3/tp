@@ -72,6 +72,8 @@ The add command execution follows these steps:
 6. A success message is shown through the `Ui` component
 7. Confirmation is returned to the user
 
+**Note:** The system enforces a maximum expense amount of $1,000,000.00 (one million dollars). If a user attempts to enter an amount exceeding this limit, the system will throw a `FinTrackException` with an appropriate error message.
+
 ![AddCommand Sequence Diagram](diagrams/AddCommand.png)
 
 The category add command follows similar steps:
@@ -112,6 +114,8 @@ The update command execution follows this sequence:
 5. The new expense replaces the old one in `ExpenseList` using `updateExpense(index, expense)`
 6. A success message is shown via `Ui`
 7. Confirmation is returned to the user
+
+**Note:** Similar to the add command, the update command also enforces a maximum expense amount of $1,000,000.00 (one million dollars). If a user attempts to update an expense with an amount exceeding this limit, the system will throw a `FinTrackException` with an appropriate error message.
 
 ![UpdateCommand Sequence Diagram](diagrams/UpdateCommand.png)
 
