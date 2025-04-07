@@ -20,7 +20,7 @@ FinTrack is a CLI expense tracking application that helps users manage their dai
 **Created Recurring Expense functionality**
 
 * Added functions to add recurring expense, update recurring expense, delete recurring expense, and view recurring expenses
-* Integerated it with the rest of the commands to function as one
+* Integrated it with the rest of the commands to function as one
 
 **Created test cases**
 

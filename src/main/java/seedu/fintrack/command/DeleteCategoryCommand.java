@@ -55,8 +55,7 @@ public class DeleteCategoryCommand implements Command {
                     ui.printBorder();
                     return;
                 }
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid category index. Please try again.");
             }
         }

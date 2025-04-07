@@ -280,8 +280,7 @@ public class Parser {
                 indexes[i] = Integer.parseInt(parts[i].trim());
             }
             return indexes;
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new FinTrackException("Input contains invalid index/indexes. Please try again.");
         }
     }
@@ -327,7 +326,14 @@ public class Parser {
                     !frequency.equals("monthly") && !frequency.equals("yearly")) {
                 throw new FinTrackException("Invalid frequency");
             }
-            Date date = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            calendar.add(Calendar.MONTH, -3);
+            Date date = calendar.getTime();
+
             return new RecurringExpense(amount, category, frequency, description, date, date);
 
         } catch (NumberFormatException e) {

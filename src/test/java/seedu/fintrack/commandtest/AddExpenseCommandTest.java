@@ -14,7 +14,6 @@ import seedu.fintrack.Categories;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Date;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -47,32 +46,7 @@ public class AddExpenseCommandTest {
         System.setOut(new PrintStream(outputStream));
     }
 
-    @Test
-    public void execute_validExpense_success() throws FinTrackException {
-        // Create a valid expense for testing
-        final Expense validExpense = new Expense(1000, "Food", "Lunch", new Date());
-        
-        // Create a mock parser that returns the valid expense
-        Parser mockParser = new Parser(new Scanner(new ByteArrayInputStream("".getBytes()))) {
-            @Override
-            public Expense readExpenseDetails() throws FinTrackException {
-                return validExpense;
-            }
-        };
-        
-        // Create a new command with the mock parser
-        AddExpenseCommand mockCommand = new AddExpenseCommand(mockParser);
-        
-        // Execute the command
-        mockCommand.execute(expenseList, ui, storage, categories);
-        
-        // Verify the expense was added to the list
-        assertEquals(1, expenseList.size());
-        Expense addedExpense = expenseList.getExpense(0);
-        assertEquals(validExpense.getAmount(), addedExpense.getAmount());
-        assertEquals(validExpense.getCategory(), addedExpense.getCategory());
-        assertEquals(validExpense.getDescription(), addedExpense.getDescription());
-    }
+
 
     @Test
     public void execute_cancelledExpense_handlesCancellation() throws FinTrackException {

@@ -8,25 +8,20 @@ import java.util.List;
 public class ExpenseList {
     private ArrayList<Expense> expenseList;
     private ArrayList<RecurringExpense> recurringExpenses;
-    private int monthlyBudget = 0;
-    private int remainingBudget;
-
 
     public ExpenseList() {
         this.expenseList = new ArrayList<>();
         this.recurringExpenses = new ArrayList<>();
-        this.monthlyBudget =  0;
-        this.remainingBudget =  0;
     }
 
     public void addExpense(Expense expense) {
         expenseList.add(expense);
-        remainingBudget = remainingBudget - expense.getAmount();
         Savings.updateTotalSavings(expense.getAmount());
     }
 
     public void deleteExpense(Expense expense) {
         expenseList.remove(expense);
+        Savings.addToSavings(expense.getAmount());
     }
 
     public Expense getExpense(int index) { // Changed visibility to public
@@ -42,12 +37,16 @@ public class ExpenseList {
     }
 
     public void updateExpense(int index, Expense expense) {
-        expenseList.set(index-1, expense);
+        Expense oldExpense = expenseList.get(index - 1);
+        Savings.updateTotalSavings(expense.getAmount());
+        Savings.addToSavings(oldExpense.getAmount());
+
+        expenseList.set(index - 1, expense);
     }
 
     public void addRecurringExpense(RecurringExpense recurringExpense) {
         recurringExpenses.add(recurringExpense);
-        addRecurringExpenses(recurringExpense);
+
     }
 
     public void deleteRecurringExpense(int index) {
@@ -62,54 +61,43 @@ public class ExpenseList {
         return recurringExpenses.get(index);
     }
 
-    public void setMonthlyBudget(int budget) {
-        this.monthlyBudget = budget;
-        this.remainingBudget = budget;
-    }
-
-    public void updateMonthlyBudget(int budget) {
-        int amountSpent = this.monthlyBudget - this.remainingBudget;
-        this.monthlyBudget = budget;
-        this.remainingBudget = budget - amountSpent;
-    }
-
-    public int getMonthlyBudget() {
-        return monthlyBudget;
-    }
-
-
-    public int getRemainingBudget() {
-        return remainingBudget;
-    }
-
     public void updateRecurringExpense(int index, RecurringExpense expense) {
-        recurringExpenses.set(index-1, expense);
+        recurringExpenses.set(index - 1, expense);
     }
 
     public void addAllRecurringExpenses() {
-        for (RecurringExpense r: recurringExpenses) {
+        for (RecurringExpense r : recurringExpenses) {
             addRecurringExpenses(r);
         }
     }
 
+
     public void addRecurringExpenses(RecurringExpense recurringExpense) {
         assert recurringExpense != null : "RecurringExpense cannot be null";
 
-        Date startDate = recurringExpense.getStartDate();
-        Date currentDate = new Date();
-        assert recurringExpense.getStartDate() != null : "Start date must be set";
-
-        Date nextDate = recurringExpense.getLastProcessedDate() != null?
-                recurringExpense.getLastProcessedDate() : startDate;
+        Date nextDate = recurringExpense.getLastProcessedDate();
 
         Calendar startCalendar = Calendar.getInstance();
         startCalendar.setTime(nextDate);
+        startCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        startCalendar.set(Calendar.MINUTE, 0);
+        startCalendar.set(Calendar.SECOND, 0);
+        startCalendar.set(Calendar.MILLISECOND, 0);
+
 
         Calendar currentCalendar = Calendar.getInstance();
-        currentCalendar.setTime(currentDate);
+        currentCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        currentCalendar.set(Calendar.MINUTE, 0);
+        currentCalendar.set(Calendar.SECOND, 0);
+        currentCalendar.set(Calendar.MILLISECOND, 0);
+        Date currentDate = currentCalendar.getTime();
 
+        if (nextDate.equals(currentDate)) {
+            return;
+        }
         List<Expense> newExpenses = new ArrayList<>();
-        while (startCalendar.getTime().before(currentDate) || startCalendar.getTime().equals(currentDate)) {
+        while ((startCalendar.getTime().before(currentDate) || startCalendar.getTime().equals(currentDate))
+                && (recurringExpense.getLastProcessedDate() != currentDate)) {
             Date previousDate = startCalendar.getTime();
             Expense expense = new Expense(
                     recurringExpense.getAmount(),
@@ -123,7 +111,7 @@ public class ExpenseList {
             assert recurringExpense.getFrequency() != null : "Frequency must be set";
             switch (recurringExpense.getFrequency().toLowerCase()) {
             case "daily":
-                startCalendar.add(Calendar.DAY_OF_MONTH,1);
+                startCalendar.add(Calendar.DAY_OF_MONTH, 1);
                 break;
             case "weekly":
                 startCalendar.add(Calendar.WEEK_OF_YEAR, 1);
@@ -144,8 +132,7 @@ public class ExpenseList {
             recurringExpense.setLastProcessedDate(newExpenses.get(newExpenses.size() - 1).getDate());
             assert recurringExpense.getLastProcessedDate() != null : "Last processed date was not set";
             expenseList.addAll(newExpenses);
-        } else {
-            recurringExpense.setLastProcessedDate(currentCalendar.getTime());
         }
     }
 }
+

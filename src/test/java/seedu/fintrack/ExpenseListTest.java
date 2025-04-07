@@ -16,7 +16,6 @@ public class ExpenseListTest {
     @BeforeEach
     void setUp() {
         expenseList = new ExpenseList();
-        expenseList.setMonthlyBudget(1000); // Set an initial budget
     }
 
     @Test
@@ -25,7 +24,6 @@ public class ExpenseListTest {
         expenseList.addExpense(expense);
 
         assertEquals(1, expenseList.size());
-        assertEquals(900, expenseList.getRemainingBudget());
     }
 
     @Test
@@ -37,21 +35,23 @@ public class ExpenseListTest {
         assertEquals(0, expenseList.size());
     }
 
-    @Test
-    void testSetMonthlyBudget() {
-        expenseList.setMonthlyBudget(2000);
-        assertEquals(2000, expenseList.getMonthlyBudget());
-        assertEquals(2000, expenseList.getRemainingBudget());
-    }
 
     @Test
     void testAddRecurringExpenseWeekly() {
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.WEEK_OF_YEAR, -5);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.add(Calendar.WEEK_OF_YEAR, -6);
+        Date newDate = calendar.getTime();
         RecurringExpense recurringExpense = new RecurringExpense(50, "Food", "weekly", "McDonalds",
-                new Date(1000L), new Date(1000L));
+                newDate, newDate);
 
         expenseList.addRecurringExpense(recurringExpense);
+        expenseList.addAllRecurringExpenses();
+
 
         List<RecurringExpense> recurringList = expenseList.getRecurringExpenses();
         assertEquals(1, recurringList.size());
@@ -60,26 +60,39 @@ public class ExpenseListTest {
 
     @Test
     void testAddRecurringExpenseMonthly() {
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MONTH, -3);
-        RecurringExpense recurringExpense = new RecurringExpense(50, "Food", "weekly", "McDonalds",
-                new Date(1000L), new Date(1000L));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.add(Calendar.MONTH, -3);
+        Date newDate = calendar.getTime();
+
+        RecurringExpense recurringExpense = new RecurringExpense(50, "Food", "monthly", "McDonalds",
+                newDate, newDate);
 
         expenseList.addRecurringExpense(recurringExpense);
+        expenseList.addAllRecurringExpenses();
 
         assertEquals(1, expenseList.getRecurringExpenses().size());
-        assertTrue(expenseList.getExpenseList().size() >= 3); // At least 3 months' expenses
+        assertEquals(4,expenseList.getExpenseList().size()); // At least 3 months' expenses
     }
 
     @Test
     void testAddRecurringExpenseYearly() {
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.YEAR, -2);
-        RecurringExpense recurringExpense = new RecurringExpense(50, "Food", "weekly", "McDonalds",
-                new Date(1000L), new Date(1000L));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.add(Calendar.YEAR, -2);
+        Date newDate = calendar.getTime();
+
+        RecurringExpense recurringExpense = new RecurringExpense(50, "Food", "yearly", "McDonalds",
+                newDate, newDate);
 
         expenseList.addRecurringExpense(recurringExpense);
-
+        expenseList.addAllRecurringExpenses();
         assertEquals(1, expenseList.getRecurringExpenses().size());
         assertTrue(expenseList.getExpenseList().size() >= 2); // At least 2 years' expenses
     }
@@ -119,7 +132,7 @@ public class ExpenseListTest {
         recurringAddAllTest.addRecurringExpense(recurring1);
         recurringAddAllTest.addRecurringExpense(recurring2);
         recurringAddAllTest.addAllRecurringExpenses();
-        assertEquals(14, recurringAddAllTest.size());
+        assertEquals(12, recurringAddAllTest.size());
     }
 
     @Test
@@ -135,12 +148,4 @@ public class ExpenseListTest {
         assertEquals(6,recurringAddTest.size());
     }
 
-    @Test
-    void testRemainingBudgetAfterMultipleExpenses() {
-        expenseList.addExpense(new Expense(200, "Food", "Dinner", new Date()));
-        expenseList.addExpense(new Expense(300, "Shopping", "Clothes", new Date()));
-        expenseList.addExpense(new Expense(100, "Transport", "Taxi", new Date()));
-
-        assertEquals(400, expenseList.getRemainingBudget());
-    }
 }
