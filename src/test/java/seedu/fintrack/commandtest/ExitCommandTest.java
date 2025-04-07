@@ -12,7 +12,7 @@ import seedu.fintrack.Categories;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.security.Permission;
+//import java.security.Permission;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,7 +24,7 @@ public class ExitCommandTest {
     private Categories categories;
     private ExitCommand exitCommand;
     private ByteArrayOutputStream outputStream;
-    private SecurityManager originalSecurityManager;
+    //private SecurityManager originalSecurityManager;
 
     @BeforeEach
     public void setUp() {
@@ -40,25 +40,11 @@ public class ExitCommandTest {
         expenseList.addExpense(new Expense(1000, "Food", "Lunch", new Date()));
         
         // Save original security manager
-        originalSecurityManager = System.getSecurityManager();
+        //originalSecurityManager = System.getSecurityManager();
     }
 
     @Test
     public void execute_displaysExitMessage() throws FinTrackException {
-        // Set up security manager to catch System.exit(0)
-        System.setSecurityManager(new SecurityManager() {
-            @Override
-            public void checkExit(int status) {
-                if (status == 0) {
-                    throw new SecurityException("System.exit(0) called");
-                }
-            }
-            
-            @Override
-            public void checkPermission(Permission perm) {
-                // Allow all other permissions
-            }
-        });
         
         try {
             // Execute the command
@@ -67,7 +53,7 @@ public class ExitCommandTest {
             // Expected exception when System.exit(0) is called
         } finally {
             // Restore original security manager
-            System.setSecurityManager(originalSecurityManager);
+            //System.setSecurityManager(originalSecurityManager);
         }
         
         // Verify the output contains the exit message

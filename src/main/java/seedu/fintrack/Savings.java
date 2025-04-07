@@ -69,21 +69,21 @@ public class Savings {
         savingsGoal = monthlySavingsGoal;
     }
 
-//    public static int calculateMonthlyExpenses(ExpenseList expenseList) {
-//        int monthlyExpenses = 0;
-//        SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
-//
-//        Date now = new Date();
-//        currentMonth = monthFormat.format(now);
-//
-//        for (Expense expense : expenseList.getExpenseList()) {
-//            if (monthFormat.format(expense.getDate()).equals(currentMonth)) {
-//                monthlyExpenses += expense.getAmount();
-//            }
-//        }
-//
-//        return monthlyExpenses;
-//    }
+    public static int calculateMonthlyExpenses(ExpenseList expenseList) {
+        int monthlyExpenses = 0;
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
+
+        Date now = new Date();
+        currentMonth = monthFormat.format(now);
+
+        for (Expense expense : expenseList.getExpenseList()) {
+            if (monthFormat.format(expense.getDate()).equals(currentMonth)) {
+                monthlyExpenses += expense.getAmount();
+            }
+        }
+
+        return monthlyExpenses;
+    }
 
     public static void updateMonthlyBudget(ArrayList<RecurringExpense> recurringExpenses) {
         int totalRecurringExpenses = 0;

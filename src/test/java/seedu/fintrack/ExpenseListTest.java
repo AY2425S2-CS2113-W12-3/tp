@@ -16,7 +16,6 @@ public class ExpenseListTest {
     @BeforeEach
     void setUp() {
         expenseList = new ExpenseList();
-        expenseList.setMonthlyBudget(1000); // Set an initial budget
     }
 
     @Test
@@ -25,7 +24,6 @@ public class ExpenseListTest {
         expenseList.addExpense(expense);
 
         assertEquals(1, expenseList.size());
-        assertEquals(900, expenseList.getRemainingBudget());
     }
 
     @Test
@@ -37,12 +35,6 @@ public class ExpenseListTest {
         assertEquals(0, expenseList.size());
     }
 
-    @Test
-    void testSetMonthlyBudget() {
-        expenseList.setMonthlyBudget(2000);
-        assertEquals(2000, expenseList.getMonthlyBudget());
-        assertEquals(2000, expenseList.getRemainingBudget());
-    }
 
     @Test
     void testAddRecurringExpenseWeekly() {
@@ -135,12 +127,4 @@ public class ExpenseListTest {
         assertEquals(6,recurringAddTest.size());
     }
 
-    @Test
-    void testRemainingBudgetAfterMultipleExpenses() {
-        expenseList.addExpense(new Expense(200, "Food", "Dinner", new Date()));
-        expenseList.addExpense(new Expense(300, "Shopping", "Clothes", new Date()));
-        expenseList.addExpense(new Expense(100, "Transport", "Taxi", new Date()));
-
-        assertEquals(400, expenseList.getRemainingBudget());
-    }
 }

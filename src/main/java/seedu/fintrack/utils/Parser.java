@@ -280,8 +280,7 @@ public class Parser {
                 indexes[i] = Integer.parseInt(parts[i].trim());
             }
             return indexes;
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new FinTrackException("Input contains invalid index/indexes. Please try again.");
         }
     }

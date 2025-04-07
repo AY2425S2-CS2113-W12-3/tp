@@ -103,7 +103,8 @@ public class UpdateExpenseCommand implements Command {
             //check if new expense exceeds current monthly budget
             Expense oldExpense = expenseList.getExpense(index -1);
             if(Savings.getCurrentMonthlyBudget() - oldExpense.getAmount()  < updatedExpense.getAmount() ) {
-                float excess = (float)(updatedExpense.getAmount() - Savings.getCurrentMonthlyBudget() - oldExpense.getAmount()) / 100;
+                float excess = (float)(updatedExpense.getAmount() -
+                        Savings.getCurrentMonthlyBudget() - oldExpense.getAmount()) / 100;
                 throw new FinTrackException("New expense cannot exceeds current budget by $" + excess);
             }
 
