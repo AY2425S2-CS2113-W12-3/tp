@@ -194,7 +194,7 @@ recurring
 When you use the `recurring` command, FinTrack will guide you through a series of prompts to define your recurring expense:
 
 1.  **Amount:** You will be asked to enter the expense amount in dollars and cents.
-2.  **Category:** You will be prompted to specify the category for the recurring expense. Choose from the predefined categories.
+2.  **Category:** You will be prompted to specify the category for the recurring expense. Choose from the defined categories.
 3.  **Frequency:** Specify how often the expense recurs. You can choose between `Weekly`, `Monthly`, or `Yearly`.
 4.  **Description:** Provide a brief description for the recurring expense (e.g., "Netflix subscription", "Weekly allowance").
 5.  **Start date:** Enter the date when the recurring expense begins in `YYYY-MM-DD` format.
@@ -220,14 +220,14 @@ recurring
 ```
 category add
 ```
-Enter the name of the new category when prompted.
+Enter the name/names of the new category when prompted.
 
 **Example:**
 To add a new category named 'Healthcare':
 ```
 category add
 ```
-Then enter: `Healthcare`
+Then enter: `Healthcare` or `Healthcare,Subscriptions,Work`
 
 #### Delete a Category
 
@@ -242,13 +242,15 @@ category del
 
 **Interaction:**
 - When you enter the `category del` command, FinTrack will first display the current list of categories with their corresponding index numbers.
-- You will then be prompted to enter the index of the category you wish to delete.
+- You will then be prompted to enter the index/indexes of the category you wish to delete.
 
 **Example:**
 ```
 category del
 ```
-*Followed by the index of the category to be deleted when prompted.*
+*Followed by the index/indexes of the category to be deleted when prompted.*
+
+Input: `1` or `1,2,3`
 
 ---
 
