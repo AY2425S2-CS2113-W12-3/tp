@@ -42,7 +42,6 @@ public class AddCategoryCommand implements Command {
         }
 
         String[] newCategories = parser.readCategories();
-        System.out.println(newCategories.length);
         if (newCategories == null || newCategories.length == 0 || newCategories.length == 1 &&
                 newCategories[0].isEmpty()) {
             ui.showError("Empty Input. Please enter a category.");

@@ -255,7 +255,7 @@ public class Parser {
         }
     }
 
-    public String[] readCategories() throws FinTrackException {
+    public String[] readCategories() {
         System.out.println("Please enter the name/names of the new category/categories: ");
         String input = scanner.nextLine().trim();
         if (input.equalsIgnoreCase("exit") || input.equalsIgnoreCase("quit")) {
