@@ -256,6 +256,36 @@ public class Parser {
         }
     }
 
+    public String[] readCategories() {
+        System.out.println("Please enter the name/names of the new category/categories: ");
+        String input = scanner.nextLine().trim();
+        if (input.equalsIgnoreCase("exit") || input.equalsIgnoreCase("quit")) {
+            System.out.println("Exiting program...");
+            System.exit(0); // Or throw a custom ExitException and catch it in your main loop.
+        }
+        return input.split("\\s*,\\s*");
+    }
+
+    public Integer[] readCategoryIndexes() throws FinTrackException {
+        try {
+            System.out.println("Please enter the index/indexes of your chosen category/categories: ");
+            String input = scanner.nextLine().trim();
+            if (input.equalsIgnoreCase("exit") || input.equalsIgnoreCase("quit")) {
+                System.out.println("Exiting program...");
+                System.exit(0); // Or throw a custom ExitException and catch it in your main loop.
+            }
+            String[] parts = input.split("\\s*,\\s*");
+            Integer[] indexes = new Integer[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                indexes[i] = Integer.parseInt(parts[i].trim());
+            }
+            return indexes;
+        }
+        catch (NumberFormatException e) {
+            throw new FinTrackException("Input contains invalid index/indexes. Please try again.");
+        }
+    }
+
     public RecurringExpense readRecurringExpenseDetails() throws FinTrackException {
         System.out.println(Ui.bold + "Enter Recurring expense details in as follows:" + Ui.reset);
         System.out.println("<dollars>,<cents>,<category index>,<description>" +
@@ -275,6 +305,7 @@ public class Parser {
         if (parts.length > 5) {
             throw new FinTrackException("More inputs than required, please follow the given syntax");
         }
+
         try {
 
             int dollars = Integer.parseInt(parts[0].trim());

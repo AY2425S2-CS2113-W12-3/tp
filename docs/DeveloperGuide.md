@@ -84,7 +84,7 @@ The category add command follows similar steps:
 4. `AddCategoryCommand` uses `Parser` to:
     - Read user's input (category name)
     - Validate the input data
-    - Returns the input as a string
+    - Returns the input as a String[ ]
 5. The new category is added to `Categories`
 6. A success message is shown through the `Ui` component
 7. Confirmation is returned to the user
@@ -140,7 +140,7 @@ The category del command follows similar steps:
 4. `DeleteCategoryCommand` uses `Parser` to:
     - Read user's input (category index)
     - Validate the input data
-    - Returns the input as an int
+    - Returns the input as an Integer[ ]
 5. The category is removed from the list of categories
 6. A success message is shown through the `Ui` component
 7. Confirmation is returned to the user
@@ -299,10 +299,10 @@ This program should be able to work smoothly, with minimal lag in Windows 11, Ub
     * Type `delete`, follow prompt to specify the expense index.
 
 6. **Adding a Category**
-    * Type `category add`, then input name of category.
+    * Type `category add`, then input name of category/categories.
 
 7. **Deleting a Category**
-    * Type `category del`, then input index of category.
+    * Type `category del`, then input index/indexes of category.
 
 8. **Clearing History**
     * Type `clear`, then confirm with "yes" to clear all expenses.
