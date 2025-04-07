@@ -187,18 +187,17 @@ public class Ui {
                 yellow + "3. View your spending history\n" + reset +
                 purple + "4. Update an expense entry\n" + reset +
                 red + "5. Delete an expense\n" + reset +
-                blue + "6. Set your monthly budget\n" + reset +
-                blue + "7. Add a recurring expense\n" + reset +
-                cyan + "8. Update a recurring expense\n" + reset +
-                yellow + "9. View all your recurring expenses\n" + reset +
-                red + "10. Delete a recurring expense\n" + reset +
-                green + "11. Create a new category\n" + reset +
-                red + "12. Delete a category\n" + reset +
-                cyan + "13. Update your Income\n" + reset +
-                cyan + "14. Update your monthly savings goal\n" + reset +
-                red + "15. Clear all expense history\n" + reset +
-                cyan + "16. Export expenses to CSV\n" + reset +
-                red + "17. Exit the app\n" + reset +
+                blue + "6. Add a recurring expense\n" + reset +
+                cyan + "7. Update a recurring expense\n" + reset +
+                yellow + "8. View all your recurring expenses\n" + reset +
+                red + "9. Delete a recurring expense\n" + reset +
+                green + "10. Create a new category\n" + reset +
+                red + "11. Delete a category\n" + reset +
+                cyan + "12. Update your Income\n" + reset +
+                cyan + "13. Update your monthly savings goal\n" + reset +
+                red + "14. Clear all expense history\n" + reset +
+                cyan + "15. Export expenses to CSV\n" + reset +
+                red + "16. Exit the app\n" + reset +
                 "For more info on how to use the commands, type " + bold + "'help'" + reset + ".\n";
         System.out.println(options + border);
     }
@@ -207,10 +206,12 @@ public class Ui {
         float income =   ((float)Savings.getIncome()) / 100;
         float savings = ((float)Savings.getCurrentSavings()) / 100;
         float savingsGoal = ((float)Savings.getSavingsGoal()) / 100;
+        float remainingBudget = ((float)Savings.getCurrentMonthlyBudget() / 100);
 
         System.out.println("Your current income: $" + income);
         System.out.println("Your current savings: $" + savings);
         System.out.println("Your current monthly saving goal: $" + savingsGoal);
+        System.out.println("Your remaining budget for this month: $" + remainingBudget);
     }
 
     public static void showMessage(String message) {

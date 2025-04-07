@@ -154,32 +154,8 @@ Then enter: `1`
 
 ---
 
-### 6. Setting and updating Monthly Budget
 
-**Command:** `budget`
-
-**Description:** Allows users to set a monthly spending budget to manage their expenses against a predefined limit.
-The format to update the budget is the same.
-
-**Format:**
-```
-budget
-```
-
-**Interaction:**
-- Upon entering the `budget` command, FinTrack will prompt you to input your desired monthly budget.
-- Enter the budget amount in cents. This budget is used to track your spending and will be displayed in the `viewmonth` command.
-
-**Example:**
-```
-budget
-```
-*Followed by user input of the budget amount when prompted.*
-- Enter budget amount in cents: `100000` (for a $1000 monthly budget)
-
----
-
-### 7. Adding a Recurring Expense
+### 6. Adding a Recurring Expense
 
 **Command:** `recurring`
 
@@ -215,7 +191,7 @@ Recurring expense added for Entertainment: Netflix on 2025-04-08 00:14:27
 ```
 ---
 
-### 8. Updating recurring expenses
+### 7. Updating recurring expenses
 
 **Command:** `update recurring`
 
@@ -251,7 +227,7 @@ Recurring Expense updated
 
 ---
 
-### 9. Viewing list of recurring expenses
+### 8. Viewing list of recurring expenses
 
 **Command:** `view recurring`
 
@@ -283,7 +259,7 @@ There are currently no recurring expenses
 
 ---
 
-### 10. Deleting recurring expenses
+### 9. Deleting recurring expenses
 
 **Command:** `delete recurring`
 
@@ -314,7 +290,7 @@ Recurring Expense deleted: Entertainment: Spotify, monthly
 
 
 
-### 11. Managing Expense Categories
+### 10. Managing Expense Categories
 
 #### Add a New Category
 
@@ -363,11 +339,16 @@ Input: `1` or `1,2,3`
 
 ---
 
-### 12. Updating Income
+### 11. Updating Income
 
 **Command:** `update income`
 
-**Description:**  Allows users to modify their current monthly income in the application.
+**Description:**  Allows users to modify their current monthly income in the application. Users can only input the amount in dollars as income in cetns is considered trivial. 
 
 **Format:**
 ```
+update income
+```
+**Interaction:**
+- When you enter the 'update income' command, FinTrack will first display the current income amount.
+- You will be prompted to enter the new income amount in only dollars. 
