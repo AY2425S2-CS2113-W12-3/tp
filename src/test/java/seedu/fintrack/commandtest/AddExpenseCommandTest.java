@@ -75,8 +75,8 @@ public class AddExpenseCommandTest {
     }
 
     @Test
-    public void execute_nullExpense_handlesException() throws FinTrackException {
-        // Create a mock parser that returns null
+    public void execute_cancelledExpense_handlesCancellation() throws FinTrackException {
+        // Create a mock parser that returns null (simulating cancellation)
         Parser mockParser = new Parser(new Scanner(new ByteArrayInputStream("".getBytes()))) {
             @Override
             public Expense readExpenseDetails() throws FinTrackException {
@@ -93,8 +93,32 @@ public class AddExpenseCommandTest {
         // Verify no expense was added to the list
         assertEquals(0, expenseList.size());
         
+        // Verify cancellation message was displayed
+        String output = outputStream.toString();
+        assertTrue(output.contains("Add expense operation cancelled"));
+    }
+
+    @Test
+    public void execute_invalidExpense_handlesException() throws FinTrackException {
+        // Create a mock parser that throws an exception
+        Parser mockParser = new Parser(new Scanner(new ByteArrayInputStream("".getBytes()))) {
+            @Override
+            public Expense readExpenseDetails() throws FinTrackException {
+                throw new FinTrackException("Invalid expense details");
+            }
+        };
+        
+        // Create a new command with the mock parser
+        AddExpenseCommand mockCommand = new AddExpenseCommand(mockParser);
+        
+        // Execute the command
+        mockCommand.execute(expenseList, ui, storage, categories);
+        
+        // Verify no expense was added to the list
+        assertEquals(0, expenseList.size());
+        
         // Verify error message was displayed
         String output = outputStream.toString();
-        assertTrue(output.contains("Failed to create expense object"));
+        assertTrue(output.contains("Invalid expense details"));
     }
 }

@@ -53,7 +53,7 @@ public class DeleteExpenseCommandTest {
         // Create a mock parser that returns index 1
         Parser mockParser = new Parser(new Scanner(new ByteArrayInputStream("".getBytes()))) {
             @Override
-            public int readInt(String prompt) {
+            public int readIntWithCancel(String prompt) throws FinTrackException {
                 return 1;
             }
         };
@@ -73,11 +73,35 @@ public class DeleteExpenseCommandTest {
     }
 
     @Test
+    public void execute_cancelledIndex_handlesCancellation() throws FinTrackException {
+        // Create a mock parser that returns -1 (simulating cancellation)
+        Parser mockParser = new Parser(new Scanner(new ByteArrayInputStream("".getBytes()))) {
+            @Override
+            public int readIntWithCancel(String prompt) throws FinTrackException {
+                return -1;
+            }
+        };
+        
+        // Create a new command with the mock parser
+        DeleteExpenseCommand mockCommand = new DeleteExpenseCommand(mockParser);
+        
+        // Execute the command
+        mockCommand.execute(expenseList, ui, storage, categories);
+        
+        // Verify the expense list remains unchanged
+        assertEquals(1, expenseList.size());
+        
+        // Verify cancellation message was displayed
+        String output = outputStream.toString();
+        assertTrue(output.contains("Delete operation cancelled"));
+    }
+
+    @Test
     public void execute_invalidIndex_handlesException() throws FinTrackException {
         // Create a mock parser that returns an invalid index
         Parser mockParser = new Parser(new Scanner(new ByteArrayInputStream("".getBytes()))) {
             @Override
-            public int readInt(String prompt) {
+            public int readIntWithCancel(String prompt) throws FinTrackException {
                 return 999; // Invalid index
             }
         };
