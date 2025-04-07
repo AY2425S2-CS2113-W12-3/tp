@@ -36,6 +36,8 @@ Follow the prompts to enter:
 - Date (optional, in yyyy-MM-dd format)
 - Time (optional, in HH:mm:ss format)
 
+**Caveat:** The maximum amount that can be entered is $1,000,000.00 (one million dollars). If you attempt to enter an amount exceeding this limit, the system will display an error message.
+
 **Example:**
 To add an expense of $12.50 for lunch in the 'Food' category on March 28, 2025:
 ```
@@ -109,6 +111,8 @@ update
 Follow the prompts to:
 1. Select the expense to update (by index)
 2. Enter new amount, category, description, and date
+
+**Caveat:** The maximum amount that can be entered is $1,000,000.00 (one million dollars). If you attempt to enter an amount exceeding this limit, the system will display an error message.
 
 **Example:**
 To update the 3rd expense in the list to $15.00 for 'Grab Taxi' under the 'Transport' category on March 28, 2025:
@@ -256,181 +260,3 @@ category del
 
 **Format:**
 ```
-update income
-```
-
-**Interaction:**
-- Upon entering `update income`, the application will first display your current recorded income.
-- You will then be prompted to enter your new monthly income.
-- Enter the new income value in cents. If the input is invalid, the income will not be updated.
-
-**Example:**
-```
-update income
-```
-*Followed by user input of the new income amount when prompted.*
-- Enter new income amount in cents: `300000` (for a $3000 monthly income)
-
----
-
-### 10. Updating Savings Goal
-
-**Command:** `update savings goal`
-
-**Description:**  Enables users to set or adjust their monthly savings goal.
-
-**Format:**
-```
-update savings goal
-```
-
-**Interaction:**
-- When you use the `update savings goal` command, FinTrack will display your current savings goal.
-- You will be prompted to input your new desired savings goal for the month.
-- Enter the new savings goal in cents. If the input is invalid, the savings goal will not be updated.
-
-**Example:**
-```
-update savings goal
-```
-*Followed by user input of the new savings goal when prompted.*
-- Enter new savings goal in cents: `50000` (for a $500 savings goal)
-
----
-
-### 11. Clearing History
-
-**Command:** `clear`
-
-**Description:** Removes all expenses from your history.
-
-**Format:**
-```
-clear
-```
-
-**Interaction:**
-- When you enter the `clear` command, FinTrack will display a warning message.
-- You will be prompted to confirm the deletion by typing 'yes'.
-- If you confirm, all expenses will be deleted from your history.
-
-**Example:**
-```
-clear
-```
-*Followed by typing 'yes' to confirm the deletion.*
-
----
-
-### 12. Exporting Expenses
-
-**Command:** `export`
-
-**Description:** Exports your expenses to a CSV file.
-
-**Format:**
-```
-export
-```
-
-**Interaction:**
-- When you enter the `export` command, FinTrack will create a CSV file with all your expenses.
-- The file will be saved in the 'exports' folder with a timestamp in the filename.
-
-**Example:**
-```
-export
-```
-*The expenses will be exported to a CSV file in the 'exports' folder.*
-
----
-
-### 13. Getting Help
-
-**Command:** `help`
-
-**Description:** Displays a list of all available commands and their usage.
-
-**Format:**
-```
-help
-```
-
-**Output:**
-- Detailed instructions for all commands, including:
-  - Step-by-step guidance
-  - Examples
-  - Format requirements
-
----
-
-### 14. Exiting the Program
-
-**Command:** `exit`
-
-**Description:** Saves all data and exits the application.
-
-**Format:**
-```
-exit
-```
-
----
-
-## Command Summary
-
-| Command               | Description                          |
-|-----------------------|--------------------------------------|
-| `add`                 | Adds a new expense                   |
-| `viewmonth`           | Views expenses for the current month |
-| `history`             | Shows spending history               |
-| `update`              | Updates an existing expense          |
-| `delete`              | Deletes an expense                   |
-| `budget`              | Sets a monthly budget                |
-| `recurring`           | Adds a recurring expense             |
-| `category add`        | Adds a new category                  |
-| `category del`        | Deletes a category                   |
-| `update income`       | Updates the user's income            |
-| `update savings goal` | Updates the savings goal             |
-| `clear`               | Clears all expenses                  |
-| `export`              | Exports expenses to CSV              |
-| `help`                | Displays help information            |
-| `exit`                | Exits the application                |
-
-## Tips for Using FinTrack
-
-1. Use the `help` command whenever you're unsure about how to use a feature
-2. Keep your categories organized to better track your spending patterns
-3. Export your data regularly to maintain a backup of your expense history
-4. Use descriptive names when adding expenses to make them easier to find later
-5. Review your expense history regularly to stay on top of your spending
-
-## Troubleshooting
-
-If you encounter any issues:
-
-1. Make sure you're using Java 11 or above
-2. Check that your input follows the correct format
-3. Use the `help` command to verify the correct usage
-4. If the application becomes unresponsive, use `exit` to close it properly
-
-## Saving Data
-
-FinTrack data are saved in the hard disk automatically after any command that changes the data. You can find the data file in the same folder as the application.
-
-## FAQ
-
-**Q: How do I transfer my data to another Computer?**  
-A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the copy of your data from your previous FinTrack home folder.
-
-**Q: What happens if I enter an invalid command?**  
-A: The application will show an error message explaining what went wrong. Use the `help` command to see the list of valid commands.
-
-**Q: Can I edit an expense after adding it?**  
-A: Yes, use the `update` command to modify any existing expense.
-
-**Q: How do I delete all my expenses?**  
-A: Use the `clear` command and confirm with 'yes' when prompted.
-
-**Q: Where are my exported files saved?**  
-A: Exported files are saved in an 'exports' folder in the same directory as the application.

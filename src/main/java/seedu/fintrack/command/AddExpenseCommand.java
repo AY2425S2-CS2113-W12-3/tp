@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 
 public class AddExpenseCommand implements Command {
     private static final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final int MAX_EXPENSE_AMOUNT = 100000000; // 1 million dollars in cents
+    private static final int MAX_CENTS = 99; // Maximum cents value (2 digits)
     private final Parser parser;
 
     public AddExpenseCommand(Parser parser) {
@@ -40,9 +42,17 @@ public class AddExpenseCommand implements Command {
             if (categories == null) {
                 throw new FinTrackException("Categories is null");
             }
+
             
             // Read expense details with validation
             Expense expense = parser.readExpenseDetails();
+            
+            // Check for cancellation
+            if (expense == null) {
+                ui.showMessage("Add expense operation cancelled.");
+                ui.printBorder();
+                return;
+            }
             
             // Validate expense object
             if (expense == null) {
@@ -52,6 +62,17 @@ public class AddExpenseCommand implements Command {
             // Validate expense amount
             if (expense.getAmount() <= 0) {
                 throw new FinTrackException("Expense amount must be greater than zero");
+            }
+            
+            // Validate expense amount does not exceed 1 million dollars
+            if (expense.getAmount() > MAX_EXPENSE_AMOUNT) {
+                throw new FinTrackException("Expense amount cannot exceed $1,000,000.00 (one million dollars)");
+            }
+            
+            // Validate that cents are limited to 2 digits
+            int cents = expense.getAmount() % 100;
+            if (cents > MAX_CENTS) {
+                throw new FinTrackException("Cents must be between 0 and 99 (2 digits only)");
             }
             
             // Validate expense category
