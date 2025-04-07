@@ -289,7 +289,7 @@ There are currently no recurring expenses
 
 **Description:** Enables users to delete recurring expenses, thus the program will not automate the entry of the particular recurring expense anymore.
 
-*Note: The expenses of recurring expense that is added, before the recurring expense is removed, will not be removed, and can be viewed via the `history` command
+*Note: The expenses of recurring expense that is added, before the recurring expense is removed, will not be removed, and can be viewed via the `history` command. To delete an expense added due to recurring expense, follow the normal `delete` commands.
 
 **Format:**
 ```
