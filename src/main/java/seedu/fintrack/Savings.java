@@ -1,6 +1,7 @@
 package seedu.fintrack;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -9,6 +10,8 @@ public class Savings {
     private static int income; // presumed to be on a monthly basis
     private static int savingsGoal;
     private static int totalSavings;
+    private static int monthlyBudget;
+    private static int currentMonthlyBudget;
 
 
     public Savings(){
@@ -18,6 +21,7 @@ public class Savings {
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM"); // Format for month (e.g., 01, 02, ...)
         Date now = new Date(); // Get the current date and time
         this.currentMonth = monthFormat.format(now);
+        this.monthlyBudget = 0;
     }
 
     public Savings(int income, int savingsGoal, int totalSavings){
@@ -27,6 +31,8 @@ public class Savings {
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM"); // Format for month (e.g., 01, 02, ...)
         Date now = new Date(); // Get the current date and time
         this.currentMonth = monthFormat.format(now);
+        this.monthlyBudget = 0;
+        this.currentMonthlyBudget = 0;
     }
 
 
@@ -41,6 +47,14 @@ public class Savings {
 
     public static int getCurrentSavings() {
         return totalSavings;
+    }
+
+    public static int getMonthlyBudget() {
+        return monthlyBudget;
+    }
+
+    public static int getCurrentMonthlyBudget() {
+        return currentMonthlyBudget;
     }
 
     //setters
@@ -71,8 +85,31 @@ public class Savings {
         return monthlyExpenses;
     }
 
+    public static void updateMonthlyBudget(ArrayList<RecurringExpense> recurringExpenses) {
+        int totalRecurringExpenses = 0;
 
-    public void addToSavings(int newSavings ) {
+        for(RecurringExpense recurringExpense:recurringExpenses){
+            if(recurringExpense.getFrequency().equals("monthly")){
+                totalRecurringExpenses += recurringExpense.getAmount();
+            } else if(recurringExpense.getFrequency().equals("weekly")){
+                totalRecurringExpenses += recurringExpense.getAmount() * 4;
+            } else if(recurringExpense.getFrequency().equals("daily")){
+                totalRecurringExpenses += recurringExpense.getAmount() * 30;
+            }
+        }
+
+        monthlyBudget += income - savingsGoal - totalRecurringExpenses;
+    }
+
+    public static void updateCurrentMonthlyBudget(Expense expense) {
+        currentMonthlyBudget -= expense.getAmount();
+    }
+
+    public static void addToCurrentMonthlyBudget(Expense expense) {
+        currentMonthlyBudget += expense.getAmount();
+    }
+
+    public static void addToSavings(int newSavings) {
         totalSavings += newSavings;
     }
 
@@ -81,8 +118,9 @@ public class Savings {
         String currentMonthCheck = monthFormat.format(new Date());
 
         if (!currentMonthCheck.equals(currentMonth)) {
-            this.currentMonth = currentMonthCheck;
+            currentMonth = currentMonthCheck;
             totalSavings += income;
+            currentMonthlyBudget = monthlyBudget;
         }
     }
 
