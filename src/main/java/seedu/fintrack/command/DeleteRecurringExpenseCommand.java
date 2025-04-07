@@ -23,9 +23,17 @@ public class DeleteRecurringExpenseCommand implements Command {
         assert ui != null : "Ui cannot be null";
         assert storage != null : "Storage cannot be null";
         assert categories != null : "Categories cannot be null";
-        int index = parser.readInt("Enter the index of the recurring expense to delete: ");
+
+        ViewRecurringExpensesCommand viewRecurringExpense = new ViewRecurringExpensesCommand();
+        viewRecurringExpense.execute(expenseList, ui, storage, categories);
+
+        ui.showMessage("Enter 0 to cancel the delete operation.");
+        int index = parser.readInt("Enter the index of the expense to delete:");
 
         int sizeBefore = expenseList.getRecurringExpenses().size();
+        if (index == 0) {
+            throw new FinTrackException("Cancelling operation");
+        }
         if (index <= 0 || index > sizeBefore) {
             throw new FinTrackException("Invalid index. Please enter a number between 1 and " + sizeBefore);
         }
