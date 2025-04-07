@@ -182,23 +182,23 @@ public class Ui {
 
     public static void printOptions() {
         String options = "Hey! Here's what I can help you with\n" +
-                cyan + "Add a new expense\n" + reset +
-                yellow + "Check out this month's spending\n" + reset +
-                yellow + "View your spending history\n" + reset +
-                purple + "Update an expense entry\n" + reset +
-                red + "Delete an expense\n" + reset +
-                blue + "Set your monthly budget\n" + reset +
-                blue + "Add a recurring expense\n" + reset +
-                cyan + "Update a recurring expense\n" + reset +
-                yellow + "View all your recurring expenses\n" + reset +
-                red + "Delete a recurring expense\n" + reset +
-                green + "Create a new category\n" + reset +
-                red + "Delete a category\n" + reset +
-                cyan + "Update your Income\n" + reset +
-                cyan + "Update your monthly savings goal\n" + reset +
-                red + "Clear all expense history\n" + reset +
-                cyan + "Export expenses to CSV\n" + reset +
-                red + "Exit the app\n" + reset +
+                cyan + "1. Add a new expense\n" + reset +
+                yellow + "2. Check out this month's spending\n" + reset +
+                yellow + "3. View your spending history\n" + reset +
+                purple + "4. Update an expense entry\n" + reset +
+                red + "5. Delete an expense\n" + reset +
+                blue + "6. Set your monthly budget\n" + reset +
+                blue + "7. Add a recurring expense\n" + reset +
+                cyan + "8. Update a recurring expense\n" + reset +
+                yellow + "9. View all your recurring expenses\n" + reset +
+                red + "10. Delete a recurring expense\n" + reset +
+                green + "11. Create a new category\n" + reset +
+                red + "12. Delete a category\n" + reset +
+                cyan + "13. Update your Income\n" + reset +
+                cyan + "14. Update your monthly savings goal\n" + reset +
+                red + "15. Clear all expense history\n" + reset +
+                cyan + "16. Export expenses to CSV\n" + reset +
+                red + "17. Exit the app\n" + reset +
                 "For more info on how to use the commands, type " + bold + "'help'" + reset + ".\n";
         System.out.println(options + border);
     }
