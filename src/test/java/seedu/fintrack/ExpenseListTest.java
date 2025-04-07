@@ -7,8 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExpenseListTest {
     private ExpenseList expenseList;
@@ -82,6 +81,55 @@ public class ExpenseListTest {
 
         assertEquals(1, expenseList.getRecurringExpenses().size());
         assertTrue(expenseList.getExpenseList().size() >= 2); // At least 2 years' expenses
+    }
+
+    @Test
+    void testUpdateRecurringExpense() {
+        RecurringExpense recurringExpense = new RecurringExpense(
+                100, "Food", "daily","Lunch", new Date(), new Date()
+        );
+        expenseList.addExpense(recurringExpense);
+
+        RecurringExpense updatedExpense = new RecurringExpense(
+                150, "Transport", "weekly","Bus", new Date(), new Date()
+        );
+        expenseList.updateRecurringExpense(1, updatedExpense);
+
+        Expense result = expenseList.getExpense(0);
+        assertEquals(150, result.getAmount());
+        assertEquals("Transport", result.getCategory());
+        assertEquals("Bus", result.getDescription());
+    }
+
+    @Test
+    void testAddAllRecurringExpenses() {
+        ExpenseList recurringAddAllTest = new ExpenseList();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -5);
+        Date fiveMonthsAgo = calendar.getTime();
+        RecurringExpense recurring1 = new RecurringExpense(
+                150, "Food", "monthly","bubble",
+                fiveMonthsAgo, fiveMonthsAgo);
+        RecurringExpense recurring2 = new RecurringExpense(
+                150, "Food", "monthly","tea",
+                fiveMonthsAgo, fiveMonthsAgo);
+        recurringAddAllTest.addRecurringExpense(recurring1);
+        recurringAddAllTest.addRecurringExpense(recurring2);
+        recurringAddAllTest.addAllRecurringExpenses();
+        assertEquals(14, recurringAddAllTest.size());
+    }
+
+    @Test
+    void testAddRecurringExpenses() {
+        ExpenseList recurringAddTest = new ExpenseList();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -5);
+        Date fiveMonthsAgo = calendar.getTime();
+        RecurringExpense recurring = new RecurringExpense(
+                150, "Food", "monthly","Bus",
+                fiveMonthsAgo, fiveMonthsAgo);
+        recurringAddTest.addRecurringExpenses(recurring);
+        assertEquals(6,recurringAddTest.size());
     }
 
     @Test

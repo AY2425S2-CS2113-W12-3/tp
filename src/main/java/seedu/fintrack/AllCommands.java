@@ -15,7 +15,7 @@ import seedu.fintrack.command.UpdateSavingsGoalCommand;
 import seedu.fintrack.command.ClearHistoryCommand;
 import seedu.fintrack.command.ExitCommand;
 import seedu.fintrack.command.HelpCommand;
-import seedu.fintrack.command.ViewRecurringExpenses;
+import seedu.fintrack.command.ViewRecurringExpensesCommand;
 import seedu.fintrack.command.DeleteRecurringExpenseCommand;
 import seedu.fintrack.command.UpdateRecurringExpenseCommand;
 import seedu.fintrack.command.ExportCommand;
@@ -62,7 +62,7 @@ public class AllCommands {
         commands.put("update savings goal", new UpdateSavingsGoalCommand(parser));
         commands.put("clear", new ClearHistoryCommand(parser));
         commands.put("exit", new ExitCommand());
-        commands.put("view recurring", new ViewRecurringExpenses());
+        commands.put("view recurring", new ViewRecurringExpensesCommand());
         commands.put("delete recurring", new DeleteRecurringExpenseCommand(parser));
         commands.put("update recurring", new UpdateRecurringExpenseCommand(parser));
         commands.put("help", new HelpCommand());

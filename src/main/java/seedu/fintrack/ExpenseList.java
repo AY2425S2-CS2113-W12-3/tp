@@ -58,6 +58,10 @@ public class ExpenseList {
         return recurringExpenses;
     }
 
+    public RecurringExpense getRecurringExpense(int index) { // Changed visibility to public
+        return recurringExpenses.get(index);
+    }
+
     public void setMonthlyBudget(int budget) {
         this.monthlyBudget = budget;
         this.remainingBudget = budget;

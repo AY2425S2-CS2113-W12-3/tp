@@ -284,7 +284,11 @@ public class Parser {
             int categoryIndex = Integer.parseInt(parts[2].trim());
             String category = Categories.getCategory(categoryIndex);
             String description = parts[3].trim();
-            String frequency = parts[4].trim();
+            String frequency = parts[4].trim().toLowerCase();
+            if (!frequency.equals("daily") && !frequency.equals("weekly") &&
+                    !frequency.equals("monthly") && !frequency.equals("yearly")) {
+                throw new FinTrackException("Invalid frequency");
+            }
             Date date = new Date();
             return new RecurringExpense(amount, category, frequency, description, date, date);
 
