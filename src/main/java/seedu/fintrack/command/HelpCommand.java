@@ -102,16 +102,16 @@ public class HelpCommand implements Command {
         ui.showMessage(Ui.green + "11. Create Category" + Ui.reset);
         ui.showMessage("   Step 1: Type 'category add'");
         ui.showMessage("   Step 2: Press Enter");
-        ui.showMessage("   Step 3: Type the category name");
-        ui.showMessage("   Example: Type 'Transport'");
+        ui.showMessage("   Step 3: Type the category name/names");
+        ui.showMessage("   Example: Type 'Transport' or 'Transport,Healthcare'");
         ui.printBorder();
 
         // Delete Category
         ui.showMessage(Ui.red + "12. Delete Category" + Ui.reset);
         ui.showMessage("   Step 1: Type 'category del'");
         ui.showMessage("   Step 2: Press Enter");
-        ui.showMessage("   Step 3: Type the category index");
-        ui.showMessage("   Example: Type '3'");
+        ui.showMessage("   Step 3: Type the category index/indexes");
+        ui.showMessage("   Example: Type '3' or '1,2,3'");
         ui.printBorder();
 
         // Update Income

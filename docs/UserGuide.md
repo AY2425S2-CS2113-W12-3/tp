@@ -320,7 +320,7 @@ Recurring Expense deleted: Entertainment: Spotify, monthly
 
 **Command:** `category add`
 
-**Description:**  Allows users to add new categories for better expense tracking and categorization.
+**Description:**  Allows users to add new custom categories for better expense tracking and categorization.
 
 **Format:**
 ```
@@ -339,7 +339,7 @@ Then enter: `Healthcare` or `Healthcare,Subscriptions,Work`
 
 **Command:** `category del`
 
-**Description:**  Enables users to remove categories that are no longer needed.
+**Description:**  Enables users to remove **custom** categories that are no longer needed.
 
 **Format:**
 ```
@@ -349,6 +349,7 @@ category del
 **Interaction:**
 - When you enter the `category del` command, FinTrack will first display the current list of categories with their corresponding index numbers.
 - You will then be prompted to enter the index/indexes of the category you wish to delete.
+- This command only allows you to delete **custom** categories, as the first 5 categories are default and should not be removed.
 
 **Example:**
 ```
@@ -357,6 +358,8 @@ category del
 *Followed by the index/indexes of the category to be deleted when prompted.*
 
 Input: `1` or `1,2,3`
+
+**NOTE:** Expenses with a deleted custom category tagged to them will retain their categories, even if they are deleted.
 
 ---
 

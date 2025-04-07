@@ -91,11 +91,7 @@ class CategoriesTest {
     @Test
     void testPrintCustomCategoriesOutput() {
         //Default categories
-        Categories.addCategory("Food");
-        Categories.addCategory("Transport");
-        Categories.addCategory("Entertainment");
-        Categories.addCategory("Household");
-        Categories.addCategory("Utilities");
+        addDefaultCategories();
 
         //Custom categories
         Categories.addCategory("Subscriptions");
@@ -122,12 +118,7 @@ class CategoriesTest {
     @Test
     void testPrintCustomCategoriesIfNoCustomCategoriesFound() {
         //Default categories
-        Categories.addCategory("Food");
-        Categories.addCategory("Transport");
-        Categories.addCategory("Entertainment");
-        Categories.addCategory("Household");
-        Categories.addCategory("Utilities");
-
+        addDefaultCategories();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
@@ -161,4 +152,13 @@ class CategoriesTest {
             Categories.removeCategory(1);
         });
     }
+
+    void addDefaultCategories() {
+        Categories.addCategory("Food");
+        Categories.addCategory("Transport");
+        Categories.addCategory("Entertainment");
+        Categories.addCategory("Household");
+        Categories.addCategory("Utilities");
+    }
+
 }
