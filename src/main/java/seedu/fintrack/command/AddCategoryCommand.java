@@ -41,6 +41,7 @@ public class AddCategoryCommand implements Command {
             throw new FinTrackException("Categories is null");
         }
 
+        categories.printCategories();
         String[] newCategories = parser.readCategories();
         if (newCategories == null || newCategories.length == 0 || newCategories.length == 1 &&
                 newCategories[0].isEmpty()) {

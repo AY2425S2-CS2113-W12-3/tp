@@ -290,7 +290,7 @@ public class Parser {
         System.out.println(Ui.bold + "Enter Recurring expense details in as follows:" + Ui.reset);
         System.out.println("<dollars>,<cents>,<category index>,<description>" +
                 ",<frequency>");
-        System.out.println("Frequency has to be either daily, weekly, monthly, or yearly");
+        System.out.println("Frequency has to be either daily, weekly, monthly, or yearly\n");
         Categories.printCategories();
         String input = scanner.nextLine();
 

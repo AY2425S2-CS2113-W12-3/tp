@@ -99,7 +99,7 @@ public class HelpCommand implements Command {
         ui.showMessage("   Step 1: Type 'category add'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Step 3: Type the category name/names");
-        ui.showMessage("   Example: Type 'Transport' or 'Transport,Health,Work");
+        ui.showMessage("   Example: Type 'Transport' or 'Transport,Health,Work'");
         ui.showMessage("   Delete Category:");
         ui.showMessage("   Step 1: Type 'category del'");
         ui.showMessage("   Step 2: Press Enter");
