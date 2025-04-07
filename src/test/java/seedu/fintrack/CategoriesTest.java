@@ -151,7 +151,7 @@ class CategoriesTest {
         assertThrows(IndexOutOfBoundsException.class, () -> {
             Categories.removeCategory(1);
         });
-    
+    }
 
     void addDefaultCategories() {
         Categories.addCategory("Food");
@@ -160,4 +160,5 @@ class CategoriesTest {
         Categories.addCategory("Household");
         Categories.addCategory("Utilities");
     }
+
 }
