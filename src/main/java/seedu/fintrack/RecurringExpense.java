@@ -39,7 +39,6 @@ public class RecurringExpense extends Expense{
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         this.lastProcessedDate = calendar.getTime();
-        System.out.println(lastProcessedDate);
     }
 
 }

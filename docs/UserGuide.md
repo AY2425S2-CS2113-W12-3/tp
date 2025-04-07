@@ -228,7 +228,23 @@ Recurring expense added for Entertainment: Netflix on 2025-04-08 00:14:27
 delete recurring
 ```
 
+**Interaction:**
+When you use the `delete recurring` command, FinTrack will show you your list of recurring expenses, and ask for the index of the recurring expense you want to delete
 
+**Example:**
+To delete the Netflix subscription of $15.99, enter:
+```
+delete recurring
+```
+Then follow the displayed messages and type
+
+```
+1
+```
+The output will be
+```
+Recurring expense added for Entertainment: Netflix on 2025-04-08 00:14:27
+```
 ---
 
 ### 9. Updating recurring expenses
