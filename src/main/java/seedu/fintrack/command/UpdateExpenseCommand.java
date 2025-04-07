@@ -2,6 +2,7 @@ package seedu.fintrack.command;
 
 import seedu.fintrack.Expense;
 import seedu.fintrack.ExpenseList;
+import seedu.fintrack.Savings;
 import seedu.fintrack.utils.FinTrackException;
 import seedu.fintrack.utils.Parser;
 import seedu.fintrack.utils.Storage;
@@ -97,6 +98,13 @@ public class UpdateExpenseCommand implements Command {
             // Validate expense date
             if (updatedExpense.getDate() == null) {
                 throw new FinTrackException("Expense date cannot be null");
+            }
+
+            //check if new expense exceeds current monthly budget
+            Expense oldExpense = expenseList.getExpense(index -1);
+            if(Savings.getCurrentMonthlyBudget() - oldExpense.getAmount()  < updatedExpense.getAmount() ) {
+                float excess = (float)(updatedExpense.getAmount() - Savings.getCurrentMonthlyBudget() - oldExpense.getAmount()) / 100;
+                throw new FinTrackException("New expense cannot exceeds current budget by $" + excess);
             }
 
             // Update expense in list
