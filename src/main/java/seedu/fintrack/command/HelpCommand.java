@@ -11,7 +11,7 @@ public class HelpCommand implements Command {
     public void execute(ExpenseList expenseList, Ui ui, Storage storage, Categories categories)
             throws FinTrackException {
         ui.showMessage("\nDetailed Usage Instructions:");
-        
+
         // Add Expense
         ui.showMessage(Ui.cyan + "1. Add Expense" + Ui.reset);
         ui.showMessage("   Step 1: Type 'add'");
@@ -68,7 +68,7 @@ public class HelpCommand implements Command {
         ui.printBorder();
 
         // Add Recurring Expense
-        ui.showMessage(Ui.cyan + "7. Add Recurring Expense" + Ui.reset);
+        ui.showMessage(Ui.blue + "7. Add Recurring Expense" + Ui.reset);
         ui.showMessage("   Step 1: Type 'recurring'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Step 3: Type the recurring expense details:");
@@ -76,45 +76,54 @@ public class HelpCommand implements Command {
         ui.showMessage("          Example: 10,00,3,Spotify,Monthly");
         ui.printBorder();
 
-        // Delete Recurring Expense
-        ui.showMessage(Ui.red + "8. Delete a Recurring Expense" + Ui.reset);
-        ui.showMessage("   Step 1: Type 'delete recurring'");
+        // Update Recurring Expense
+        ui.showMessage(Ui.cyan + "8. Update Recurring Expense" + Ui.reset);
+        ui.showMessage("   Step 1: Type 'update recurring'");
         ui.showMessage("   Step 2: Press Enter");
-        ui.showMessage("   Step 3: Type the expense number to delete");
-        ui.showMessage("   Example: Type '1' to delete the first recurring expense in the recurring expense list");
+        ui.showMessage("   Step 3: Select the recurring expense number");
+        ui.showMessage("   Step 4: Type the new details");
         ui.printBorder();
 
-        // Update Recurring Expense
-
         // View Recurring Expense
-        ui.showMessage(Ui.yellow + "9. View list of recurring expenses" + Ui.reset);
+        ui.showMessage(Ui.yellow + "9. View Recurring Expenses" + Ui.reset);
         ui.showMessage("   Step 1: Type 'view recurring'");
         ui.showMessage("   Step 2: Press Enter");
-        ui.showMessage("   Example: Shows the current list of recurring expenses and their frequencies");
+        ui.showMessage("   Example: Shows all recurring expenses");
+        ui.printBorder();
+
+        // Delete Recurring Expense
+        ui.showMessage(Ui.red + "10. Delete Recurring Expense" + Ui.reset);
+        ui.showMessage("   Step 1: Type 'delete recurring'");
+        ui.showMessage("   Step 2: Press Enter");
+        ui.showMessage("   Step 3: Type the recurring expense number to delete");
         ui.printBorder();
 
         // Category Management
-        ui.showMessage(Ui.green + "10. Category Management" + Ui.reset);
-        ui.showMessage("   Add Category:");
+        ui.showMessage(Ui.green + "11. Create Category" + Ui.reset);
         ui.showMessage("   Step 1: Type 'category add'");
         ui.showMessage("   Step 2: Press Enter");
-        ui.showMessage("   Step 3: Type the category name/names");
-        ui.showMessage("   Example: Type 'Transport' or 'Transport,Health,Work'");
-        ui.showMessage("   Delete Category:");
-        ui.showMessage("   Step 1: Type 'category del'");
-        ui.showMessage("   Step 2: Press Enter");
-        ui.showMessage("   Step 3: Type the category index/indexes");
-        ui.showMessage("   Example: Type '3' or '1,2,3'");
+        ui.showMessage("   Step 3: Type the category name");
+        ui.showMessage("   Example: Type 'Transport'");
         ui.printBorder();
 
-        // Update Income and Savings Goal
-        ui.showMessage(Ui.cyan + "11. Update Financial Goals" + Ui.reset);
-        ui.showMessage("   Update Income:");
+        // Delete Category
+        ui.showMessage(Ui.red + "12. Delete Category" + Ui.reset);
+        ui.showMessage("   Step 1: Type 'category del'");
+        ui.showMessage("   Step 2: Press Enter");
+        ui.showMessage("   Step 3: Type the category index");
+        ui.showMessage("   Example: Type '3'");
+        ui.printBorder();
+
+        // Update Income
+        ui.showMessage(Ui.cyan + "13. Update Income" + Ui.reset);
         ui.showMessage("   Step 1: Type 'update income'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Step 3: Type the new income amount");
         ui.showMessage("   Example: Type '300000' for a $3000 monthly income");
-        ui.showMessage("   Update Savings Goal:");
+        ui.printBorder();
+
+        // Update Savings Goal
+        ui.showMessage(Ui.cyan + "14. Update Savings Goal" + Ui.reset);
         ui.showMessage("   Step 1: Type 'update savings goal'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Step 3: Type the new savings goal amount");
@@ -122,7 +131,7 @@ public class HelpCommand implements Command {
         ui.printBorder();
 
         // Clear History
-        ui.showMessage(Ui.red + "12. Clear History" + Ui.reset);
+        ui.showMessage(Ui.red + "15. Clear History" + Ui.reset);
         ui.showMessage("   Step 1: Type 'clear'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Step 3: Type 'yes' to confirm");
@@ -130,7 +139,7 @@ public class HelpCommand implements Command {
         ui.printBorder();
 
         // Export
-        ui.showMessage(Ui.cyan + "13. Export Expenses" + Ui.reset);
+        ui.showMessage(Ui.cyan + "16. Export Expenses" + Ui.reset);
         ui.showMessage("   Step 1: Type 'export'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Example: Type 'export' to save all expenses to a CSV file");
@@ -138,7 +147,7 @@ public class HelpCommand implements Command {
         ui.printBorder();
 
         // Exit
-        ui.showMessage(Ui.red + "14. Exit Program" + Ui.reset);
+        ui.showMessage(Ui.red + "17. Exit Program" + Ui.reset);
         ui.showMessage("   Step 1: Type 'exit'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Example: Type 'exit' to close the program");
