@@ -95,6 +95,8 @@ public class Savings {
                 totalRecurringExpenses += recurringExpense.getAmount() * 4;
             } else if(recurringExpense.getFrequency().equals("daily")){
                 totalRecurringExpenses += recurringExpense.getAmount() * 30;
+            } else if(recurringExpense.getFrequency().equals("yearly")){
+                totalRecurringExpenses += recurringExpense.getAmount() / 12;
             }
         }
 
@@ -103,6 +105,10 @@ public class Savings {
 
     public static void updateCurrentMonthlyBudget(Expense expense) {
         currentMonthlyBudget -= expense.getAmount();
+    }
+
+    public static void updateCurrentMonthlyBudget(int previousMonthlyBudget) {
+        currentMonthlyBudget = income - monthlyBudget + previousMonthlyBudget;
     }
 
     public static void addToCurrentMonthlyBudget(Expense expense) {
