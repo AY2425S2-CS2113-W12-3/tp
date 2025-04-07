@@ -28,6 +28,7 @@ public class AddRecurringExpenseCommand implements Command {
         assert categories != null : "Categories cannot be null";
 
         RecurringExpense expense = parser.readRecurringExpenseDetails();
+
         if (expense == null) {
             throw new FinTrackException("Failed to create expense object");
         }

@@ -131,7 +131,6 @@ public class Storage {
 
                 RecurringExpense expense = new RecurringExpense(amount, category, frequency,
                         description, startDate, startDate);
-                expense.setLastProcessedDate(lastProcessedDate);
                 expenseList.addRecurringExpense(expense);
             }
         } catch (IOException e) {

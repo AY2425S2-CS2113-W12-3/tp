@@ -194,19 +194,97 @@ recurring
 When you use the `recurring` command, FinTrack will guide you through a series of prompts to define your recurring expense:
 
 1.  **Amount:** You will be asked to enter the expense amount in dollars and cents.
-2.  **Category:** You will be prompted to specify the category for the recurring expense. Choose from the defined categories.
-3.  **Frequency:** Specify how often the expense recurs. You can choose between `Weekly`, `Monthly`, or `Yearly`.
-4.  **Description:** Provide a brief description for the recurring expense (e.g., "Netflix subscription", "Weekly allowance").
-5.  **Start date:** Enter the date when the recurring expense begins in `YYYY-MM-DD` format.
+2.  **Category:** You will be prompted to specify the index of the particular category for the recurring expense. Choose from the listed defined categories.
+3.  **Description:** Provide a brief description for the recurring expense (e.g., "Netflix subscription", "Weekly allowance").
+4. **Frequency:** Specify how often the expense recurs. You can choose between `Weekly`, `Monthly`, or `Yearly`.
+
 
 **Example:**
-To add a monthly Netflix subscription of $15.99 starting from April 5, 2025:
+To add a monthly Netflix subscription of $15.99, enter:
 ```
 recurring
 ```
-*Follow the prompts to enter amount, category, frequency (Monthly), description (Netflix), and start date (2025-04-05).*
+Then follow the given prompts and type
+
+```
+15,99,3,Netflix,monthly
+```
+The output will be 
+```
+Recurring expense added for Entertainment: Netflix on 2025-04-08 00:14:27
+```
+---
+
+### 8. Updating recurring expenses
 
 ---
+
+### 9. Viewing list of recurring expenses
+
+**Command:** `view recurring`
+
+**Description:** : shows the user the list of recurring expenses
+
+**Format:**
+```
+view recurring
+```
+
+**Interaction:**
+When you use the `view recurring` command, FinTrack will show you your list of recurring expenses.
+
+**Example:**
+```
+view recurring
+```
+
+The output will be
+```
+Recurring Expense deleted: Entertainment: Netflix, monthly
+```
+
+---
+
+### 10. Deleting recurring expenses
+
+**Command:** `delete recurring`
+
+**Description:** Enables users to delete recurring expenses, thus the program will not automate the entry of the particular recurring expense anymore.
+
+*Note: The expenses of recurring expense that is added, before the recurring expense is removed, will not be removed, and can be viewed via the `history` command
+
+**Format:**
+```
+delete recurring
+```
+
+**Interaction:**
+When you use the `delete recurring` command, FinTrack will show you your list of recurring expenses, and ask for the index of the recurring expense you want to delete
+
+**Example:**
+To delete the Netflix subscription of $15.99, enter:
+```
+delete recurring
+```
+Then follow the displayed messages and type
+
+```
+1
+```
+The output will be
+```
+These are your current recurring expenses:
+1. Lunch: $10.00, monthly
+```
+If there is no recurring expenses added, calling `view recurring ` will show
+
+```
+
+```
+
+---
+
+
 
 ### 8. Managing Expense Categories
 
