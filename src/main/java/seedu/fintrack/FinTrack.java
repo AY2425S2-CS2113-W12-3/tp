@@ -14,12 +14,7 @@ public class FinTrack {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        //Do the initial setup for the application, which will happen once at the start.
-        //Ui.printRandomTip();
-        Ui.printGreeting();
-        //Ui.printLogo();
-        Ui.printSavings();
-        Ui.printOptions();
+
 
         //String input = sc.nextLine();
         ExpenseList expenseList = new ExpenseList();
@@ -34,6 +29,13 @@ public class FinTrack {
         //Loading the savings.txt file will also call the constructor for a new Savings object
         Savings savings = storage.loadSavingsFromFile();
         savings.addIncome();
+
+        //Do the initial setup for the application, which will happen once at the start.
+        //Ui.printRandomTip();
+        Ui.printGreeting();
+        //Ui.printLogo();
+        Ui.printSavings();
+        Ui.printOptions();
 
         if (!expenseList.getRecurringExpenses().isEmpty()) {
             expenseList.addAllRecurringExpenses();
