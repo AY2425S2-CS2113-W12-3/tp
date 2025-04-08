@@ -40,6 +40,9 @@ public class UpdateIncomeCommand implements Command {
             Savings.updateIncome(newIncome * 100);
             Storage.saveSavingsToFile(newIncome * 100, Savings.getSavingsGoal(), Savings.getCurrentSavings());
             float finalIncome = (float)(newIncome * 100) / 100;
+            int previousMonthlyBudget = Savings.getMonthlyBudget();
+            Savings.updateCurrentMonthlyBudget(previousMonthlyBudget);
+            Savings.updateCurrentMonthlyBudget(newIncome);
             ui.showMessage("Your income has been update to $" + finalIncome);
             ui.printBorder();
         } catch (FinTrackException e) {
