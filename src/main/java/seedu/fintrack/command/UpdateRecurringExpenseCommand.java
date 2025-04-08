@@ -1,12 +1,10 @@
 package seedu.fintrack.command;
 
-import seedu.fintrack.ExpenseList;
-import seedu.fintrack.RecurringExpense;
+import seedu.fintrack.*;
 import seedu.fintrack.utils.FinTrackException;
 import seedu.fintrack.utils.Parser;
 import seedu.fintrack.utils.Storage;
 import seedu.fintrack.utils.Ui;
-import seedu.fintrack.Categories;
 
 import java.util.Date;
 
@@ -68,7 +66,36 @@ public class UpdateRecurringExpenseCommand implements Command {
             }
             Date currentDate = new Date();
             updatedExpense.setLastProcessedDate(currentDate);
+
+            Expense oldExpense = expenseList.getRecurringExpenses().get(index);
+
+
+
+            if(updatedExpense.getFrequency().equals("monthly")) {
+                if(updatedExpense.getAmount() > Savings.getCurrentMonthlyBudget()){
+                    throw new FinTrackException("Expense amount cannot be greater than current monthly budget");
+                }
+            } else if(updatedExpense.getFrequency().equals("weekly")){
+                if(updatedExpense.getAmount() * 4 > Savings.getCurrentMonthlyBudget()){
+                    throw new FinTrackException("Expense amount cannot be greater than current monthly budget");
+                }
+            }else if(updatedExpense.getFrequency().equals("daily")){
+                if(updatedExpense.getAmount() * 30 > Savings.getCurrentMonthlyBudget()){
+                    throw new FinTrackException("Expense amount cannot be greater than current monthly budget");
+                }
+            }else if(updatedExpense.getFrequency().equals("yearly")){
+                if(updatedExpense.getAmount() / 12 > Savings.getCurrentMonthlyBudget()){
+                    throw new FinTrackException("Expense amount cannot be greater than current monthly budget");
+                }
+            }
+
             expenseList.updateRecurringExpense(index, updatedExpense);
+            Savings.addToSavings(oldExpense.getAmount());
+            Savings.updateTotalSavings(updatedExpense.getAmount());
+            Savings.updateMonthlyBudget(expenseList.getRecurringExpenses());
+            Savings.updateCurrentMonthlyBudget(updatedExpense.getAmount());
+            Storage.saveSavingsToFile(Savings.getIncome(), Savings.getSavingsGoal(), Savings.getCurrentSavings());
+
 
             ui.showMessage("Recurring Expense updated.");
             storage.savRecurringExpensesToFile(expenseList);
