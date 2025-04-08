@@ -290,9 +290,9 @@ Recurring Expense deleted: Entertainment: Spotify, monthly
 
 
 
-### 10. Managing Expense Categories
+###  Managing Expense Categories
 
-#### Add a New Category
+### 10. Add a New Category
 
 **Command:** `category add`
 
@@ -311,7 +311,7 @@ category add
 ```
 Then enter: `Healthcare` or `Healthcare,Subscriptions,Work`
 
-#### Delete a Category
+### 11. Delete a Category
 
 **Command:** `category del`
 
@@ -339,7 +339,7 @@ Input: `1` or `1,2,3`
 
 ---
 
-### 11. Updating Income
+### 13. Updating Income
 
 **Command:** `update income`
 
@@ -352,3 +352,76 @@ update income
 **Interaction:**
 - When you enter the 'update income' command, FinTrack will first display the current income amount.
 - You will be prompted to enter the new income amount in only dollars. 
+
+---
+
+### 14. Updating Saving goals
+
+**Command:** `update savings goal`
+
+**Description:**  Allows users to modify their current monthly saving goals in the application. 
+
+**Format:**
+```
+update savings goal
+```
+**Interaction:**
+- When you enter the 'update savings goal' command, FinTrack will first display your current monthly savings goal
+- You will be prompted to enter your new monthly savings goals in dollars and cents
+
+Example: You want to change your monthly savings goals to $40.00, key in
+
+```
+update saving goals
+
+```
+FinTrack will show your current savings goal then prompt you to insert a new monthly savings goal, first in dollars
+
+```
+40
+```
+then in cents
+
+```
+00 
+```
+
+---
+
+### 15. Export
+
+**Command:** `export`
+
+**Description:**  Users are able to export their list of expenses as a csv file
+
+**Format:**
+```
+export
+```
+**Interaction:**
+- When you enter the `export` command, the program will create a new exports directory if it does not already exit, and save the csv file into the directory
+
+
+Output: The output will be
+```
+Expenses exported to exports successfully!
+```
+
+---
+
+### 18. Exit FinTrack
+
+**Command:** `exit`
+
+**Description:**  Users are able to end the program, with any changes the user made being stored as text files
+
+**Format:**
+```
+exit
+```
+**Interaction:**
+- When you enter the `exit` command, the program will output a goodbye message as shown below
+
+```
+Make sure to have good saving habits yeah, cyaaaa.
+```
