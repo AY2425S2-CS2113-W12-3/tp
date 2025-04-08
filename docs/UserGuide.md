@@ -291,9 +291,9 @@ Recurring Expense deleted: Entertainment: Spotify, monthly
 
 
 
-### 10. Managing Expense Categories
+###  Managing Expense Categories
 
-#### Add a New Category
+### 10. Add a New Category
 
 **Command:** `category add`
 
@@ -312,7 +312,7 @@ category add
 ```
 Then enter: `Healthcare` or `Healthcare,Subscriptions,Work`
 
-#### Delete a Category
+### 11. Delete a Category
 
 **Command:** `category del`
 
@@ -339,7 +339,8 @@ Input: `1` or `1,2,3`
 **NOTE:** Expenses with a deleted custom category tagged to them will retain their categories, even if they are deleted.
 
 ---
-### 11. Updating Income
+
+### 12. Updating Income
 
 **Command:** `update income`
 
@@ -350,6 +351,7 @@ Input: `1` or `1,2,3`
 update income
 ```
 **Interaction:**
+
 - When you enter the update income command, FinTrack will first display the current income.
 - You will be prompted to enter the new dollar amount of your income.
 - If the input is valid, FinTrack will update the income and save the changes.
@@ -364,7 +366,7 @@ Input: `1000`
 
 **NOTE:** The user starts off with income of $1000 and no current savings. Monthly budget is income - savings goals.
 
-### 12. Updating Savings Goals
+### 13. Updating Savings Goals
 
 **Command:** `update savings goals`
 
@@ -391,7 +393,7 @@ Input: `10` then `20`
 **NOTE:** The user starts off with savings goals of $100 and no current savings.
 
 ---
-### 13. Tips
+### 14. Tips
 
 **Command:** `tips`
 
@@ -405,3 +407,41 @@ tips
 - When you enter the tipsd, FinTrack will first generate random number.
 - And it will produce a finance tip from that index.
 
+
+### 15. Export
+
+**Command:** `export`
+
+**Description:**  Users are able to export their list of expenses as a csv file
+
+**Format:**
+```
+export
+```
+**Interaction:**
+- When you enter the `export` command, the program will create a new exports directory if it does not already exit, and save the csv file into the directory
+
+
+Output: The output will be
+```
+Expenses exported to exports successfully!
+```
+
+---
+
+### 16. Exit FinTrack
+
+**Command:** `exit`
+
+**Description:**  Users are able to end the program, with any changes the user made being stored as text files
+
+**Format:**
+```
+exit
+```
+**Interaction:**
+- When you enter the `exit` command, the program will output a goodbye message as shown below
+
+```
+Make sure to have good saving habits yeah, cyaaaa.
+```
