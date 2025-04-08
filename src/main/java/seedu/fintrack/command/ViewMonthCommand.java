@@ -20,7 +20,7 @@ public class ViewMonthCommand implements Command {
         String currentMonth = monthFormat.format(now);
         ui.showMessage("Month: " + currentMonth);
         ui.showMessage("Your current income: " + Savings.getIncome());
-        int monthlyExpenses = Savings.calculateMonthlyExpenses(expenseList);
+        int monthlyExpenses = Savings.calculateMonthlyExpenses(ExpenseList.getExpenseList());
 
         if (monthlyExpenses < Savings.getSavingsGoal()) {
             ui.showMessage("You have yet to hit your savings goal You can still spend "

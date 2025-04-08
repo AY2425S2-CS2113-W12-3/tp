@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ExpenseList {
-    private ArrayList<Expense> expenseList;
+    private static ArrayList<Expense> expenseList;
     private ArrayList<RecurringExpense> recurringExpenses;
 
     public ExpenseList() {
@@ -28,7 +28,7 @@ public class ExpenseList {
         return expenseList.get(index);
     }
 
-    public ArrayList<Expense> getExpenseList() {
+    public static ArrayList<Expense> getExpenseList() {
         return expenseList;
     }
 
