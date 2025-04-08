@@ -40,7 +40,7 @@ public class UpdateSavingsGoalCommand implements Command {
             }
 
 
-            int cents = parser.readInt("Nest enter your cents amount:\n");
+            int cents = parser.readInt("Next enter your cents amount:\n");
 
             if(cents < 0){
                 throw new FinTrackException("Cents amount cannot be negative.");
