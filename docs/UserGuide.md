@@ -57,7 +57,7 @@ Then follow the prompts:
 
 **Command:** `viewmonth`
 
-**Description:** Displays all expenses for the current month, the user's income, and budget status.
+**Description:** Displays all expenses for the current month, the user's income status.
 
 **Format:**
 ```
@@ -74,6 +74,7 @@ viewmonth
   - Index number for each expense.
   - Description of the expense.
   - Amount spent in dollars and cents.
+- **Financial insight:** FinTrack detects your spending habits and gives you simple feedback on them
 
 ---
 
@@ -338,17 +339,69 @@ Input: `1` or `1,2,3`
 **NOTE:** Expenses with a deleted custom category tagged to them will retain their categories, even if they are deleted.
 
 ---
-
 ### 11. Updating Income
 
 **Command:** `update income`
 
-**Description:**  Allows users to modify their current monthly income in the application. Users can only input the amount in dollars as income in cetns is considered trivial. 
+**Description:**  Allows users to modify their monthly income in the application. Users must input the income in dollars only to ensure accuracy.
 
 **Format:**
 ```
 update income
 ```
 **Interaction:**
-- When you enter the 'update income' command, FinTrack will first display the current income amount.
-- You will be prompted to enter the new income amount in only dollars. 
+- When you enter the update income command, FinTrack will first display the current income.
+- You will be prompted to enter the new dollar amount of your income.
+- If the input is valid, FinTrack will update the income and save the changes.
+
+**Example:**
+```
+update income
+```
+*Followed by the <dollars> when prompted.*
+
+Input: `1000` 
+
+**NOTE:** The user starts off with income of $1000 and no current savings. Monthly budget is income - savings goals.
+
+### 12. Updating Savings Goals
+
+**Command:** `update savings goals`
+
+**Description:**  Allows users to modify their monthly savings goal in the application. Users must input the savings goal in both dollars and cents to ensure accuracy. The savings goal must be greater than zero and less than the monthly income.
+
+**Format:**
+```
+update savings goal
+```
+**Interaction:**
+- When you enter the update savings goal command, FinTrack will first display the current savings goal.
+- You will be prompted to enter the new dollar amount of your savings goal.
+- You will then be prompted to enter the cents amount separately.
+- If the input is valid, FinTrack will update the savings goal and save the changes.
+
+**Example:**
+```
+update savings goals
+```
+*Followed by the <dollars> and then <cents> when prompted.*
+
+Input: `10` then `20`
+
+**NOTE:** The user starts off with savings goals of $100 and no current savings.
+
+---
+### 13. Updating Savings Goals
+
+**Command:** `tips`
+
+**Description:** Randomly generates a financial tip from a pool of tips.  
+
+**Format:**
+```
+tips
+```
+**Interaction:**
+- When you enter the tipsd, FinTrack will first generate random number.
+- And it will produce a finance tip from that index.
+
