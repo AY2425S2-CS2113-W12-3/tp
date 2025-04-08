@@ -3,6 +3,7 @@ package seedu.fintrack.command;
 import seedu.fintrack.Categories;
 import seedu.fintrack.ExpenseList;
 import seedu.fintrack.RecurringExpense;
+import seedu.fintrack.Savings;
 import seedu.fintrack.utils.FinTrackException;
 import seedu.fintrack.utils.Parser;
 import seedu.fintrack.utils.Storage;
@@ -47,6 +48,8 @@ public class DeleteRecurringExpenseCommand implements Command {
         ui.showMessage("Recurring Expense deleted: " + category + ": " + description + ", " + frequency);
 
         expenseList.deleteRecurringExpense(index-1);
+        Savings.updateMonthlyBudget(expenseList.getRecurringExpenses());
+        Storage.saveSavingsToFile(Savings.getIncome(), Savings.getSavingsGoal(), Savings.getCurrentSavings());
 
         if (expenseList.getRecurringExpenses().size() != sizeBefore - 1) {
             throw new FinTrackException("Recurring expense is not removed as expected");

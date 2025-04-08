@@ -90,6 +90,8 @@ public class DeleteExpenseCommand implements Command {
             String dateStr = expense.getDate() != null ? DATE_TIME_FORMAT.format(expense.getDate()) : "No date";
 
             Savings.addToCurrentMonthlyBudget(expense);
+            Savings.addToSavings(expense.getAmount());
+            Storage.saveSavingsToFile(Savings.getIncome(), Savings.getMonthlyBudget(), Savings.getCurrentSavings());
             
             ui.showMessage("Expense deleted: " + category + ": " + description + " on " + dateStr);
             

@@ -108,6 +108,10 @@ public class UpdateExpenseCommand implements Command {
                 throw new FinTrackException("New expense cannot exceeds current budget by $" + excess);
             }
 
+            Savings.addToSavings(oldExpense.getAmount());
+            Savings.updateTotalSavings(updatedExpense.getAmount());
+            Storage.saveSavingsToFile(Savings.getIncome(), Savings.getMonthlyBudget(), Savings.getCurrentSavings());
+
             // Update expense in list
             expenseList.updateExpense(index, updatedExpense);
 

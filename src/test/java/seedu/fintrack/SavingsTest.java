@@ -74,7 +74,7 @@ class SavingsTest {
         expenseList.addExpense(new Expense(1500, "Food", "Dinner", new Date(1000L)));
         expenseList.addExpense(new Expense(1500, "Food", "Dinner", new Date(2000L)));
 
-        assertEquals(0, Savings.calculateMonthlyExpenses(expenseList), "Expected total" +
+        assertEquals(0, Savings.calculateMonthlyExpenses(ExpenseList.getExpenseList()), "Expected total" +
                 " monthly expenses to exclude past months");
     }
 }

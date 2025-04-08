@@ -98,7 +98,8 @@ public class AddExpenseCommand implements Command {
             expenseList.addExpense(expense);
 
             Savings.updateCurrentMonthlyBudget(expense);
-            
+            Savings.updateTotalSavings(expense.getAmount());
+            Storage.saveSavingsToFile(Savings.getIncome(), Savings.getSavingsGoal(), Savings.getCurrentSavings());
             // Verify expense was added correctly
             if (expenseList.size() != sizeBefore + 1) {
                 throw new FinTrackException("Expense list did not increment as expected");

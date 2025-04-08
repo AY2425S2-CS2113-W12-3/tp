@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ExpenseList {
-    private ArrayList<Expense> expenseList;
+    private static ArrayList<Expense> expenseList;
     private ArrayList<RecurringExpense> recurringExpenses;
 
     public ExpenseList() {
@@ -28,7 +28,7 @@ public class ExpenseList {
         return expenseList.get(index);
     }
 
-    public ArrayList<Expense> getExpenseList() {
+    public static ArrayList<Expense> getExpenseList() {
         return expenseList;
     }
 
@@ -56,6 +56,10 @@ public class ExpenseList {
         int previousMonthlyBudget = Savings.getMonthlyBudget();
         Savings.updateMonthlyBudget(recurringExpenses);
         Savings.updateCurrentMonthlyBudget(previousMonthlyBudget);
+    }
+
+    public ArrayList<Expense> getExpensesList() {
+        return expenseList;
     }
 
     public ArrayList<RecurringExpense> getRecurringExpenses() {
@@ -141,6 +145,17 @@ public class ExpenseList {
             assert recurringExpense.getLastProcessedDate() != null : "Last processed date was not set";
             expenseList.addAll(newExpenses);
         }
+    }
+
+    public static int getTotalByCategory(ExpenseList expenseList, String category) {
+        int total = 0;
+        for (int i = 0; i < expenseList.size(); i++) {
+            Expense expense = expenseList.getExpense(i);
+            if (expense.getCategory().equalsIgnoreCase(category)) {
+                total += expense.getAmount();
+            }
+        }
+        return total;
     }
 }
 

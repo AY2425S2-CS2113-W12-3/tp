@@ -197,7 +197,8 @@ public class Ui {
                 cyan + "13. Update your monthly savings goal\n" + reset +
                 red + "14. Clear all expense history\n" + reset +
                 cyan + "15. Export expenses to CSV\n" + reset +
-                red + "16. Exit the app\n" + reset +
+                cyan + "16. Tips\n" + reset +
+                red + "17. Exit the app\n" + reset +
                 "For more info on how to use the commands, type " + bold + "'help'" + reset + ".\n";
         System.out.println(options + border);
     }
@@ -208,10 +209,11 @@ public class Ui {
         float savingsGoal = ((float)Savings.getSavingsGoal()) / 100;
         float remainingBudget = ((float)Savings.getCurrentMonthlyBudget() / 100);
 
-        System.out.println("Your current income: $" + income);
-        System.out.println("Your current savings: $" + savings);
-        System.out.println("Your current monthly saving goal: $" + savingsGoal);
-        System.out.println("Your remaining budget for this month: $" + remainingBudget);
+        System.out.printf("Your current income: $%.2f%n", income);
+        System.out.printf("Your current savings: $%.2f%n", savings);
+        System.out.printf("Your current monthly saving goal: $%.2f%n", savingsGoal);
+        System.out.printf("Your remaining budget for this month: $%.2f%n", remainingBudget);
+
     }
 
     public static void showMessage(String message) {

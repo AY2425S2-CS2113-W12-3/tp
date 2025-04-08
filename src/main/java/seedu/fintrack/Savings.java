@@ -16,12 +16,12 @@ public class Savings {
 
     public Savings(){
         this.income = 0;
-        this.savingsGoal = 0;
+        this.savingsGoal = 100;
         this.totalSavings = 0;
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM"); // Format for month (e.g., 01, 02, ...)
         Date now = new Date(); // Get the current date and time
         this.currentMonth = monthFormat.format(now);
-        this.monthlyBudget = 0;
+        this.monthlyBudget = 100;
     }
 
     public Savings(int income, int savingsGoal, int totalSavings){
@@ -31,8 +31,8 @@ public class Savings {
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM"); // Format for month (e.g., 01, 02, ...)
         Date now = new Date(); // Get the current date and time
         this.currentMonth = monthFormat.format(now);
-        this.monthlyBudget = 0;
-        this.currentMonthlyBudget = 0;
+        this.monthlyBudget = income - savingsGoal - calculateMonthlyExpenses(ExpenseList.getExpenseList());
+        this.currentMonthlyBudget = income - savingsGoal - calculateMonthlyExpenses(ExpenseList.getExpenseList());
     }
 
 
@@ -69,14 +69,14 @@ public class Savings {
         savingsGoal = monthlySavingsGoal;
     }
 
-    public static int calculateMonthlyExpenses(ExpenseList expenseList) {
+    public static int calculateMonthlyExpenses(ArrayList<Expense> expenseList) {
         int monthlyExpenses = 0;
         SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
 
         Date now = new Date();
         currentMonth = monthFormat.format(now);
 
-        for (Expense expense : expenseList.getExpenseList()) {
+        for (Expense expense : expenseList) {
             if (monthFormat.format(expense.getDate()).equals(currentMonth)) {
                 monthlyExpenses += expense.getAmount();
             }
@@ -100,7 +100,7 @@ public class Savings {
             }
         }
 
-        monthlyBudget += income - savingsGoal - totalRecurringExpenses;
+        monthlyBudget = income - savingsGoal - totalRecurringExpenses;
     }
 
     public static void updateCurrentMonthlyBudget(Expense expense) {
