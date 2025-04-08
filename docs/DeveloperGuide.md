@@ -209,6 +209,37 @@ The clear history command works as follows:
 6. The empty list is saved to storage
 7. A success message is shown via `Ui`
 
+#### <u> Update Income Implementation </u>
+
+The update income command works as follows:
+1. User enters the "update icome" command
+2. `FinTrack` delegates to `AllCommands`
+3. `AllCommands` creates a `UpdateIncomeCommand` object
+4. `UpdateIncomeCommand` displays a previous income and asks for the new income
+5. If the user new income, the income is updated
+6. The income is saved to storage
+7. A success message is shown via `Ui`
+
+#### <u> Update Savings Goals Implementation </u>
+
+The update savings goals command works as follows:
+1. User enters the "update savings goals" command
+2. `FinTrack` delegates to `AllCommands`
+3. `AllCommands` creates a `UpdateSavingsGoalsCommand` object
+4. `UpdateSavingsGoalsCommand` displays a previous income and asks for the new income
+5. If the user new savings goals, the savings goals is updated
+6. The savings goals is saved to storage
+7. A success message is shown via `Ui`
+
+#### <u> Tips Implementation </u>
+
+The tips command works as follows:
+1. User enters the "tips" command
+2. `FinTrack` delegates to `AllCommands`
+3. `AllCommands` creates a `TipsCommand` object
+4. `TipsCommand` displays a rnadomly generated tip
+5. 
+
 #### <u> Export Command Implementation </u>
 
 The export command works as follows:
