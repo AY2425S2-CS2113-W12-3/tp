@@ -138,8 +138,14 @@ public class HelpCommand implements Command {
         ui.showMessage("   Note: The file will be saved in the 'exports' folder with the current date and time");
         ui.printBorder();
 
+        //Tips
+        ui.showMessage(Ui.cyan + "16. tips" + Ui.reset);
+        ui.showMessage("   Step 1: Type 'Tips'");
+        ui.showMessage("   Step 2: Press Enter");
+        ui.printBorder();
+
         // Exit
-        ui.showMessage(Ui.red + "16. Exit Program" + Ui.reset);
+        ui.showMessage(Ui.red + "17. Exit Program" + Ui.reset);
         ui.showMessage("   Step 1: Type 'exit'");
         ui.showMessage("   Step 2: Press Enter");
         ui.showMessage("   Example: Type 'exit' to close the program");

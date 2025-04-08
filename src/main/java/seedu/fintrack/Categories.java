@@ -14,6 +14,7 @@ public class Categories {
         categories.add("Entertainment");
         categories.add("Household");
         categories.add("Utilities");
+        categories.add("Luxury");
     }
 
     public static String getCategory(int index) {

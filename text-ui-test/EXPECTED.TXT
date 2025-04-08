@@ -2,10 +2,10 @@ ________________________________________________________________________________
 Hello, I am Fin! Your go-to expense tracker
 How can I help you today?
 ________________________________________________________________________________
-Your current income: $0.0
-Your current savings: $0.0
-Your current monthly saving goal: $0.0
-Your remaining budget for this month: $0.0
+Your current income: $0.00
+Your current savings: $0.00
+Your current monthly saving goal: $1.00
+Your remaining budget for this month: $0.00
 Hey! Here's what I can help you with
 [36m1. Add a new expense
 [0m[33m2. Check out this month's spending
@@ -22,7 +22,8 @@ Hey! Here's what I can help you with
 [0m[36m13. Update your monthly savings goal
 [0m[31m14. Clear all expense history
 [0m[36m15. Export expenses to CSV
-[0m[31m16. Exit the app
+[0m[36m16. Tips
+[0m[31m17. Exit the app
 [0mFor more info on how to use the commands, type [1m'help'[0m.
 ________________________________________________________________________________
 ________________________________________________________________________________

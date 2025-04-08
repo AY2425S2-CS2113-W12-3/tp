@@ -197,7 +197,8 @@ public class Ui {
                 cyan + "13. Update your monthly savings goal\n" + reset +
                 red + "14. Clear all expense history\n" + reset +
                 cyan + "15. Export expenses to CSV\n" + reset +
-                red + "16. Exit the app\n" + reset +
+                cyan + "16. Tips\n" + reset +
+                red + "17. Exit the app\n" + reset +
                 "For more info on how to use the commands, type " + bold + "'help'" + reset + ".\n";
         System.out.println(options + border);
     }

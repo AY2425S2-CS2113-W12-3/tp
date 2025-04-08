@@ -1,10 +1,14 @@
 package seedu.fintrack.command;
 
-import seedu.fintrack.*;
+import seedu.fintrack.ExpenseList;
+import seedu.fintrack.RecurringExpense;
 import seedu.fintrack.utils.FinTrackException;
 import seedu.fintrack.utils.Parser;
 import seedu.fintrack.utils.Storage;
 import seedu.fintrack.utils.Ui;
+import seedu.fintrack.Categories;
+import seedu.fintrack.Savings;
+import seedu.fintrack.Expense;
 
 import java.util.Date;
 

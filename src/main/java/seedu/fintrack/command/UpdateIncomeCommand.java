@@ -25,7 +25,7 @@ public class UpdateIncomeCommand implements Command {
             ui.printBorder();
             ui.showMessage("Your current income: ");
             float oldIncome = (float)(Savings.getIncome()) / 100;
-            ui.showMessage(Float.toString(oldIncome));
+            ui.showMessage(String.format("%.2f", oldIncome));
             int newIncome = parser.readInt("Enter your new income in dollars " +
                     "(your income is only input in dollars) :");
 
@@ -43,7 +43,7 @@ public class UpdateIncomeCommand implements Command {
             int previousMonthlyBudget = Savings.getMonthlyBudget();
             Savings.updateCurrentMonthlyBudget(previousMonthlyBudget);
             Savings.updateCurrentMonthlyBudget(newIncome);
-            ui.showMessage("Your income has been update to $" + finalIncome);
+            ui.showMessage("Your income has been updated to $" + String.format("%.2f", finalIncome));
             ui.printBorder();
         } catch (FinTrackException e) {
             ui.showError(e.getMessage());

@@ -58,6 +58,10 @@ public class ExpenseList {
         Savings.updateCurrentMonthlyBudget(previousMonthlyBudget);
     }
 
+    public ArrayList<Expense> getExpensesList() {
+        return expenseList;
+    }
+
     public ArrayList<RecurringExpense> getRecurringExpenses() {
         return recurringExpenses;
     }
@@ -141,6 +145,17 @@ public class ExpenseList {
             assert recurringExpense.getLastProcessedDate() != null : "Last processed date was not set";
             expenseList.addAll(newExpenses);
         }
+    }
+
+    public static int getTotalByCategory(ExpenseList expenseList, String category) {
+        int total = 0;
+        for (int i = 0; i < expenseList.size(); i++) {
+            Expense expense = expenseList.getExpense(i);
+            if (expense.getCategory().equalsIgnoreCase(category)) {
+                total += expense.getAmount();
+            }
+        }
+        return total;
     }
 }
 
