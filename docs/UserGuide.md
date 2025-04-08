@@ -391,7 +391,7 @@ Input: `10` then `20`
 **NOTE:** The user starts off with savings goals of $100 and no current savings.
 
 ---
-### 13. Updating Savings Goals
+### 13. Tips
 
 **Command:** `tips`
 
