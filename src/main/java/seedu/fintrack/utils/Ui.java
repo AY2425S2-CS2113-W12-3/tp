@@ -208,10 +208,11 @@ public class Ui {
         float savingsGoal = ((float)Savings.getSavingsGoal()) / 100;
         float remainingBudget = ((float)Savings.getCurrentMonthlyBudget() / 100);
 
-        System.out.println("Your current income: $" + income);
-        System.out.println("Your current savings: $" + savings);
-        System.out.println("Your current monthly saving goal: $" + savingsGoal);
-        System.out.println("Your remaining budget for this month: $" + remainingBudget);
+        System.out.printf("Your current income: $%.2f%n", income);
+        System.out.printf("Your current savings: $%.2f%n", savings);
+        System.out.printf("Your current monthly saving goal: $%.2f%n", savingsGoal);
+        System.out.printf("Your remaining budget for this month: $%.2f%n", remainingBudget);
+
     }
 
     public static void showMessage(String message) {
